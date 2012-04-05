@@ -13,6 +13,8 @@ source ~/bin/git-completion.bash
 PS1="$RED\w$YELLOW\$(__git_ps1)$WHITE % "
 #PS1="\w\$(__git_ps1)\$ "
 
+PS1="$GREEN\$(~/.rvm/bin/rvm-prompt) $PS1" # add ruby version
+
 #lsexport GEM_PATH=/Library/Ruby/Gems/1.8:$HOME/.gem/ruby/1.8
 
 export HISTFILESIZE=10000
