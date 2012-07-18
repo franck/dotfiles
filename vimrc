@@ -103,5 +103,5 @@ inoremap <Tab> <C-R>=CleverTab()<CR>
 " CoffeeCompile split the screen verticaly by default
 let coffee_compile_vert = 1
 
-
-
+" indexer
+g:indexer_disableCtagsWarning=1 " disable ctag warnings

@@ -1,4 +1,4 @@
-PATH=$PATH:$HOME/bin:/usr/local/bin:/usr/local/mysql/bin:./bin
+PATH=$HOME/bin:/usr/local/bin:/usr/local/mysql/bin:./bin:$PATH
 
 GIT_PS1_SHOWDIRTYSTATE=1 
 GIT_PS1_SHOWSTASHSTATE=1 
@@ -23,6 +23,7 @@ export PROMPT_COMMAND='history -a'
 shopt -s histappend
 
 # aliases
+alias ne="cd $HOME/webdesign/neweureo/site"
 alias ej="cd $HOME/webdesign/eurojob/rails3;r3"
 alias eureo="cd $HOME/webdesign/eureo/site;r31"
 alias mk="cd $HOME/webdesign/merrykitchen/site;r3"
