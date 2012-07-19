@@ -8,12 +8,12 @@ YELLOW="\[\033[0;33m\]"
 GREEN="\[\033[0;32m\]"
 WHITE="\[\033[0;37m\]"
 #:/opt/nginx/sbin
-PS1="\w% "
-source ~/bin/git-completion.bash
-#PS1="$RED\w$YELLOW\$(__git_ps1)$WHITE % "
+# PS1="\w% "
+# source ~/bin/git-completion.bash
+PS1="$RED\w$YELLOW\$(__git_ps1)$WHITE % "
 #PS1="\w\$(__git_ps1)\$ "
 
-# PS1="$GREEN\$(~/.rvm/bin/rvm-prompt) $PS1" # add ruby version
+#PS1="$GREEN\$(~/.rvm/bin/rvm-prompt) $PS1" # add ruby version
 
 #lsexport GEM_PATH=/Library/Ruby/Gems/1.8:$HOME/.gem/ruby/1.8
 
@@ -109,13 +109,13 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
 case "$TERM" in
-  xterm-color) color_prompt=yes;;
-esac
+    xterm-color) color_prompt=yes;;
+  esac
 
-#CLICOLOR=1
-#export LSCOLORS='gxfxcxdxbxegedabagacad'
-#export TERM=xterm-color
+  #CLICOLOR=1
+  #export LSCOLORS='gxfxcxdxbxegedabagacad'
+  #export TERM=xterm-color
 
-export LS_OPTIONS='--color=auto'
-export CLICOLOR='Yes'
-export LSCOLORS='Exgxcxdxbxegedabagacad'
+  export LS_OPTIONS='--color=auto'
+  export CLICOLOR='Yes'
+  export LSCOLORS='Exgxcxdxbxegedabagacad'
