@@ -9,7 +9,7 @@ GREEN="\[\033[0;32m\]"
 WHITE="\[\033[0;37m\]"
 #:/opt/nginx/sbin
 # PS1="\w% "
-# source ~/bin/git-completion.bash
+source ~/bin/git-completion.bash
 PS1="$RED\w$YELLOW\$(__git_ps1)$WHITE % "
 #PS1="\w\$(__git_ps1)\$ "
 
@@ -44,6 +44,7 @@ alias tpoids="tmuxinator poids"
 alias tjobsite="tmuxinator jobsite"
 alias tfanpage="tmuxinator fanpage"
 
+alias be="bundle exec"
 alias vi="vim"
 alias s="cd .."
 alias ll="ls -l"
