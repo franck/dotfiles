@@ -92,6 +92,7 @@ alias ett="mate app public config lib vendor/assets db lang test spec stories fe
 alias ss="ruby script/server"
 alias zz="bundle exec autotest"
 alias rspec="rspec -c"
+alias rs="redis-server /usr/local/etc/redis.conf"
 
 alias sftpce="sftp -oPort=32100 deploy@46.105.99.154"
 alias sftpecj="sftp -oPort=32100 deploy@91.121.160.184"
