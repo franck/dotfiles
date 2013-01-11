@@ -244,6 +244,8 @@ function! RunTests(filename)
     else
         if filereadable("script/test")
             exec ":!script/test " . a:filename
+        elseif filereadable("zeus.json")
+            exec ":!zeus rspec --color " . a:filename
         elseif filereadable("Gemfile")
             exec ":!bundle exec rspec --color " . a:filename
         else
