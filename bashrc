@@ -2,7 +2,7 @@
 source ~/.profile
 
 # Add paths that should have been there by default
-export PATH=${PATH}:/usr/local/bin
+export PATH=${PATH}:/usr/local/bin:/usr/games/bin
 export PATH="~/bin:$PATH"
 export SHELL=/bin/bash
 export EDITOR=vim
