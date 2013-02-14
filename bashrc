@@ -1,5 +1,6 @@
 . ~/bin/bash_colors.sh
 source ~/.profile
+source ~/.bash_profile
 
 # Add paths that should have been there by default
 export PATH=${PATH}:/usr/local/bin:/usr/games/bin
@@ -16,7 +17,8 @@ export VERSIONER_PYTHON_PREFER_32_BIT=yes
 export TERM='xterm-color'
 alias ls='ls -G'
 alias ll='ls -lG'
-export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
+#export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
+export LSCOLORS="Exfxcxdxbxegedabagacad"
 export GREP_OPTIONS="--color"
 
 # Erase duplicates in history
