@@ -199,9 +199,9 @@ nnoremap <leader>; :call OpenTestAlternate()<cr>
 " RUNNING TESTS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>t :call RunTestFile()<cr>
-" map <leader>T :call RunNearestTest()<cr>
-map <leader>T :call RunAllTest()<cr>
-map <leader>a :call RunTests('')<cr>
+map <leader>T :call RunNearestTest()<cr>
+map <leader>a :call RunAllTest()<cr>
+" map <leader>a :call RunTests('')<cr>
 map <leader>c :w\|:!script/features<cr>
 map <leader>w :w\|:!script/features --profile wip<cr>
 
@@ -224,7 +224,7 @@ endfunction
 
 function! RunNearestTest()
     let spec_line_number = line('.')
-    call RunTestFile(":" . spec_line_number . " -b")
+    call RunTestFile(":" . spec_line_number)
 endfunction
 
 function! SetTestFile()
@@ -233,14 +233,20 @@ function! SetTestFile()
 endfunction
 
 function! RunAllTest()
+  :w
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   if filereadable("zeus.json")
-    exec ":!zeus rspec --color -I spec/spec_helper.rb spec/"
+    exec ":!zeus rspec --color --format documentation -I spec/spec_helper.rb spec/"
   elseif filereadable("Gemfile")
-    exec ":!bundle exec rspec --color -I spec/spec_helper.rb spec/"
+    exec ":!bundle exec rspec --color --format documentation -I spec/spec_helper.rb spec/"
   else
-    exec ":!rspec --color -I spec/spec_helper.rb spec/"
+    exec ":!rspec --color --format documenation -I spec/spec_helper.rb spec/"
   endif
-
 endfunction
 
 function! RunTests(filename)
@@ -258,11 +264,11 @@ function! RunTests(filename)
         if filereadable("script/test")
             exec ":!script/test " . a:filename
         elseif filereadable("zeus.json")
-            exec ":!zeus rspec --color " . a:filename
+            exec ":!zeus rspec " . a:filename
         elseif filereadable("Gemfile")
-            exec ":!bundle exec rspec --color " . a:filename
+            exec ":!bundle exec rspec " . a:filename
         else
-            exec ":!rspec --color " . a:filename
+            exec ":!rspec " . a:filename
         end
     end
 endfunction
