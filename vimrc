@@ -164,6 +164,7 @@ map <leader>gg :topleft 100 :split Gemfile<cr>
 map <leader>gt :CommandTFlush<cr>\|:CommandTTag<cr>
 map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
 map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SWITCH BETWEEN TEST AND PRODUCTION CODE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -198,7 +199,8 @@ nnoremap <leader>; :call OpenTestAlternate()<cr>
 " RUNNING TESTS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>t :call RunTestFile()<cr>
-map <leader>T :call RunNearestTest()<cr>
+" map <leader>T :call RunNearestTest()<cr>
+map <leader>T :call RunAllTest()<cr>
 map <leader>a :call RunTests('')<cr>
 map <leader>c :w\|:!script/features<cr>
 map <leader>w :w\|:!script/features --profile wip<cr>
@@ -230,6 +232,17 @@ function! SetTestFile()
     let t:grb_test_file=@%
 endfunction
 
+function! RunAllTest()
+  if filereadable("zeus.json")
+    exec ":!zeus rspec --color -I spec/spec_helper.rb spec/"
+  elseif filereadable("Gemfile")
+    exec ":!bundle exec rspec --color -I spec/spec_helper.rb spec/"
+  else
+    exec ":!rspec --color -I spec/spec_helper.rb spec/"
+  endif
+
+endfunction
+
 function! RunTests(filename)
     " Write the file and run tests for the given filename
     :w
@@ -254,3 +267,15 @@ function! RunTests(filename)
     end
 endfunction
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PROMOTE VARIABLE TO RSPEC LET
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! PromoteToLet()
+  :normal! dd
+  " :exec '?^\s*it\>'
+  :normal! P
+  :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
+  :normal ==
+endfunction
+:command! PromoteToLet :call PromoteToLet()
+:map <leader>p :PromoteToLet<cr>
