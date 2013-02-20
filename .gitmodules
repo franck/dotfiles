@@ -10,6 +10,7 @@
 [submodule "vim/bundle/vim-matchit"]
 	path = vim/bundle/vim-matchit
 	url = https://github.com/tsaleh/vim-matchit.git
+  ignore = dirty
 [submodule "vim/bundle/vim-surround"]
 	path = vim/bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
@@ -22,3 +23,4 @@
 [submodule "vim/bundle/xmledit"]
 	path = vim/bundle/xmledit
 	url = https://github.com/sukima/xmledit.git
+  ignore = dirty
