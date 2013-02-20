@@ -1,4 +1,6 @@
+execute pathogen#infect()
 call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASIC EDITING CONFIGURATION
@@ -93,6 +95,17 @@ call MapCR()
 " swith current buffer and last opened buffer
 nnoremap <leader><leader> <c-^>
 
+nmap j gj
+nmap k gk
+
+cnoremap <C-a>  <Home>
+:nmap <leader>N :NERDTreeToggle<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SYNTASTIC
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:syntastic_ruby_exec = '~/.rvm/rubies/ruby-1.9.2-p290/bin/ruby'
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
 " Indent if we're at the beginning of a line. Else, do completion.
@@ -110,7 +123,7 @@ inoremap <s-tab> <c-n>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ARROW KEYS ARE UNACCEPTABLE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <Left> <Nop>
 map <Right> <Nop>
 map <Up> <Nop>
