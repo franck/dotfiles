@@ -1,6 +1,9 @@
 . ~/bin/bash_colors.sh
 source ~/.profile
-source ~/.bash_profile
+if [ -f ~/.bash_profile ]
+then
+  source ~/.bash_profile
+fi
 
 # Add paths that should have been there by default
 export PATH=${PATH}:/usr/local/bin:/usr/games/bin
