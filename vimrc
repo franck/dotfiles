@@ -95,11 +95,13 @@ call MapCR()
 " swith current buffer and last opened buffer
 nnoremap <leader><leader> <c-^>
 
-nmap j gj
-nmap k gk
+nnoremap j gj
+nnoremap k gk
 
 cnoremap <C-a>  <Home>
 :nmap <leader>N :NERDTreeToggle<CR>
+
+nnoremap <leader>l :ls<cr>:b<space>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SYNTASTIC
