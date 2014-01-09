@@ -6,15 +6,21 @@ then
 fi
 
 # Add paths that should have been there by default
-export PATH=${PATH}:/usr/local/bin:/usr/games/bin
+export PATH=${PATH}:/usr/local/bin:/usr/games/bin:/usr/local/sbin
 export PATH="~/bin:$PATH"
 export SHELL=/bin/bash
 export EDITOR=vim
+#export EDITOR=vi crontab -e
+alias crontab="VIM_CRONTAB=true crontab"
 export NODE_PATH=$HOME/local/lib/node_modules
 
 # needed for mysql2 gem in mac os
 export DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$DYLD_LIBRARY_PATH"
 export VERSIONER_PYTHON_PREFER_32_BIT=yes
+
+# need for icu4c (chardetection gem)
+export LDFLAGS="-L/usr/local/opt/icu4c/lib"
+export CPPFLAGS="-I/usr/local/opt/icu4c/include"
 
 # Unbreak broken, non-colored terminal
 export TERM='xterm-color'
@@ -60,7 +66,15 @@ grb_git_prompt() {
         echo ${GIT_PROMPT}
     fi
 }
-PS1="\[\033[00;33m\]\w${NORMAL}\$(grb_git_prompt) \$ "
+git_branch() {
+  local g="$(__gitdir)"
+  if [ -n "$g" ]; then
+    local GIT_PROMPT=`__git_ps1`
+    echo ${GIT_PROMPT}
+  fi
+}
+#PS1="\[\033[00;33m\]\w${NORMAL}\$(grb_git_prompt) \$ "
+PS1="\[\033[00;33m\]\w${NORMAL}\$(git_branch) "
 source ~/bin/git-completion.bash
 
 # aliases
@@ -95,9 +109,10 @@ alias lp="ls -p"
 alias h=history
 alias ett="mate app public config lib vendor/assets db lang test spec stories features Gemfile Guardfile .rvmrc &"
 alias ss="ruby script/server"
-alias zz="bundle exec autotest"
 alias rspec="rspec -c"
 alias rs="redis-server /usr/local/etc/redis.conf"
+alias rmi="rake db:migrate & rake db:migrate RAILS_ENV='test'"
+alias zs="zeus start"
 
 alias sftpce="sftp -oPort=32100 deploy@46.105.99.154"
 alias sftpecj="sftp -oPort=32100 deploy@91.121.160.184"
@@ -127,5 +142,6 @@ alias r="rails"
 alias r3="rails3"
 alias r31="rails31"
 alias shotgun="shotgun -I ."
+alias zs="zeus start"
 
 alias tree="find . -print | sed -e 's;[^/]*/;|--;g;s;--|; |;g'"

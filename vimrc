@@ -18,6 +18,8 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set autoindent
+let g:indent_guides_start_level=2
+let g:indent_guides_guide_size=1
 set laststatus=2
 set showmatch
 set incsearch
@@ -228,7 +230,7 @@ function! RunTestFile(...)
     endif
 
     " Run the tests for the previously-marked file.
-    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
+    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
     if in_test_file
         call SetTestFile()
     elseif !exists("t:grb_test_file")
@@ -260,7 +262,7 @@ function! RunAllTest()
   elseif filereadable("Gemfile")
     exec ":!bundle exec rspec --color --format documentation -I spec/spec_helper.rb spec/"
   else
-    exec ":!rspec --color --format documenation -I spec/spec_helper.rb spec/"
+    exec ":!rspec --color --format documentation -I spec/spec_helper.rb spec/"
   endif
 endfunction
 
@@ -275,6 +277,12 @@ function! RunTests(filename)
     :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
     if match(a:filename, '\.feature$') != -1
         exec ":!script/features " . a:filename
+    elseif match(a:filename, '_test\.rb$') != -1
+      if filereadable("zeus.json")
+        exec ":!zeus test " . a:filename
+      else
+        exec ":!ruby -Itest " . a:filename
+      end
     else
         if filereadable("script/test")
             exec ":!script/test " . a:filename
@@ -300,3 +308,9 @@ function! PromoteToLet()
 endfunction
 :command! PromoteToLet :call PromoteToLet()
 :map <leader>p :PromoteToLet<cr>
+
+" using VIM with crontab
+:if $VIM_CRONTAB == "true"
+:set nobackup
+:set nowritebackup
+:endif
