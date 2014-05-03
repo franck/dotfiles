@@ -145,3 +145,6 @@ alias shotgun="shotgun -I ."
 alias zs="zeus start"
 
 alias tree="find . -print | sed -e 's;[^/]*/;|--;g;s;--|; |;g'"
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+export NODE_PATH=/Users/franck/local/lib/node_modules:/usr/local/lib/node_modules

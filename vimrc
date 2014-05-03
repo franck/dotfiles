@@ -109,6 +109,7 @@ nnoremap <leader>l :ls<cr>:b<space>
 " SYNTASTIC
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:syntastic_ruby_exec = '~/.rvm/rubies/ruby-1.9.2-p290/bin/ruby'
+let g:syntastic_quiet_warnings=1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
