@@ -105,6 +105,10 @@ cnoremap <C-a>  <Home>
 
 nnoremap <leader>l :ls<cr>:b<space>
 
+" snipMate mappings
+imap <C-t> <Plug>snipMateNextOrTrigger
+smap <C-t> <Plug>snipMateNextOrTrigger
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SYNTASTIC
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
