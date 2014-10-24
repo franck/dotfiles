@@ -1,9 +1,11 @@
 require 'rake'
 require 'erb'
 
+# $ rake install REPPLACE_ALL=true to force all files
+
 desc "install the dot files into user's home directory"
 task :install do
-  replace_all = false
+  replace_all = ENV['REPLACE_ALL'] || false
   Dir['*'].each do |file|
     next if %w[bin Rakefile README.rdoc LICENSE bash_profile].include? file
     
