@@ -318,3 +318,11 @@ endfunction
 :set nobackup
 :set nowritebackup
 :endif
+
+
+" fold on indent
+" augroup vimrc
+"   au BufReadPre * setlocal foldmethod=indent
+"   " uncomment to have fold method indent on opening and manual after
+"   "au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+" augroup END
