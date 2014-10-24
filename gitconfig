@@ -48,3 +48,5 @@
     tool = vimdiff
 [core]
 	excludesfile = /Users/franckdagostini/.gitignore
+[push]
+	default = simple
