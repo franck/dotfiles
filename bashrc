@@ -1,9 +1,23 @@
 . ~/bin/bash_colors.sh
-source ~/.profile
-if [ -f ~/.bash_profile ]
-then
+
+platform='unknown'
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+   platform='linux'
+elif [[ "$unamestr" == 'Darwin' ]]; then
+   platform='mac'
+fi
+
+if [ -f ~/.bash_profile ]; then
   source ~/.bash_profile
 fi
+
+if [[ $platform ==  'mac' ]]; then
+  if [ -f ~/.mac_profile ]; then
+    source ~/.mac_profile
+  fi
+fi
+
 
 # Add paths that should have been there by default
 export PATH="~/bin:$PATH"
@@ -64,7 +78,7 @@ git_branch() {
   fi
 }
 #PS1="\[\033[00;33m\]\w${NORMAL}\$(grb_git_prompt) \$ "
-PS1="\[\033[00;33m\]\w${NORMAL}\$(git_branch) "
+PS1="\[\033[00;33m\]\h:\w${NORMAL}\$(git_branch) "
 source ~/bin/git-completion.bash
 
 # aliases
