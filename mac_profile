@@ -41,6 +41,8 @@ source ~/bin/git-completion.bash
 export PATH="/Users/franckdagostini/Library/Application Support/GoodSync":$PATH
 export PATH=${PATH}:/usr/local/bin:/usr/games/bin:/usr/local/sbin
 
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home
+
 alias ett="mate app public config lib vendor/assets db lang test spec stories features Gemfile Guardfile .rvmrc &"
 alias nginx_start="launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.nginx.plist"
 alias nginx_stop="launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.nginx.plist"
