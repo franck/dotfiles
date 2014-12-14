@@ -73,6 +73,8 @@ let mapleader=","
 :set t_Co=256 " 256 colors
 :set background=dark
 :color grb256
+:let g:solarized_termcolors=256
+:colorscheme solarized
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STATUS LINE
@@ -319,3 +321,14 @@ endfunction
 :set nobackup
 :set nowritebackup
 :endif
+
+
+" fold on indent
+" augroup vimrc
+"   au BufReadPre * setlocal foldmethod=indent
+"   " uncomment to have fold method indent on opening and manual after
+"   "au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+" augroup END
+
+" Set syntax to scss if file.scss.css
+au BufRead,BufNewFile *.scss.css set filetype=scss.css

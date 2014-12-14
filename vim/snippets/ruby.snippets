@@ -2,3 +2,9 @@
 # expect(page).to
 snippet ept
 	expect(page).to have_content ${0}
+snippet sop
+	save_and_open_page
+snippet let
+	let(:${1:object}) { ${0} }
+snippet let!
+	let!(:${1:object}) { ${0} }
