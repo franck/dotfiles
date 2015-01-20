@@ -15,7 +15,7 @@ fi
 PS1='\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 # Add paths that should have been there by default
-export PATH="~/bin:$PATH"
+export PATH="~/bin:~/dotfiles/bin:$PATH"
 export SHELL=/bin/bash
 export EDITOR=vim
 #export EDITOR=vi crontab -e
