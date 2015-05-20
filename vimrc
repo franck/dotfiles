@@ -74,7 +74,9 @@ let mapleader=","
 :set background=dark
 :color grb256
 :let g:solarized_termcolors=256
-:colorscheme solarized
+":colorscheme railscasts
+":colorscheme solarized
+:colorscheme gruvbox
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STATUS LINE
@@ -108,8 +110,16 @@ cnoremap <C-a>  <Home>
 nnoremap <leader>l :ls<cr>:b<space>
 
 " snipMate mappings
-imap <C-t> <Plug>snipMateNextOrTrigger
-smap <C-t> <Plug>snipMateNextOrTrigger
+" imap <C-t> <Plug>snipMateNextOrTrigger
+" smap <C-t> <Plug>snipMateNextOrTrigger
+imap <S-Tab> <Plug>snipMateNextOrTrigger
+smap <S-Tab> <Plug>snipMateNextOrTrigger
+
+" reindent
+map <F7> mzgg=G`z<CR>
+
+" jump to tag (ctags) : ctags -R .
+nnoremap t <C-]>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SYNTASTIC
@@ -130,7 +140,7 @@ function! InsertTabWrapper()
     endif
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <s-tab> <c-n>
+" inoremap <s-tab> <c-n>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ARROW KEYS ARE UNACCEPTABLE
@@ -225,9 +235,6 @@ nnoremap <leader>; :call OpenTestAlternate()<cr>
 map <leader>t :call RunTestFile()<cr>
 map <leader>T :call RunNearestTest()<cr>
 map <leader>a :call RunAllTest()<cr>
-" map <leader>a :call RunTests('')<cr>
-map <leader>c :w\|:!script/features<cr>
-map <leader>w :w\|:!script/features --profile wip<cr>
 
 function! RunTestFile(...)
     if a:0
@@ -284,26 +291,16 @@ function! RunTests(filename)
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  if match(a:filename, '\.feature$') != -1
-    exec ":!script/features " . a:filename
-  elseif match(a:filename, '_test\.rb$') != -1
-    if filereadable("zeus.json")
-      exec ":!zeus test " . a:filename
-    else
-      exec ":!ruby -Itest " . a:filename
-    end
+  if filereadable("script/test")
+    exec ":!script/test " . a:filename
+  elseif filereadable("zeus.json")
+    exec ":!zeus rspec " . a:filename
+  elseif filereadable("bin/rspec")
+    exec ":!bin/rspec " . a:filename
+  elseif filereadable("Gemfile")
+    exec ":!bundle exec rspec " . a:filename
   else
-    if filereadable("script/test")
-      exec ":!script/test " . a:filename
-    elseif filereadable("zeus.json")
-      exec ":!zeus rspec " . a:filename
-    elseif filereadable("bin/rspec")
-      exec ":!bin/rspec " . a:filename
-    elseif filereadable("Gemfile")
-      exec ":!bundle exec rspec " . a:filename
-    else
-      exec ":!rspec " . a:filename
-    end
+    exec ":!rspec " . a:filename
   end
 endfunction
 

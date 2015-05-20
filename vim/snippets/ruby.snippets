@@ -8,3 +8,9 @@ snippet let
 	let(:${1:object}) { ${0} }
 snippet let!
 	let!(:${1:object}) { ${0} }
+snippet feat
+	require "rails_helper"
+
+	feature "${1}" do
+	  ${2}
+	end
