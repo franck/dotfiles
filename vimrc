@@ -132,12 +132,12 @@ let g:syntastic_quiet_warnings=1
 " Indent if we're at the beginning of a line. Else, do completion.
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
+  let col = col('.') - 1
+  if !col || getline('.')[col - 1] !~ '\k'
+    return "\<tab>"
+  else
+    return "\<c-p>"
+  endif
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 " inoremap <s-tab> <c-n>
@@ -154,13 +154,13 @@ map <Down> <Nop>
 " RENAME CURRENT FILE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! RenameFile()
-    let old_name = expand('%')
-    let new_name = input('New file name: ', expand('%'), 'file')
-    if new_name != '' && new_name != old_name
-        exec ':saveas ' . new_name
-        exec ':silent !rm ' . old_name
-        redraw!
-    endif
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'), 'file')
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
 endfunction
 map <leader>n :call RenameFile()<cr>
 
@@ -237,30 +237,30 @@ map <leader>T :call RunNearestTest()<cr>
 map <leader>a :call RunAllTest()<cr>
 
 function! RunTestFile(...)
-    if a:0
-        let command_suffix = a:1
-    else
-        let command_suffix = ""
-    endif
+  if a:0
+    let command_suffix = a:1
+  else
+    let command_suffix = ""
+  endif
 
-    " Run the tests for the previously-marked file.
-    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
-    if in_test_file
-        call SetTestFile()
-    elseif !exists("t:grb_test_file")
-        return
-    end
-    call RunTests(t:grb_test_file . command_suffix)
+  " Run the tests for the previously-marked file.
+  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
+  if in_test_file
+    call SetTestFile()
+  elseif !exists("t:grb_test_file")
+    return
+  end
+  call RunTests(t:grb_test_file . command_suffix)
 endfunction
 
 function! RunNearestTest()
-    let spec_line_number = line('.')
-    call RunTestFile(":" . spec_line_number)
+  let spec_line_number = line('.')
+  call RunTestFile(":" . spec_line_number)
 endfunction
 
 function! SetTestFile()
-    " Set the spec file that tests will be run for.
-    let t:grb_test_file=@%
+  " Set the spec file that tests will be run for.
+  let t:grb_test_file=@%
 endfunction
 
 function! RunAllTest()
@@ -271,14 +271,18 @@ function! RunAllTest()
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  if filereadable("zeus.json")
-    exec ":!zeus rspec --color --format documentation -I spec/spec_helper.rb spec/"
-  elseif filereadable("bin/rspec")
-    exec ":!bin/rspec --color --format documentation -I spec/spec_helper.rb spec/"
-  elseif filereadable("Gemfile")
-    exec ":!bundle exec rspec --color --format documentation -I spec/spec_helper.rb spec/"
+  if filereadable("rspec")
+    if filereadable("zeus.json")
+      exec ":!zeus rspec --color --format documentation -I spec/spec_helper.rb spec/"
+    elseif filereadable("bin/rspec")
+      exec ":!bin/rspec --color --format documentation -I spec/spec_helper.rb spec/"
+    elseif filereadable("Gemfile")
+      exec ":!bundle exec rspec --color --format documentation -I spec/spec_helper.rb spec/"
+    else
+      exec ":!rspec --color --format documentation -I spec/spec_helper.rb spec/"
+    endif
   else
-    exec ":!rspec --color --format documentation -I spec/spec_helper.rb spec/"
+    exec ":!rake test"
   endif
 endfunction
 
@@ -291,16 +295,20 @@ function! RunTests(filename)
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  if filereadable("script/test")
-    exec ":!script/test " . a:filename
-  elseif filereadable("zeus.json")
-    exec ":!zeus rspec " . a:filename
-  elseif filereadable("bin/rspec")
-    exec ":!bin/rspec " . a:filename
-  elseif filereadable("Gemfile")
-    exec ":!bundle exec rspec " . a:filename
+  if filereadable("rspec")
+    if filereadable("script/test")
+      exec ":!script/test " . a:filename
+    elseif filereadable("zeus.json")
+      exec ":!zeus rspec " . a:filename
+    elseif filereadable("bin/rspec")
+      exec ":!bin/rspec " . a:filename
+    elseif filereadable("Gemfile")
+      exec ":!bundle exec rspec " . a:filename
+    else
+      exec ":!rspec " . a:filename
+    end
   else
-    exec ":!rspec " . a:filename
+    exec ":!rake test " . a:filename
   end
 endfunction
 
