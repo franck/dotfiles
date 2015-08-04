@@ -271,18 +271,16 @@ function! RunAllTest()
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  if filereadable("rspec")
-    if filereadable("zeus.json")
-      exec ":!zeus rspec --color --format documentation -I spec/spec_helper.rb spec/"
-    elseif filereadable("bin/rspec")
-      exec ":!bin/rspec --color --format documentation -I spec/spec_helper.rb spec/"
-    elseif filereadable("Gemfile")
-      exec ":!bundle exec rspec --color --format documentation -I spec/spec_helper.rb spec/"
-    else
-      exec ":!rspec --color --format documentation -I spec/spec_helper.rb spec/"
-    endif
-  else
+  if filereadable("script/test")
     exec ":!rake test"
+  elseif filereadable("zeus.json")
+    exec ":!zeus rspec --color --format documentation -I spec/spec_helper.rb spec/"
+  elseif filereadable("bin/rspec")
+    exec ":!bin/rspec --color --format documentation -I spec/spec_helper.rb spec/"
+  elseif filereadable("Gemfile")
+    exec ":!bundle exec rspec --color --format documentation -I spec/spec_helper.rb spec/"
+  else
+    exec ":!rspec --color --format documentation -I spec/spec_helper.rb spec/"
   endif
 endfunction
 
@@ -295,20 +293,16 @@ function! RunTests(filename)
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  if filereadable("rspec")
-    if filereadable("script/test")
-      exec ":!script/test " . a:filename
-    elseif filereadable("zeus.json")
-      exec ":!zeus rspec " . a:filename
-    elseif filereadable("bin/rspec")
-      exec ":!bin/rspec " . a:filename
-    elseif filereadable("Gemfile")
-      exec ":!bundle exec rspec " . a:filename
-    else
-      exec ":!rspec " . a:filename
-    end
-  else
+  if filereadable("script/test")
     exec ":!rake test " . a:filename
+  elseif filereadable("zeus.json")
+    exec ":!zeus rspec " . a:filename
+  elseif filereadable("bin/rspec")
+    exec ":!bin/rspec " . a:filename
+  elseif filereadable("Gemfile")
+    exec ":!bundle exec rspec " . a:filename
+  else
+    exec ":!rspec " . a:filename
   end
 endfunction
 
