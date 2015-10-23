@@ -5,8 +5,8 @@ call pathogen#helptags()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASIC EDITING CONFIGURATION
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible
-" allow unsaved background buffers and remember marks/undo for them
+set nocompatible " allow unsaved background buffers and remember marks/undo for them
+syntax on " Enable highlighting for syntax
 set hidden
 set encoding=utf-8
 set fileencoding=utf-8
@@ -30,7 +30,6 @@ set mouse=a
 set ttymouse=xterm2
 " make searches case-sensitive only if they contain upper-case characters
 set ignorecase smartcase
-" highlight current line
 " set cursorline
 set number                        " Show line numbers.
 set ruler                         " Show cursor position.
@@ -54,8 +53,6 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set backspace=indent,eol,start
 " display incomplete commands
 set showcmd
-" Enable highlighting for syntax
-syntax on
 " Enable file type detection.
 " Use the default filetype settings, so that mail gets 'tw' set to 72,
 " 'cindent' is on in C files, etc.
@@ -98,6 +95,10 @@ function! MapCR()
   nnoremap <cr> :nohlsearch<cr>
 endfunction
 call MapCR()
+
+" turn off search highlight
+nnoremap <leader><space> :nohlsearch<CR>
+
 " swith current buffer and last opened buffer
 nnoremap <leader><leader> <c-^>
 
@@ -120,6 +121,16 @@ map <F7> mzgg=G`z<CR>
 
 " jump to tag (ctags) : ctags -R .
 nnoremap t <C-]>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" FOLDING
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set foldenable          " enable folding
+set foldlevelstart=10   " open most folds by default
+set foldnestmax=10      " 10 nested fold max
+" space open/closes folds
+nnoremap <space> za
+set foldmethod=indent   " fold based on indent level
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SYNTASTIC

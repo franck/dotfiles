@@ -102,3 +102,8 @@ alias ctags="`brew --prefix`/bin/ctags"
 
 alias clean_budget_file="sed -e '1d' | sed -e '/Date/,$d' | sed -e 's/,/ /g' | sed -e 's/\"//g' | awk '{ print $1 \";\" $4 ';' $5}' | sed -e '/;;/d' | sed -e 's/\./,/g'"
 PHP_AUTOCONF="/usr/local/bin/autoconf"
+
+alias elasticsearch="$HOME/sandbox/elasticsearch/elasticsearch/bin/elasticsearch"
+alias es="elasticsearch -d"
+alias kibana="echo 'localhost:5601' && $HOME/sandbox/elasticsearch/kibana/bin/kibana"
+alias logstash="$HOME/sandbox/elasticsearch/logstash/bin/logstash"
