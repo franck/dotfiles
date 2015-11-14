@@ -19,7 +19,9 @@ function! s:Bookmark.AddBookmark(name, path)
         endif
     endfor
     call add(s:Bookmark.Bookmarks(), s:Bookmark.New(a:name, a:path))
-    call s:Bookmark.Sort()
+    if g:NERDTreeBookmarksSort ==# 1
+        call s:Bookmark.Sort()
+    endif
 endfunction
 
 " FUNCTION: Bookmark.Bookmarks()   {{{1
@@ -67,7 +69,7 @@ function! s:Bookmark.BookmarkNames()
 endfunction
 
 " FUNCTION: Bookmark.CacheBookmarks(silent) {{{1
-" Class method to read all bookmarks from the bookmarks file intialize
+" Class method to read all bookmarks from the bookmarks file initialize
 " bookmark objects for each one.
 "
 " Args:
@@ -85,6 +87,7 @@ function! s:Bookmark.CacheBookmarks(silent)
 
                 let name = substitute(i, '^\(.\{-}\) .*$', '\1', '')
                 let path = substitute(i, '^.\{-} \(.*\)$', '\1', '')
+                let path = fnamemodify(path, ':p')
 
                 try
                     let bookmark = s:Bookmark.New(name, g:NERDTreePath.New(path))
@@ -101,7 +104,9 @@ function! s:Bookmark.CacheBookmarks(silent)
                 call nerdtree#echo(invalidBookmarksFound . " invalid bookmarks were read. See :help NERDTreeInvalidBookmarks for info.")
             endif
         endif
-        call s:Bookmark.Sort()
+        if g:NERDTreeBookmarksSort ==# 1
+            call s:Bookmark.Sort()
+        endif
     endif
 endfunction
 
@@ -249,7 +254,7 @@ endfunction
 " FUNCTION: Bookmark.str()   {{{1
 " Get the string that should be rendered in the view for this bookmark
 function! s:Bookmark.str()
-    let pathStrMaxLen = winwidth(nerdtree#getTreeWinNum()) - 4 - len(self.name)
+    let pathStrMaxLen = winwidth(g:NERDTree.GetWinNum()) - 4 - len(self.name)
     if &nu
         let pathStrMaxLen = pathStrMaxLen - &numberwidth
     endif
@@ -271,7 +276,7 @@ function! s:Bookmark.toRoot()
             let targetNode = g:NERDTreeFileNode.New(s:Bookmark.BookmarkFor(self.name).path)
         endtry
         call targetNode.makeRoot()
-        call nerdtree#renderView()
+        call b:NERDTree.render()
         call targetNode.putCursorHere(0, 0)
     endif
 endfunction
@@ -289,7 +294,7 @@ function! s:Bookmark.validate()
         return 1
     else
         call s:Bookmark.CacheBookmarks(1)
-        call nerdtree#renderView()
+        call b:NERDTree.render()
         call nerdtree#echo(self.name . "now points to an invalid location. See :help NERDTreeInvalidBookmarks for info.")
         return 0
     endif
@@ -300,7 +305,7 @@ endfunction
 function! s:Bookmark.Write()
     let bookmarkStrings = []
     for i in s:Bookmark.Bookmarks()
-        call add(bookmarkStrings, i.name . ' ' . i.path.str())
+        call add(bookmarkStrings, i.name . ' ' . fnamemodify(i.path.str(), ':~'))
     endfor
 
     "add a blank line before the invalid ones
