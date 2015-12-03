@@ -44,7 +44,7 @@ if [[ -s "$HOME/.rvm/scripts/rvm" ]]  ; then source "$HOME/.rvm/scripts/rvm" ; f
 
 export PATH=$PATH:/usr/local/mysql/bin # Add MySQL to PATH
 export PATH=${PATH}:/usr/local/bin:/usr/games/bin:/usr/local/sbin
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home
+export JAVA_HOME="$(/usr/libexec/java_home)"
 export PHP_AUTOCONF="/usr/local/bin/autoconf"
 export NODE_PATH=$HOME/local/lib/node_modules
 # needed for mysql2 gem in mac os
@@ -103,7 +103,7 @@ alias ctags="`brew --prefix`/bin/ctags"
 alias clean_budget_file="sed -e '1d' | sed -e '/Date/,$d' | sed -e 's/,/ /g' | sed -e 's/\"//g' | awk '{ print $1 \";\" $4 ';' $5}' | sed -e '/;;/d' | sed -e 's/\./,/g'"
 PHP_AUTOCONF="/usr/local/bin/autoconf"
 
-alias elasticsearch="$HOME/sandbox/elasticsearch/elasticsearch/bin/elasticsearch"
+alias elasticsearch="$HOME/webdesign/src/elasticsearch/bin/elasticsearch"
 alias es="elasticsearch -d"
-alias kibana="echo 'localhost:5601' && $HOME/sandbox/elasticsearch/kibana/bin/kibana"
-alias logstash="$HOME/sandbox/elasticsearch/logstash/bin/logstash"
+alias kibana="echo 'localhost:5601' && $HOME/webdesign/src/kibana/bin/kibana"
+alias logstash="$HOME/webdesign/src/logstash/bin/logstash"
