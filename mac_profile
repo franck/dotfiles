@@ -107,3 +107,5 @@ alias elasticsearch="$HOME/webdesign/src/elasticsearch/bin/elasticsearch"
 alias es="elasticsearch -d"
 alias kibana="echo 'localhost:5601' && $HOME/webdesign/src/kibana/bin/kibana"
 alias logstash="$HOME/webdesign/src/logstash/bin/logstash"
+
+source ~/bin/tmuxinator.bash

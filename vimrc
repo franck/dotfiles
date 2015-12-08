@@ -72,8 +72,8 @@ let mapleader=","
 :color grb256
 :let g:solarized_termcolors=256
 ":colorscheme railscasts
-":colorscheme solarized
-:colorscheme gruvbox
+:colorscheme solarized
+":colorscheme gruvbox
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STATUS LINE
@@ -282,7 +282,7 @@ function! RunAllTest()
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  if filereadable("script/test")
+  if filereadable("bin/test")
     exec ":!rake test"
   elseif filereadable("zeus.json")
     exec ":!zeus rspec --color --format documentation -I spec/spec_helper.rb spec/"
@@ -304,7 +304,7 @@ function! RunTests(filename)
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  if filereadable("script/test")
+  if filereadable("bin/test")
     exec ":!rake test " . a:filename
   elseif filereadable("zeus.json")
     exec ":!zeus rspec " . a:filename
