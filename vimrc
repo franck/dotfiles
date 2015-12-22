@@ -284,6 +284,8 @@ function! RunAllTest()
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   if filereadable("bin/test")
     exec ":!rake test"
+  elseif filereadable("bin/test5")
+    exec ":!rails test"
   elseif filereadable("zeus.json")
     exec ":!zeus rspec --color --format documentation -I spec/spec_helper.rb spec/"
   elseif filereadable("bin/rspec")
@@ -306,6 +308,8 @@ function! RunTests(filename)
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   if filereadable("bin/test")
     exec ":!rake test " . a:filename
+  elseif filereadable("bin/test5")
+    exec ":!rails test" . a:filename
   elseif filereadable("zeus.json")
     exec ":!zeus rspec " . a:filename
   elseif filereadable("bin/rspec")
