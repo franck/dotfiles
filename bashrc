@@ -8,10 +8,6 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
    platform='mac'
 fi
 
-if [ -f ~/.bash_profile ]; then
-  source ~/.bash_profile
-fi
-
 PS1='\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 # Add paths that should have been there by default
