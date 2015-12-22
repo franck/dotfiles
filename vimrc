@@ -5,8 +5,8 @@ call pathogen#helptags()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASIC EDITING CONFIGURATION
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible
-" allow unsaved background buffers and remember marks/undo for them
+set nocompatible " allow unsaved background buffers and remember marks/undo for them
+syntax on " Enable highlighting for syntax
 set hidden
 set encoding=utf-8
 set fileencoding=utf-8
@@ -30,7 +30,6 @@ set mouse=a
 set ttymouse=xterm2
 " make searches case-sensitive only if they contain upper-case characters
 set ignorecase smartcase
-" highlight current line
 " set cursorline
 set number                        " Show line numbers.
 set ruler                         " Show cursor position.
@@ -54,8 +53,6 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set backspace=indent,eol,start
 " display incomplete commands
 set showcmd
-" Enable highlighting for syntax
-syntax on
 " Enable file type detection.
 " Use the default filetype settings, so that mail gets 'tw' set to 72,
 " 'cindent' is on in C files, etc.
@@ -74,7 +71,9 @@ let mapleader=","
 :set background=dark
 :color grb256
 :let g:solarized_termcolors=256
+":colorscheme railscasts
 :colorscheme solarized
+":colorscheme gruvbox
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STATUS LINE
@@ -96,6 +95,10 @@ function! MapCR()
   nnoremap <cr> :nohlsearch<cr>
 endfunction
 call MapCR()
+
+" turn off search highlight
+nnoremap <leader><space> :nohlsearch<CR>
+
 " swith current buffer and last opened buffer
 nnoremap <leader><leader> <c-^>
 
@@ -108,8 +111,26 @@ cnoremap <C-a>  <Home>
 nnoremap <leader>l :ls<cr>:b<space>
 
 " snipMate mappings
-imap <C-t> <Plug>snipMateNextOrTrigger
-smap <C-t> <Plug>snipMateNextOrTrigger
+" imap <C-t> <Plug>snipMateNextOrTrigger
+" smap <C-t> <Plug>snipMateNextOrTrigger
+imap <S-Tab> <Plug>snipMateNextOrTrigger
+smap <S-Tab> <Plug>snipMateNextOrTrigger
+
+" reindent
+map <F7> mzgg=G`z<CR>
+
+" jump to tag (ctags) : ctags -R .
+nnoremap t <C-]>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" FOLDING
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set foldenable          " enable folding
+set foldlevelstart=10   " open most folds by default
+set foldnestmax=10      " 10 nested fold max
+" space open/closes folds
+nnoremap <space> za
+set foldmethod=indent   " fold based on indent level
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SYNTASTIC
@@ -122,15 +143,15 @@ let g:syntastic_quiet_warnings=1
 " Indent if we're at the beginning of a line. Else, do completion.
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
+  let col = col('.') - 1
+  if !col || getline('.')[col - 1] !~ '\k'
+    return "\<tab>"
+  else
+    return "\<c-p>"
+  endif
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <s-tab> <c-n>
+" inoremap <s-tab> <c-n>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ARROW KEYS ARE UNACCEPTABLE
@@ -144,13 +165,13 @@ map <Down> <Nop>
 " RENAME CURRENT FILE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! RenameFile()
-    let old_name = expand('%')
-    let new_name = input('New file name: ', expand('%'), 'file')
-    if new_name != '' && new_name != old_name
-        exec ':saveas ' . new_name
-        exec ':silent !rm ' . old_name
-        redraw!
-    endif
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'), 'file')
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
 endfunction
 map <leader>n :call RenameFile()<cr>
 
@@ -225,35 +246,32 @@ nnoremap <leader>; :call OpenTestAlternate()<cr>
 map <leader>t :call RunTestFile()<cr>
 map <leader>T :call RunNearestTest()<cr>
 map <leader>a :call RunAllTest()<cr>
-" map <leader>a :call RunTests('')<cr>
-map <leader>c :w\|:!script/features<cr>
-map <leader>w :w\|:!script/features --profile wip<cr>
 
 function! RunTestFile(...)
-    if a:0
-        let command_suffix = a:1
-    else
-        let command_suffix = ""
-    endif
+  if a:0
+    let command_suffix = a:1
+  else
+    let command_suffix = ""
+  endif
 
-    " Run the tests for the previously-marked file.
-    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
-    if in_test_file
-        call SetTestFile()
-    elseif !exists("t:grb_test_file")
-        return
-    end
-    call RunTests(t:grb_test_file . command_suffix)
+  " Run the tests for the previously-marked file.
+  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
+  if in_test_file
+    call SetTestFile()
+  elseif !exists("t:grb_test_file")
+    return
+  end
+  call RunTests(t:grb_test_file . command_suffix)
 endfunction
 
 function! RunNearestTest()
-    let spec_line_number = line('.')
-    call RunTestFile(":" . spec_line_number)
+  let spec_line_number = line('.')
+  call RunTestFile(":" . spec_line_number)
 endfunction
 
 function! SetTestFile()
-    " Set the spec file that tests will be run for.
-    let t:grb_test_file=@%
+  " Set the spec file that tests will be run for.
+  let t:grb_test_file=@%
 endfunction
 
 function! RunAllTest()
@@ -264,7 +282,9 @@ function! RunAllTest()
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  if filereadable("zeus.json")
+  if filereadable("bin/test")
+    exec ":!rake test"
+  elseif filereadable("zeus.json")
     exec ":!zeus rspec --color --format documentation -I spec/spec_helper.rb spec/"
   elseif filereadable("bin/rspec")
     exec ":!bin/rspec --color --format documentation -I spec/spec_helper.rb spec/"
@@ -284,26 +304,16 @@ function! RunTests(filename)
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  if match(a:filename, '\.feature$') != -1
-    exec ":!script/features " . a:filename
-  elseif match(a:filename, '_test\.rb$') != -1
-    if filereadable("zeus.json")
-      exec ":!zeus test " . a:filename
-    else
-      exec ":!ruby -Itest " . a:filename
-    end
+  if filereadable("bin/test")
+    exec ":!rake test " . a:filename
+  elseif filereadable("zeus.json")
+    exec ":!zeus rspec " . a:filename
+  elseif filereadable("bin/rspec")
+    exec ":!bin/rspec " . a:filename
+  elseif filereadable("Gemfile")
+    exec ":!bundle exec rspec " . a:filename
   else
-    if filereadable("script/test")
-      exec ":!script/test " . a:filename
-    elseif filereadable("zeus.json")
-      exec ":!zeus rspec " . a:filename
-    elseif filereadable("bin/rspec")
-      exec ":!bin/rspec " . a:filename
-    elseif filereadable("Gemfile")
-      exec ":!bundle exec rspec " . a:filename
-    else
-      exec ":!rspec " . a:filename
-    end
+    exec ":!rspec " . a:filename
   end
 endfunction
 

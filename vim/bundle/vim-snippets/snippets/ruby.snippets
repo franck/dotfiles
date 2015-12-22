@@ -634,28 +634,18 @@ snippet crw
 	cattr_accessor :${0:attr_names}
 snippet defcreate
 	def create
-		@${1:model_class_name} = ${2:ModelClassName}.new(params[:$1])
-
-		respond_to do |format|
-			if @$1.save
-				flash[:notice] = '$2 was successfully created.'
-				format.html { redirect_to(@$1) }
-				format.xml  { render :xml => @$1, :status => :created, :location => @$1 }
-			else
-				format.html { render :action => "new" }
-				format.xml  { render :xml => @$1.errors, :status => :unprocessable_entity }
-			end
-		end
+	  @${1:model_class_name} = ${2:ModelClassName}.new(params[:$1])
+	  if @$1.save
+		redirect_to(@$1)
+	  else
+		render :new
+	  end
 	end
 snippet defdestroy
 	def destroy
-		@${1:model_class_name} = ${2:ModelClassName}.find(params[:id])
-		@$1.destroy
-
-		respond_to do |format|
-			format.html { redirect_to($1s_url) }
-			format.xml  { head :ok }
-		end
+	  @${1:model_class_name} = ${2:ModelClassName}.find(params[:id])
+	  @$1.destroy
+	  redirect_to($1s_url)
 	end
 snippet defedit
 	def edit
@@ -663,45 +653,24 @@ snippet defedit
 	end
 snippet defindex
 	def index
-		@${1:model_class_name} = ${2:ModelClassName}.all
-
-		respond_to do |format|
-			format.html # index.html.erb
-			format.xml  { render :xml => @$1s }
-		end
+	  @${1:model_class_name} = ${2:ModelClassName}.all
 	end
 snippet defnew
 	def new
-		@${1:model_class_name} = ${2:ModelClassName}.new
-
-		respond_to do |format|
-			format.html # new.html.erb
-			format.xml  { render :xml => @$1 }
-		end
+	  @${1:model_class_name} = ${2:ModelClassName}.new
 	end
 snippet defshow
 	def show
-		@${1:model_class_name} = ${2:ModelClassName}.find(params[:id])
-
-		respond_to do |format|
-			format.html # show.html.erb
-			format.xml  { render :xml => @$1 }
-		end
+	  @${1:model_class_name} = ${2:ModelClassName}.find(params[:id])
 	end
 snippet defupdate
 	def update
-		@${1:model_class_name} = ${2:ModelClassName}.find(params[:id])
-
-		respond_to do |format|
-			if @$1.update_attributes(params[:$1])
-				flash[:notice] = '$2 was successfully updated.'
-				format.html { redirect_to(@$1) }
-				format.xml  { head :ok }
-			else
-				format.html { render :action => "edit" }
-				format.xml  { render :xml => @$1.errors, :status => :unprocessable_entity }
-			end
-		end
+	  @${1:model_class_name} = ${2:ModelClassName}.find(params[:id])
+	  if @$1.update_attributes(params[:$1])
+		redirect_to(@$1)
+	  else
+		render :edit
+	  end
 	end
 snippet dele delegate .. to
 	delegate :${1:methods}, :to => :${0:object}
@@ -1022,8 +991,8 @@ snippet cont
 		${0}
 	end
 snippet bef
-	before :${1:each} do
-		${0}
+	before do
+	  ${0}
 	end
 snippet aft
 	after :${1:each} do
@@ -1051,7 +1020,7 @@ snippet ibl
 	it_behaves_like ${0:"shared examples name"}
 snippet it
 	it "${1:spec_name}" do
-		${0}
+	  ${0}
 	end
 snippet its
 	its(:${1:method}) { should ${0} }
