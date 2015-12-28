@@ -1,3 +1,5 @@
+source ~/.bashrc
+
 #. ~/bin/bash_colors.sh
 #
 #platform='unknown'

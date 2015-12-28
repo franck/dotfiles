@@ -71,7 +71,7 @@ alias sftpes="sftpit"
 
 alias sshce="ssh deploy@46.105.99.154 -p 32100"
 alias sshecj="ssh deploy@91.121.160.184 -p 32100"
-alias sshcf="ssh deploy@91.121.165.111 -p 32100"
+#alias sshcf="ssh deploy@91.121.165.111 -p 32100"
 alias sshej="sshcf"
 alias sshold="ssh franck@91.121.1.20 -p 8888"
 alias sshfb="ssh -p 8888 eurojob-consulting.com -R :3001:127.0.0.1:3000 sleep 9999"
@@ -80,6 +80,7 @@ alias sshcairn="ssh cairnbri@cairnbridge.com"
 alias sshit="ssh -p 32100 deploy@176.31.255.14"
 alias sshes="sshit"
 alias sshgolf="ssh -p 32100 deploy@golfmail.fr"
+alias sshcf="ssh deploy@new.connexion-francaise.fr"
 
 alias redisstart='sudo launchctl start io.redis.redis-server'
 alias redisstop='sudo launchctl stop io.redis.redis-server'
