@@ -80,7 +80,7 @@ alias sshcairn="ssh cairnbri@cairnbridge.com"
 alias sshit="ssh -p 32100 deploy@176.31.255.14"
 alias sshes="sshit"
 alias sshgolf="ssh -p 32100 deploy@golfmail.fr"
-alias sshcf="ssh deploy@new.connexion-francaise.fr"
+alias sshcf="ssh deploy@new.connexion-francaise.com"
 
 alias redisstart='sudo launchctl start io.redis.redis-server'
 alias redisstop='sudo launchctl stop io.redis.redis-server'
