@@ -307,7 +307,7 @@ function! RunTests(filename)
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   if filereadable("bin/test")
-    exec ":!rake test " . a:filename
+    exec ":!m " . a:filename
   elseif filereadable("bin/test5")
     exec ":!rails test" . a:filename
   elseif filereadable("zeus.json")
