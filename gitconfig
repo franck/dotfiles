@@ -53,8 +53,6 @@
 
 [merge]
   tool = vimdiff
-[core]
-  excludesfile = /Users/franckdagostini/.gitignore
 [filter "lfs"]
   clean = git-lfs clean %f
   smudge = git-lfs smudge %f
