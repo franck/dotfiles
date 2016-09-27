@@ -11,9 +11,11 @@ export NODE_PATH=$HOME/local/lib/node_modules
 # needed for mysql2 gem in mac os
 export DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$DYLD_LIBRARY_PATH"
 export VERSIONER_PYTHON_PREFER_32_BIT=yes
-# need for icu4c (chardetection gem)
-export LDFLAGS="-L/usr/local/opt/icu4c/lib"
-export CPPFLAGS="-I/usr/local/opt/icu4c/include"
+
+## need for icu4c (chardetection gem)
+#export LDFLAGS="-L/usr/local/opt/icu4c/lib"
+#export CPPFLAGS="-I/usr/local/opt/icu4c/include"
+#
 # ruby optim
 export RUBY_GC_HEAP_INIT_SLOTS=1000000
 export RUBY_HEAP_SLOTS_INCREMENT=1000000
@@ -21,19 +23,23 @@ export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
 export RUBY_GC_MALLOC_LIMIT=1000000000
 export RUBY_HEAP_FREE_MIN=500000
 
+alias meteo="curl -4 wttr.in/Bethune"
+
 alias sftpce="sftp -oPort=32100 deploy@46.105.99.154"
+alias sftpnewce="sftp -oPort=32100 deploy@46.105.105.40"
 alias sftpecj="sftp -oPort=32100 deploy@91.121.160.184"
-alias sftpcf="sftp -oPort=32100 deploy@91.121.165.111"
-alias sftpej="sftpcf"
+alias sftpej="sftp -oPort=32100 deploy@91.121.165.111"
+alias sftpcf="sftp deploy@connexion-francaise.com"
 alias sftpold="sftp -oPort=8888 franck@91.121.1.20"
 alias sftpmerry="sftp -oPort=32100 deploy@91.121.0.126"
 alias sftpit="sftp -oPort=32100 deploy@176.31.255.14"
 alias sftpes="sftpit"
 
 alias sshce="ssh deploy@46.105.99.154 -p 32100"
+alias sshnewce="ssh deploy@46.105.105.40 -p 32100"
 alias sshecj="ssh deploy@91.121.160.184 -p 32100"
-#alias sshcf="ssh deploy@91.121.165.111 -p 32100"
-alias sshej="sshcf"
+alias sshej="ssh deploy@91.121.165.111 -p 32100"
+alias sshnewej="ssh deploy@new.eurojob-consulting.com"
 alias sshold="ssh franck@91.121.1.20 -p 8888"
 alias sshfb="ssh -p 8888 eurojob-consulting.com -R :3001:127.0.0.1:3000 sleep 9999"
 alias sshmerry="ssh deploy@91.121.0.126 -p 32100"
@@ -66,10 +72,15 @@ alias ctags="`brew --prefix`/bin/ctags"
 alias clean_budget_file="sed -e '1d' | sed -e '/Date/,$d' | sed -e 's/,/ /g' | sed -e 's/\"//g' | awk '{ print $1 \";\" $4 ';' $5}' | sed -e '/;;/d' | sed -e 's/\./,/g'"
 PHP_AUTOCONF="/usr/local/bin/autoconf"
 
-alias elasticsearch="$HOME/webdesign/src/elasticsearch/bin/elasticsearch"
-alias es="elasticsearch -d"
 alias kibana="echo 'localhost:5601' && $HOME/webdesign/src/kibana/bin/kibana"
+alias kb="$HOME/sandbox/src/kibana/bin/kibana"
+alias elasticsearch="$HOME/sandbox/src/elasticsearch/bin/elasticsearch"
+alias es="elasticsearch -d"
 alias logstash="$HOME/webdesign/src/logstash/bin/logstash"
+
+alias vu="vagrant up"
+alias vssh="vagrant ssh"
+alias vh="vagrant halt"
 
 
 if [ -f ~/bin/tmuxinator.bash ]; then

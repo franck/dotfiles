@@ -283,7 +283,7 @@ function! RunAllTest()
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   if filereadable("bin/test")
-    exec ":!rake test"
+    exec ":!bin/rake test"
   elseif filereadable("bin/test5")
     exec ":!rails test"
   elseif filereadable("zeus.json")
@@ -291,7 +291,8 @@ function! RunAllTest()
   elseif filereadable("bin/rspec")
     exec ":!bin/rspec --color --format documentation -I spec/spec_helper.rb spec/"
   elseif filereadable("Gemfile")
-    exec ":!bundle exec rspec --color --format documentation -I spec/spec_helper.rb spec/"
+    " exec ":!bundle exec rspec --color --format documentation -I spec/spec_helper.rb spec/"
+    exec ":!rspec --color --format documentation -I spec/spec_helper.rb spec/"
   else
     exec ":!rspec --color --format documentation -I spec/spec_helper.rb spec/"
   endif
@@ -315,7 +316,8 @@ function! RunTests(filename)
   elseif filereadable("bin/rspec")
     exec ":!bin/rspec " . a:filename
   elseif filereadable("Gemfile")
-    exec ":!bundle exec rspec " . a:filename
+    "exec ":!rake rspec " . a:filename
+    exec ":!rspec " . a:filename
   else
     exec ":!rspec " . a:filename
   end

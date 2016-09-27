@@ -107,4 +107,8 @@ if [[ $platform ==  'mac' ]]; then
   fi
 fi
 
+if [ -f ~/.secret_env ]; then
+  source ~/.secret_env
+fi
+
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
