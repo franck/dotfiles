@@ -88,6 +88,9 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
 " Can't be bothered to understand ESC vs <c-c> in insert mode
 imap <c-c> <esc>
 " Clear the search buffer when hitting return
@@ -120,7 +123,8 @@ smap <S-Tab> <Plug>snipMateNextOrTrigger
 map <F7> mzgg=G`z<CR>
 
 " jump to tag (ctags) : ctags -R .
-nnoremap t <C-]>
+nnoremap <leader>j <C-]>
+nnoremap <leader>b <C-O>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FOLDING
