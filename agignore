@@ -2,3 +2,6 @@ log
 tags
 tmp
 .git
+.bundle
+.heroku
+.locale

@@ -20,7 +20,8 @@ Plugin 'VundleVim/Vundle.vim'
 " Glog
 Plugin 'tpope/vim-fugitive'
 
-" Fuzzy search
+" Fuzzy search 
+" need to install 'ag' utility for better perf, $brew install the_silver_searcher / apt-get install silversearcher-ag
 " C-p
 Plugin 'kien/ctrlp.vim'
 
@@ -45,6 +46,25 @@ Plugin 'tpope/vim-rails'
 " gcc     => comment current linge
 " gcip    => comment inside paragraph
 Plugin 'tpope/vim-commentary'
+
+" add end after if
+Plugin 'tpope/vim-endwise'
+
+" insert <%= %> or <% %>
+" INSERT MODE : 
+" C-x =     => <%= %>
+" C-x -     => <% %>
+Plugin 'tpope/vim-ragtag'
+
+" SNIPMATE
+" S-tab to complete
+" INSERT MODE : letters<C-r>Tab to see what's available.
+" Ex: exp<C-r>Tab => exp, expb, experr
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+" optional
+Plugin 'honza/vim-snippets'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required:
