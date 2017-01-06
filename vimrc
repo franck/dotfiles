@@ -1,6 +1,54 @@
-execute pathogen#infect()
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VUNBLE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" :PluginInstall  => Install plugins
+" :PluginList     => List plugins
+
+" Fugitive is a Git wrapper
+" Glog
+Plugin 'tpope/vim-fugitive'
+
+" Fuzzy search
+" C-p
+Plugin 'kien/ctrlp.vim'
+
+" ysiw<strong> => <strong>test</strong>
+Plugin 'tpope/vim-surround'
+
+" supercharge the '.' command to repeat a surround for instance
+Plugin 'tpope/vim-repeat'
+
+" VIM RAILS
+" :A                  => open alternate file (spec for model, etc.)
+" :Emodel <tab>       => Tab complete to open model by name 
+" :Eview <tab>        => Tab complete to open model by name 
+" :Econtroller <tab>  => Tab complete to open model by name 
+" replace E by V, S or T to open in split or tab
+"
+" :Rails console      => launch console
+" <visual> :Rextract filename => put visual selection inside a details
+" :h rails<cr> for more
+Plugin 'tpope/vim-rails'
+
+" gcc     => comment current linge
+" gcip    => comment inside paragraph
+Plugin 'tpope/vim-commentary'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required:
+filetype plugin indent on    " required
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASIC EDITING CONFIGURATION
@@ -81,6 +129,13 @@ let mapleader=","
 :set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PLUGINS CONFIGURATION
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Make CtrlP use ag for listing the files. Way faster and no useless files.
+let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
+let g:ctrlp_use_caching = 0
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISC KEY MAPS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Move around splits with <c-hjkl>
@@ -93,6 +148,8 @@ set splitbelow
 set splitright
 " Can't be bothered to understand ESC vs <c-c> in insert mode
 imap <c-c> <esc>
+imap jk <esc>
+imap kj <esc>
 " Clear the search buffer when hitting return
 function! MapCR()
   nnoremap <cr> :nohlsearch<cr>
@@ -114,8 +171,6 @@ cnoremap <C-a>  <Home>
 nnoremap <leader>l :ls<cr>:b<space>
 
 " snipMate mappings
-" imap <C-t> <Plug>snipMateNextOrTrigger
-" smap <C-t> <Plug>snipMateNextOrTrigger
 imap <S-Tab> <Plug>snipMateNextOrTrigger
 smap <S-Tab> <Plug>snipMateNextOrTrigger
 
@@ -125,6 +180,11 @@ map <F7> mzgg=G`z<CR>
 " jump to tag (ctags) : ctags -R .
 nnoremap <leader>j <C-]>
 nnoremap <leader>b <C-O>
+
+" Open vimrc in a new split window
+nmap <leader>vr :vsp $MYVIMRC<cr>
+" Compile vimrc file
+nmap <leader>so :source $MYVIMRC<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FOLDING
