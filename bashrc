@@ -8,45 +8,9 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
    platform='mac'
 fi
 
-# Git prompt components
-GIT_PS1_SHOWDIRTYSTATE=1 
-GIT_PS1_SHOWSTASHSTATE=1 
-GIT_PS1_SHOWUNTRACKEDFILES=1
-function minutes_since_last_commit {
-    now=`date +%s`
-    last_commit=`git log --pretty=format:'%at' -1`
-    seconds_since_last_commit=$((now-last_commit))
-    minutes_since_last_commit=$((seconds_since_last_commit/60))
-    echo $minutes_since_last_commit
-}
-grb_git_prompt() {
-    local g="$(__gitdir)"
-    if [ -n "$g" ]; then
-        local MINUTES_SINCE_LAST_COMMIT=`minutes_since_last_commit`
-        if [ "$MINUTES_SINCE_LAST_COMMIT" -gt 30 ]; then
-            local COLOR=${RED}
-        elif [ "$MINUTES_SINCE_LAST_COMMIT" -gt 10 ]; then
-            local COLOR=${YELLOW}
-        else
-            local COLOR=${GREEN}
-        fi
-        local SINCE_LAST_COMMIT="${COLOR}$(minutes_since_last_commit)m${NORMAL}"
-        # The __git_ps1 function inserts the current git branch where %s is
-        local GIT_PROMPT=`__git_ps1 "(%s|${SINCE_LAST_COMMIT})"`
-        # local GIT_PROMPT=`__git_ps1`
-        echo ${GIT_PROMPT}
-    fi
-}
-git_branch() {
-  local g="$(__gitdir)"
-  if [ -n "$g" ]; then
-    local GIT_PROMPT=`__git_ps1`
-    echo ${GIT_PROMPT}
-  fi
-}
 
-
-PS1="\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$(git_branch) "
+# source ~/.bash_prompt.old
+source ~/.bash_prompt
 source ~/bin/git-completion.bash
 
 # Add paths that should have been there by default
