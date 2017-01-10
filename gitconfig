@@ -50,6 +50,7 @@
   ra = !git r --all
   l = "!. ~/.githelpers && pretty_git_log"
   la = !git l --all
+	ctags = !.git/hooks/ctags
 
 [merge]
   tool = vimdiff
@@ -66,3 +67,5 @@
   modified = red
 [push]
 	default = matching
+[init]
+	templatedir = ~/.git_template
