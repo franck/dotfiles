@@ -1,74 +1,8 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" VUNBLE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" use % to jump between opening and closing keywords of ruby constructs
+" (module, class, methods, ...)
+runtime macros/matchit.vim
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" :PluginInstall  => Install plugins
-" :PluginList     => List plugins
-
-" Fugitive is a Git wrapper
-" Glog
-Plugin 'tpope/vim-fugitive'
-
-" Fuzzy search 
-" need to install 'ag' utility for better perf, $brew install the_silver_searcher / apt-get install silversearcher-ag
-" C-p
-Plugin 'kien/ctrlp.vim'
-
-" ysiw<strong> => <strong>test</strong>
-Plugin 'tpope/vim-surround'
-
-" supercharge the '.' command to repeat a surround for instance
-Plugin 'tpope/vim-repeat'
-
-" VIM RAILS
-" :A                  => open alternate file (spec for model, etc.)
-" :Emodel <tab>       => Tab complete to open model by name 
-" :Eview <tab>        => Tab complete to open model by name 
-" :Econtroller <tab>  => Tab complete to open model by name 
-" replace E by V, S or T to open in split or tab
-"
-" :Rails console      => launch console
-" <visual> :Rextract filename => put visual selection inside a details
-" :h rails<cr> for more
-Plugin 'tpope/vim-rails'
-
-" gcc     => comment current linge
-" gcip    => comment inside paragraph
-Plugin 'tpope/vim-commentary'
-
-" add end after if
-Plugin 'tpope/vim-endwise'
-
-" insert <%= %> or <% %>
-" INSERT MODE : 
-" C-x =     => <%= %>
-" C-x -     => <% %>
-Plugin 'tpope/vim-ragtag'
-
-" SNIPMATE
-" S-tab to complete
-" INSERT MODE : letters<C-r>Tab to see what's available.
-" Ex: exp<C-r>Tab => exp, expb, experr
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-" optional
-Plugin 'honza/vim-snippets'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required:
-filetype plugin indent on    " required
+source ~/.vim/plugins.vim
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASIC EDITING CONFIGURATION
@@ -88,6 +22,8 @@ set softtabstop=2
 set autoindent
 let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
+let g:ruby_indent_access_modifier_style = 'indent'
+let g:ruby_indent_block_style = 'do'
 set laststatus=2
 set showmatch
 set incsearch
@@ -100,6 +36,7 @@ set ttymouse=xterm2
 set ignorecase smartcase
 " set cursorline
 set number                        " Show line numbers.
+set relativenumber
 set ruler                         " Show cursor position.
 set cmdheight=2
 set switchbuf=useopen
@@ -130,7 +67,6 @@ filetype plugin indent on
 set wildmenu                      " Enhanced command line completion.
 set wildmode=list:longest         " Complete files like a shell.
 set title                         " Set the terminal's title
-let mapleader=","
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
@@ -149,64 +85,6 @@ let mapleader=","
 :set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PLUGINS CONFIGURATION
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Make CtrlP use ag for listing the files. Way faster and no useless files.
-let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
-let g:ctrlp_use_caching = 0
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" MISC KEY MAPS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Move around splits with <c-hjkl>
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
-" Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
-" Can't be bothered to understand ESC vs <c-c> in insert mode
-imap <c-c> <esc>
-imap jk <esc>
-imap kj <esc>
-" Clear the search buffer when hitting return
-function! MapCR()
-  nnoremap <cr> :nohlsearch<cr>
-endfunction
-call MapCR()
-
-" turn off search highlight
-nnoremap <leader><space> :nohlsearch<CR>
-
-" swith current buffer and last opened buffer
-nnoremap <leader><leader> <c-^>
-
-nnoremap j gj
-nnoremap k gk
-
-cnoremap <C-a>  <Home>
-:nmap <leader>N :NERDTreeToggle<CR>
-
-nnoremap <leader>l :ls<cr>:b<space>
-
-" snipMate mappings
-imap <S-Tab> <Plug>snipMateNextOrTrigger
-smap <S-Tab> <Plug>snipMateNextOrTrigger
-
-" reindent
-map <F7> mzgg=G`z<CR>
-
-" jump to tag (ctags) : ctags -R .
-nnoremap <leader>j <C-]>
-nnoremap <leader>b <C-O>
-
-" Open vimrc in a new split window
-nmap <leader>vr :vsp $MYVIMRC<cr>
-" Compile vimrc file
-nmap <leader>so :source $MYVIMRC<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FOLDING
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set foldenable          " enable folding
@@ -215,12 +93,6 @@ set foldnestmax=10      " 10 nested fold max
 " space open/closes folds
 nnoremap <space> za
 set foldmethod=indent   " fold based on indent level
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" SYNTASTIC
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:syntastic_ruby_exec = '~/.rvm/rubies/ruby-1.9.2-p290/bin/ruby'
-let g:syntastic_quiet_warnings=1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
@@ -259,173 +131,6 @@ function! RenameFile()
 endfunction
 map <leader>n :call RenameFile()<cr>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" MAPS TO JUMP TO SPECIFIC COMMAND-T TARGETS AND FILES
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>gr :topleft :split config/routes.rb<cr>
-function! ShowRoutes()
-  " Requires 'scratch' plugin
-  :topleft 100 :split __Routes__
-  " Make sure Vim doesn't write __Routes__ as a file
-  :set buftype=nofile
-  " Delete everything
-  :normal 1GdG
-  " Put routes output in buffer
-  :0r! rake -s routes
-  " Size window to number of lines (1 plus rake output length)
-  :exec ":normal " . line("$") . _ "
-  " Move cursor to bottom
-  :normal 1GG
-  " Delete empty trailing line
-  :normal dd
-endfunction
-map <leader>gR :call ShowRoutes()<cr>
-map <leader>ga :CommandTFlush<cr>\|:CommandT app/assets<cr>
-map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
-map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
-map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
-map <leader>gh :CommandTFlush<cr>\|:CommandT app/helpers<cr>
-map <leader>gl :CommandTFlush<cr>\|:CommandT lib<cr>
-map <leader>gp :CommandTFlush<cr>\|:CommandT public<cr>
-map <leader>gs :CommandTFlush<cr>\|:CommandT public/stylesheets/sass<cr>
-map <leader>gf :CommandTFlush<cr>\|:CommandT features<cr>
-map <leader>gg :topleft 100 :split Gemfile<cr>
-map <leader>gt :CommandTFlush<cr>\|:CommandTTag<cr>
-map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
-map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" SWITCH BETWEEN TEST AND PRODUCTION CODE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! OpenTestAlternate()
-  let new_file = AlternateForCurrentFile()
-  exec ':e ' . new_file
-endfunction
-function! AlternateForCurrentFile()
-  let current_file = expand("%")
-  let new_file = current_file
-  let in_spec = match(current_file, '^spec/') != -1
-  let going_to_spec = !in_spec
-  let in_app = match(current_file, '\<controllers\>') != -1 || match(current_file, '\<models\>') != -1 || match(current_file, '\<views\>') != -1 || match(current_file, '\<helpers\>') != -1
-  if going_to_spec
-    if in_app
-      let new_file = substitute(new_file, '^app/', '', '')
-    end
-    let new_file = substitute(new_file, '\.rb$', '_spec.rb', '')
-    let new_file = 'spec/' . new_file
-  else
-    let new_file = substitute(new_file, '_spec\.rb$', '.rb', '')
-    let new_file = substitute(new_file, '^spec/', '', '')
-    if in_app
-      let new_file = 'app/' . new_file
-    end
-  endif
-  return new_file
-endfunction
-nnoremap <leader>; :call OpenTestAlternate()<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" RUNNING TESTS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>t :call RunTestFile()<cr>
-map <leader>T :call RunNearestTest()<cr>
-map <leader>a :call RunAllTest()<cr>
-
-function! RunTestFile(...)
-  if a:0
-    let command_suffix = a:1
-  else
-    let command_suffix = ""
-  endif
-
-  " Run the tests for the previously-marked file.
-  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.rb\)$') != -1
-  if in_test_file
-    call SetTestFile()
-  elseif !exists("t:grb_test_file")
-    return
-  end
-  call RunTests(t:grb_test_file . command_suffix)
-endfunction
-
-function! RunNearestTest()
-  let spec_line_number = line('.')
-  call RunTestFile(":" . spec_line_number)
-endfunction
-
-function! SetTestFile()
-  " Set the spec file that tests will be run for.
-  let t:grb_test_file=@%
-endfunction
-
-function! RunAllTest()
-  :w
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  if filereadable("bin/test")
-    exec ":!bin/rake test"
-  elseif filereadable("bin/test5")
-    exec ":!rails test"
-  elseif filereadable("zeus.json")
-    exec ":!zeus rspec --color --format documentation -I spec/spec_helper.rb spec/"
-  elseif filereadable("bin/rspec")
-    exec ":!bin/rspec --color --format documentation -I spec/spec_helper.rb spec/"
-  elseif filereadable("Gemfile")
-    " exec ":!bundle exec rspec --color --format documentation -I spec/spec_helper.rb spec/"
-    exec ":!rspec --color --format documentation -I spec/spec_helper.rb spec/"
-  else
-    exec ":!rspec --color --format documentation -I spec/spec_helper.rb spec/"
-  endif
-endfunction
-
-function! RunTests(filename)
-  " Write the file and run tests for the given filename
-  :w
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  if filereadable("bin/test")
-    exec ":!m " . a:filename
-  elseif filereadable("bin/test5")
-    exec ":!rails test" . a:filename
-  elseif filereadable("zeus.json")
-    exec ":!zeus rspec " . a:filename
-  elseif filereadable("bin/rspec")
-    exec ":!bin/rspec " . a:filename
-  elseif filereadable("Gemfile")
-    "exec ":!rake rspec " . a:filename
-    exec ":!rspec " . a:filename
-  else
-    exec ":!rspec " . a:filename
-  end
-endfunction
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PROMOTE VARIABLE TO RSPEC LET
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! PromoteToLet()
-  :normal! dd
-  " :exec '?^\s*it\>'
-  :normal! P
-  :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
-  :normal ==
-endfunction
-:command! PromoteToLet :call PromoteToLet()
-:map <leader>p :PromoteToLet<cr>
-
-" using VIM with crontab
-:if $VIM_CRONTAB == "true"
-:set nobackup
-:set nowritebackup
-:endif
-
 
 " fold on indent
 " augroup vimrc
@@ -436,3 +141,6 @@ endfunction
 
 " Set syntax to scss if file.scss.css
 au BufRead,BufNewFile *.scss.css set filetype=scss.css
+
+source ~/.vim/mappings.vim
+source ~/.vim/test.vim
