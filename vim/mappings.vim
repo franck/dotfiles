@@ -30,8 +30,7 @@ nnoremap <leader><leader> <c-^>
 nnoremap j gj
 nnoremap k gk
 
-cnoremap <C-a>  <Home>
-:nmap <leader>N :NERDTreeToggle<CR>
+cnoremap <C-a> <Home>
 
 nnoremap <leader>l :ls<cr>:b<space>
 
