@@ -36,7 +36,8 @@ set ttymouse=xterm2
 set ignorecase smartcase
 " set cursorline
 set number                        " Show line numbers.
-set relativenumber
+" set relativenumber
+silent! setlocal norelativenumber
 set ruler                         " Show cursor position.
 set cmdheight=2
 set switchbuf=useopen
