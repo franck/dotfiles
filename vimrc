@@ -37,7 +37,7 @@ set ignorecase smartcase
 " set cursorline
 set number                        " Show line numbers.
 " set relativenumber
-silent! setlocal norelativenumber
+silent! set relativenumber
 set ruler                         " Show cursor position.
 set cmdheight=2
 set switchbuf=useopen
