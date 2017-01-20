@@ -7,46 +7,49 @@
   ui = auto
 [alias]
   aa = add --all
+  b  = branch
+  browse = !hub browse
   ca = commit --amend
+	car = commit --amend --no-edit
   ci = commit
   co = checkout
+	ctags = !.git/hooks/ctags
   di = diff
   dc = diff --word-diff --cached --color-words
   df = diff --word-diff --color-words
-
-  master = checkout master
-  stable = checkout stable
-
-  sl = log --oneline --decorate --graph -20
-  sl = log --oneline --decorate --graph --all
-
-  ff = merge --ff-only
-  pullff = pull --ff-only
-  noff = merge --no-ff
-  fa = fetch --all
-  pom = push origin master
-  b = branch
-  ds = diff --stat=160,120
   dh1 = diff HEAD~1
-  st = status
+  ds = diff --stat=160,120
 
-  # Divergence (commits we added and commits remote added)
-  div = divergence
+  fa = fetch --all
+  ff = merge --ff-only
 
-  # Goodness (summary of diff lines added/removed/total)
+	glog = log -E -i --grep
   gn = goodness
   gnc = goodness --cached
 
-	ctags = !.git/hooks/ctags
+  master = checkout master
+
+  mup = !git checkout master && git pull && git checkout -
+
+  pl = pull
+  plr = pull --rebase
+  pom = push -u origin master
+  ps = push
+  rbc = rebase --continue
+  ri = rebase --interactive
+
+  sl = log --oneline --decorate --graph -20
+  sl = log --oneline --decorate --graph --all
 	sla = log --oneline --decorate --graph --all
-	glog = log -E -i --grep
-	car = commit --amend --no-edit
-	ca = commit --amend
+  st = status
+
 	unstage = reset
 	uncommit = reset --soft HEAD^
+	stable = checkout stable
 
 [merge]
   tool = vimdiff
+  ff = only # fast forward only. Never create a commit only for merging. Force to Rebase first.
 [filter "lfs"]
   clean = git-lfs clean %f
   smudge = git-lfs smudge %f
@@ -59,6 +62,13 @@
   untracked = yellow
   modified = red
 [push]
-	default = matching
+	default = upstream # push only the current local branch if upstream branch exist. if not do nothing.
 [init]
 	templatedir = ~/.git_template
+[fetch]
+  prune = true # compare local refs with the remote ref compare local refs with the remote refes 
+[core]
+  editor = vim
+  excludefile = ~/.gitignore
+[status]
+	short = true

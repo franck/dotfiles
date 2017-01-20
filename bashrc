@@ -1,4 +1,5 @@
 . ~/bin/bash_colors.sh
+. ~/bin/g.sh
 
 platform='unknown'
 unamestr=`uname`
