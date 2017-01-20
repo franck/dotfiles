@@ -130,7 +130,7 @@ function! RenameFile()
     redraw!
   endif
 endfunction
-nnoremap <leader>n :call RenameFile()<cr>
+nnoremap <leader>d :call RenameFile()<cr>
 
 
 " fold on indent
