@@ -9,3 +9,6 @@
 	path = vim/bundle/xmledit
 	url = https://github.com/sukima/xmledit.git
   ignore = dirty
+[submodule "vim/bundle/vim-textobj-user"]
+  path = vim/bundle/vim-textobj-user
+  ignore = dirty
