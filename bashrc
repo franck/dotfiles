@@ -13,6 +13,8 @@ fi
 # source ~/.bash_prompt.old
 source ~/.bash_prompt
 source ~/bin/git-completion.bash
+# add  bash complettion for "g" alias
+__git_complete g __git_main
 
 # Add paths that should have been there by default
 export PATH="$HOME/bin:$PATH"
