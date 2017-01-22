@@ -72,3 +72,5 @@
   excludefile = ~/.gitignore
 [status]
 	short = true
+[credential]
+	helper = cache
