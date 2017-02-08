@@ -80,6 +80,10 @@ Plugin 'rhysd/vim-textobj-ruby'
 " Coffeescript support
 Plugin 'kchmck/vim-coffee-script'
 
+Plugin 'sunaku/vim-ruby-minitest'
+
+Plugin 'mileszs/ack.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required:
 filetype plugin indent on    " required

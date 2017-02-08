@@ -130,7 +130,15 @@ function! RenameFile()
     redraw!
   endif
 endfunction
-nnoremap <leader>d :call RenameFile()<cr>
+nnoremap <leader>n :call RenameFile()<cr>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use Silver Bullet for Ack plugin if available
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
 
 " fold on indent
