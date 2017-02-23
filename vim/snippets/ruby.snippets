@@ -1,5 +1,7 @@
 # RSPEC AND CAPYBARA
 # expect(page).to
+snippet exp
+	expect({#}).to ${0}
 snippet ept
 	expect(page).to have_content ${0}
 snippet sop
@@ -12,5 +14,11 @@ snippet feat
 	require "rails_helper"
 
 	feature "${1}" do
+	  ${2}
+	end
+snippet desc
+	require "rails_helper"
+
+	describe "${1}" do
 	  ${2}
 	end
