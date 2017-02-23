@@ -76,7 +76,7 @@ alias kibana="echo 'localhost:5601' && $HOME/webdesign/src/kibana/bin/kibana"
 alias kb="$HOME/sandbox/src/kibana/bin/kibana"
 alias elasticsearch="$HOME/sandbox/src/elasticsearch/bin/elasticsearch"
 alias es="elasticsearch -d"
-alias es5="$HOME/sandbox/src/elasticsearch-5.1.1/bin/elasticsearch -d"
+alias es2="$HOME/sandbox/src/elasticsearch2/bin/elasticsearch -d"
 alias logstash="$HOME/sandbox/src/logstash/bin/logstash"
 
 alias vu="vagrant up"
