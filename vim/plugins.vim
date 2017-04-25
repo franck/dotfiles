@@ -46,6 +46,10 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rvm'
 Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-rake'
+Plugin 'tpope/vim-sleuth'
+
+" Collection of languages pack : syntax, indent
+Plugin 'sheerun/vim-polyglot'
 
 " gcc     => comment current linge
 " gcip    => comment inside paragraph
@@ -82,6 +86,7 @@ Plugin 'kchmck/vim-coffee-script'
 
 Plugin 'sunaku/vim-ruby-minitest'
 
+" :Ack pattern
 Plugin 'mileszs/ack.vim'
 
 " All of your Plugins must be added before the following line
