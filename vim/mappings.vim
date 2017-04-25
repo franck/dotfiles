@@ -108,12 +108,12 @@ nnoremap <leader>n :call RenameFile()<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CTAGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! CtagsBundler()
-  let ctag_cmd = ":!ctags -f \".git/bundletags\" --exclude=.git --exclude=log --languages=javascript,sql -R `bundle show --paths`"
-  execute ctag_cmd
-endfunction
-nmap <leader>ct :call CtagsBundler()<cr>
-set tags+=.git/bundletags
+" function! CtagsBundler()
+"   let ctag_cmd = ":!ctags -f \".git/bundletags\" --exclude=.git --exclude=log --languages=javascript,sql -R `bundle show --paths`"
+"   execute ctag_cmd
+" endfunction
+" nmap <leader>ct :call CtagsBundler()<cr>
+" set tags+=.git/bundletags
 
 
 
