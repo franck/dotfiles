@@ -55,6 +55,9 @@ Plugin 'sheerun/vim-polyglot'
 " gcip    => comment inside paragraph
 Plugin 'tpope/vim-commentary'
 
+" Auto pairing brackets, quotes, ...
+Plugin 'jiangmiao/auto-pairs'
+
 " add end after if
 Plugin 'tpope/vim-endwise'
 
@@ -89,6 +92,12 @@ Plugin 'sunaku/vim-ruby-minitest'
 " :Ack pattern
 Plugin 'mileszs/ack.vim'
 
+" vim-searchindex
+" show number of occurance and current occurance index in commandline
+Plugin 'google/vim-searchindex'
+
+Plugin 'lyokha/vim-xkbswitch'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required:
 filetype plugin indent on    " required
@@ -99,3 +108,5 @@ filetype plugin indent on    " required
 " Make CtrlP use ag for listing the files. Way faster and no useless files.
 let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
 let g:ctrlp_use_caching = 0
+" let g:ctrlp_map = '<c-p>'
+let g:ctrlp_map = '<leader>h'

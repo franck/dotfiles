@@ -27,6 +27,9 @@ nnoremap <leader><space> :nohlsearch<CR>
 " swith current buffer and last opened buffer
 nnoremap <leader><leader> <c-^>
 
+" Ctrl-p
+let g:ctrlp_map = '<leader>r'
+
 nnoremap j gj
 nnoremap k gk
 
@@ -64,6 +67,12 @@ function! PasteCode()
 endfunction
 
 nmap <leader>pp :call PasteCode()<CR><leader>i
+
+" insert <%= %> and <% %> for ERB file
+nmap <leader>+ i<C-x>=
+nmap <leader>- i<C-x>-
+imap ,- <C-x>-
+imap ,+ <C-x>=
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MAPS TO JUMP TO SPECIFIC COMMAND-T TARGETS AND FILES

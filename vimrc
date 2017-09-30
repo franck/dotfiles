@@ -77,8 +77,8 @@ set title                         " Set the terminal's title
 :color grb256
 :let g:solarized_termcolors=256
 ":colorscheme railscasts
-:colorscheme solarized
-":colorscheme gruvbox
+":colorscheme solarized
+:colorscheme gruvbox
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STATUS LINE
@@ -151,5 +151,12 @@ endif
 " Set syntax to scss if file.scss.css
 au BufRead,BufNewFile *.scss.css set filetype=scss.css
 
+
 source ~/.vim/mappings.vim
+
+let keyboard = system('issw')
+if keyboard == "m.apple.keyboardlayout.fr-dvorak-bepo.keylayout.FrenchDvorak"
+  source ~/.vim/bepo.vim
+end
+
 source ~/.vim/test.vim

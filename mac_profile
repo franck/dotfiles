@@ -57,6 +57,9 @@ alias redisstop='sudo launchctl stop io.redis.redis-server'
 
 
 alias r="rails"
+alias h="heroku"
+alias dprod="g ps production stable:master"
+alias dstage="g ps staging master"
 
 alias ack="/usr/local/Cellar/ack/2.14/bin/ack"
 
