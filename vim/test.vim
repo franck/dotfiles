@@ -75,14 +75,14 @@ function! RunAllTest()
   elseif filereadable("bin/test5")
     exec ":!rails test"
   elseif filereadable("zeus.json")
-    exec ":!zeus rspec --color --format documentation -I spec/spec_helper.rb spec/"
+    exec ":!zeus rspec --color -I spec/spec_helper.rb spec/"
   elseif filereadable("bin/rspec")
-    exec ":!bin/rspec --color --format documentation -I spec/spec_helper.rb spec/"
+    exec ":!bin/rspec --color -I spec/spec_helper.rb spec/"
   elseif filereadable("Gemfile")
-    " exec ":!bundle exec rspec --color --format documentation -I spec/spec_helper.rb spec/"
-    exec ":!rspec --color --format documentation -I spec/spec_helper.rb spec/"
+    " exec ":!bundle exec rspec --color -I spec/spec_helper.rb spec/"
+    exec ":!rspec --color -I spec/spec_helper.rb spec/"
   else
-    exec ":!rspec --color --format documentation -I spec/spec_helper.rb spec/"
+    exec ":!rspec --color -I spec/spec_helper.rb spec/"
   endif
 endfunction
 

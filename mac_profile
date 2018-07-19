@@ -8,6 +8,8 @@ export PATH=${PATH}:/usr/local/bin:/usr/games/bin:/usr/local/sbin
 export JAVA_HOME="$(/usr/libexec/java_home)"
 export PHP_AUTOCONF="/usr/local/bin/autoconf"
 export NODE_PATH=$HOME/local/lib/node_modules
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin # Add Go to PATH
 # needed for mysql2 gem in mac os
 export DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$DYLD_LIBRARY_PATH"
 export VERSIONER_PYTHON_PREFER_32_BIT=yes
@@ -49,6 +51,9 @@ alias sshes="sshit"
 alias sshgolf="ssh -p 32100 deploy@golfmail.fr"
 alias sshcf="ssh deploy@connexion-francaise.com"
 alias sshnewej="ssh deploy@new.eurojob-consulting.com"
+
+alias sshdgl='ssh -i ~/.ssh/awsfrancfortfranck.pem ec2-user@ec2-18-195-205-108.eu-central-1.compute.amazonaws.com'
+alias sftpdgl='sftp -i ~/.ssh/awsfrancfortfranck.pem ec2-user@ec2-18-195-205-108.eu-central-1.compute.amazonaws.com'
 
 alias redisstart='sudo launchctl start io.redis.redis-server'
 alias redisstop='sudo launchctl stop io.redis.redis-server'

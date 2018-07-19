@@ -21,6 +21,9 @@ function! MapCR()
 endfunction
 call MapCR()
 
+" Go to tag
+nnoremap à <c-]> 
+
 " turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
 
@@ -35,6 +38,11 @@ nnoremap k gk
 
 cnoremap <C-a> <Home>
 
+
+" recording
+:noremap Q @q
+
+" rocket launch
 nnoremap <leader>l :ls<cr>:b<space>
 
 " snipMate mappings

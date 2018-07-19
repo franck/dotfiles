@@ -66,7 +66,7 @@ set showcmd
 filetype plugin indent on
 " make tab completion for files/buffers act like bash
 set wildmenu                      " Enhanced command line completion.
-set wildmode=list:longest         " Complete files like a shell.
+set wildmode=list:longest         " romplete files like a shell.
 set title                         " Set the terminal's title
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -151,12 +151,10 @@ endif
 " Set syntax to scss if file.scss.css
 au BufRead,BufNewFile *.scss.css set filetype=scss.css
 
-
 source ~/.vim/mappings.vim
 
 let keyboard = system('issw')
-if keyboard == "m.apple.keyboardlayout.fr-dvorak-bepo.keylayout.FrenchDvorak"
-  source ~/.vim/bepo.vim
-end
 
+source ~/.vim/bepo.vim
 source ~/.vim/test.vim
+source ~/.vim/nerdtree.vim
