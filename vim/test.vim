@@ -34,6 +34,7 @@ nnoremap <leader>; :call OpenTestAlternate()<cr>
 map <leader>t :call RunTestFile()<cr>
 map <leader>T :call RunNearestTest()<cr>
 map <leader>a :call RunAllTest()<cr>
+map <leader>A :call RunAllTestWithStopWatch()<cr>
 
 function! RunTestFile(...)
   if a:0
@@ -77,13 +78,26 @@ function! RunAllTest()
   elseif filereadable("zeus.json")
     exec ":!zeus rspec --color -I spec/spec_helper.rb spec/"
   elseif filereadable("bin/rspec")
-    exec ":!bin/rspec --color -I spec/spec_helper.rb spec/"
+    " exec ":!bin/rspec --color -I spec/rails_helper.rb spec/ --tag ~js"
+    exec ":!bin/rspec --color -I spec/rails_helper.rb spec/"
   elseif filereadable("Gemfile")
-    " exec ":!bundle exec rspec --color -I spec/spec_helper.rb spec/"
-    exec ":!rspec --color -I spec/spec_helper.rb spec/"
+    " exec ":!rspec --color -I spec/rails_helper.rb spec/ --tag ~js"
+    exec ":!rspec --color -I spec/rails_helper.rb spec/"
   else
-    exec ":!rspec --color -I spec/spec_helper.rb spec/"
+    " exec ":!rspec --color -I spec/rails_helper.rb spec/ --tag ~js"
+    exec ":!rspec --color -I spec/rails_helper.rb spec/"
   endif
+endfunction
+
+function! RunAllTestWithStopWatch()
+  :w
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  exec ":!rspec --color -I spec/rails_helper.rb spec/ --format DurationFormatter"
 endfunction
 
 function! RunTests(filename)
