@@ -11,7 +11,7 @@ export NODE_PATH=$HOME/local/lib/node_modules
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin # Add Go to PATH
 # needed for mysql2 gem in mac os
-export DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$DYLD_LIBRARY_PATH"
+# export DYLD_LIBRARY_PATH="/usr/local/mysql/lib:$DYLD_LIBRARY_PATH"
 export VERSIONER_PYTHON_PREFER_32_BIT=yes
 
 ## need for icu4c (chardetection gem)
