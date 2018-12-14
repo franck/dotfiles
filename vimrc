@@ -16,6 +16,10 @@ set termencoding=utf-8
 " remember more commands and search history
 set history=10000
 set expandtab
+
+" do not scan all includes files for autocompletion
+setglobal complete-=i
+
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
