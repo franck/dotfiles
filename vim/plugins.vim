@@ -23,13 +23,13 @@ Plugin 'tpope/vim-fugitive'
 " Fuzzy search 
 " need to install 'ag' utility for better perf, $brew install the_silver_searcher / apt-get install silversearcher-ag
 " C-p
-Plugin 'kien/ctrlp.vim'
+" Plugin 'kien/ctrlp.vim'
 
 " ysiw<strong> => <strong>test</strong>
 Plugin 'tpope/vim-surround'
 
 " supercharge the '.' command to repeat a surround for instance
-Plugin 'tpope/vim-repeat'
+" Plugin 'tpope/vim-repeat'
 
 " VIM RAILS
 " :A                  => open alternate file (spec for model, etc.)
@@ -53,7 +53,8 @@ Plugin 'sheerun/vim-polyglot'
 
 " gcc     => comment current linge
 " gcip    => comment inside paragraph
-Plugin 'tpope/vim-commentary'
+" Plugin 'tpope/vim-commentary'
+Plugin 'file:///Users/franck/sandbox/src/vim-commentary'
 
 " Auto pairing brackets, quotes, ...
 Plugin 'jiangmiao/auto-pairs'
@@ -81,27 +82,27 @@ Plugin 'honza/vim-snippets'
 " dar     => delete around ruby-block
 " dir     => delete inside ruby-block
 " var     => visual select around ruby-block
-Plugin 'kana/vim-textobj-user'
-Plugin 'rhysd/vim-textobj-ruby'
+" Plugin 'kana/vim-textobj-user'
+" Plugin 'rhysd/vim-textobj-ruby'
 
 " Coffeescript support
-Plugin 'kchmck/vim-coffee-script'
+" Plugin 'kchmck/vim-coffee-script'
 
-Plugin 'sunaku/vim-ruby-minitest'
+" Plugin 'sunaku/vim-ruby-minitest'
 
 " :Ack pattern
-Plugin 'mileszs/ack.vim'
+" Plugin 'mileszs/ack.vim'
 
 " vim-searchindex
 " show number of occurance and current occurance index in commandline
-Plugin 'google/vim-searchindex'
+" Plugin 'google/vim-searchindex'
 
-Plugin 'lyokha/vim-xkbswitch'
+" Plugin 'lyokha/vim-xkbswitch'
 
-Plugin 'rizzatti/dash.vim'
+" Plugin 'rizzatti/dash.vim'
 
 " NerdTree
-Plugin 'scrooloose/nerdtree'
+" Plugin 'scrooloose/nerdtree'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required:
@@ -111,7 +112,9 @@ filetype plugin indent on    " required
 " PLUGINS CONFIGURATION
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Make CtrlP use ag for listing the files. Way faster and no useless files.
-let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
-let g:ctrlp_use_caching = 0
+" let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
+" let g:ctrlp_use_caching = 0
 " let g:ctrlp_map = '<c-p>'
-let g:ctrlp_map = '<leader>h'
+" let g:ctrlp_map = '<leader>h'
+"
+

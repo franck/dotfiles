@@ -1,12 +1,12 @@
-" use % to jump between opening and closing keywords of ruby constructs
-" (module, class, methods, ...)
-runtime macros/matchit.vim
+" " use % to jump between opening and closing keywords of ruby constructs
+" " (module, class, methods, ...)
+" runtime macros/matchit.vim
 
 source ~/.vim/plugins.vim
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" BASIC EDITING CONFIGURATION
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" " BASIC EDITING CONFIGURATION
+" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible " allow unsaved background buffers and remember marks/undo for them
 syntax on " Enable highlighting for syntax
 set hidden
@@ -17,7 +17,7 @@ set termencoding=utf-8
 set history=10000
 set expandtab
 
-" do not scan all includes files for autocompletion
+" " do not scan all includes files for autocompletion
 setglobal complete-=i
 
 set tabstop=2
@@ -41,7 +41,7 @@ set ignorecase smartcase
 " set cursorline
 set number                        " Show line numbers.
 " set relativenumber
-silent! set relativenumber
+" silent! set relativenumber
 set ruler                         " Show cursor position.
 set cmdheight=2
 set switchbuf=useopen
@@ -161,4 +161,23 @@ let keyboard = system('issw')
 
 source ~/.vim/bepo.vim
 source ~/.vim/test.vim
-source ~/.vim/nerdtree.vim
+
+" Custom surround mapping
+let g:surround_no_mappings=1
+nmap yss <Plug>Yssurround
+nmap ds  <Plug>Dsurround
+nmap ys  <Plug>Ysurround
+nmap yS  <Plug>YSurround
+nmap yss <Plug>Yssurround
+nmap ySs <Plug>YSsurround
+nmap ySS <Plug>YSsurround
+vnoremap S <Plug>VSurround
+vmap S <Plug>VSurround
+xmap gS  <Plug>VgSurround
+if !exists("g:surround_no_insert_mappings") || ! g:surround_no_insert_mappings
+  if !hasmapto("<Plug>Isurround","i") && "" == mapcheck("<C-S>","i")
+    imap    <C-S> <Plug>Isurround
+  endif
+  imap      <C-G>s <Plug>Isurround
+  imap      <C-G>S <Plug>ISurround
+endif

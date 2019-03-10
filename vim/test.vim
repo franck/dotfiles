@@ -31,10 +31,11 @@ nnoremap <leader>; :call OpenTestAlternate()<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RUNNING TESTS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>t :call RunTestFile()<cr>
-map <leader>T :call RunNearestTest()<cr>
-map <leader>a :call RunAllTest()<cr>
-map <leader>A :call RunAllTestWithStopWatch()<cr>
+map <leader>tt :call RunTestFile()<cr>
+map <leader>tT :call RunNearestTest()<cr>
+map <leader>ta :call RunAllTest()<cr>
+map <leader>tA :call RunAllTestWithStopWatch()<cr>
+map <leader>tf :call RunLastFailure()<cr>
 
 function! RunTestFile(...)
   if a:0
@@ -123,6 +124,17 @@ function! RunTests(filename)
   else
     exec ":!rspec " . a:filename
   end
+endfunction
+
+function! RunLastFailure()
+  :w
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+  exec('!bin/rspec --next-failure')
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

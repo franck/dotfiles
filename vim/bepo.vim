@@ -21,9 +21,6 @@ noremap r l
 " {ts} = « haut / bas »
 noremap t j
 noremap s k
-" {CR} = « haut / bas de l'écran »
-noremap C H
-noremap R L
 " {TS} = « joindre / aide »
 noremap T J
 noremap S K
@@ -41,13 +38,8 @@ noremap l c
 noremap L C
 " {H} = « Remplace »           (h = un caractère slt, H = reste en « Remplace »)
 noremap h r
-noremap H R
-" {K} = « Substitue »          (k = caractère, K = ligne)
+" {K} = « Su:stitue »          (k = caractère, K = ligne)
 noremap k s
-noremap K S
-" Corollaire : correction orthographique
-noremap ]k ]s
-noremap [k [s
 
 " Désambiguation de {g}
 " —————————————————————
@@ -57,9 +49,6 @@ noremap gt gj
 " onglet précédant / suivant
 noremap gb gT
 noremap gé gt
-" optionnel : {gB} / {gÉ} pour aller au premier / dernier onglet
-noremap gB :exe "silent! tabfirst"<CR>
-noremap gÉ :exe "silent! tablast"<CR>
 " optionnel : {g"} pour aller au début de la ligne écran
 noremap g" g0
 
@@ -81,44 +70,31 @@ noremap w<SPACE> :split<CR>
 noremap w<CR> :vsplit<CR>
 "Si vous souhaitez avoir les chiffres en accès direct en mode normal, remplacez la section « <> en direct » par les lignes suivantes :
 
-" Chiffres en accès direct
-" ————————————————————————
-noremap " 1
-noremap 1 "
-noremap « 2
-noremap 2 <
-noremap » 3
-noremap 3 >
-noremap ( 4
-noremap 4 (
-noremap ) 5
-noremap 5 )
-noremap @ 6
-noremap 6 @
-noremap + 7
-noremap 7 +
-noremap - 8
-noremap 8 -
-noremap / 9
-noremap 9 /
-noremap * 0
-noremap 0 *
+" " Chiffres en accès direct
+" " ————————————————————————
+" noremap " 1
+" noremap 1 "
+" noremap « 2
+" noremap 2 <
+" noremap » 3
+" noremap 3 >
+" noremap ( 4
+" noremap 4 (
+" noremap ) 5
+" noremap 5 )
+" noremap @ 6
+" noremap 6 @
+" noremap + 7
+" noremap 7 +
+" noremap - 8
+" noremap 8 -
+" noremap / 9
+" noremap 9 /
+" noremap * 0
+" noremap 0 *
 
 " Can't be bothered to understand ESC vs <c-c> in insert mode
 imap ttt <esc>
 
 noremap <leader>s :w<CR>
 noremap <leader>z :wq<CR>
-
-" NERDTree
-" ————————
-let g:NERDTreeMapChdir = 'H'
-let g:NERDTreeMapChdir = 'hd'
-let g:NERDTreeMapCWD = 'HD'
-let g:NERDTreeMapOpenInTab = 'j'
-let g:NERDTreeMapJumpLastChild = 'J'
-let g:NERDTreeMapOpenVSplit = 'k'
-let g:NERDTreeMapRefresh = 'l'
-let g:NERDTreeMapRefreshRoot = 'L'
-
-map <C-n> :NERDTreeToggle<CR>

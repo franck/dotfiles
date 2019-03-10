@@ -80,3 +80,6 @@
 	short = true
 [credential]
 	helper = cache
+[rerere]
+	enabled = 1
+	autoupdate = true
