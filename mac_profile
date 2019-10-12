@@ -17,6 +17,15 @@ export VERSIONER_PYTHON_PREFER_32_BIT=yes
 ## need for icu4c (chardetection gem)
 #export LDFLAGS="-L/usr/local/opt/icu4c/lib"
 #export CPPFLAGS="-I/usr/local/opt/icu4c/include"
+
+
+# Make RVM install ruby with OpenSSL support
+# brew install openssl
+# brew link openssl
+# rvm install ruby-2.5.3 --with-openssl-dir=`brew --prefix openssl`
+export LDFLAGS="-L/usr/local/opt/openssl/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl/include"
+export PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig"
 #
 # ruby optim
 export RUBY_GC_HEAP_INIT_SLOTS=1000000
@@ -24,6 +33,10 @@ export RUBY_HEAP_SLOTS_INCREMENT=1000000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
 export RUBY_GC_MALLOC_LIMIT=1000000000
 export RUBY_HEAP_FREE_MIN=500000
+
+export TERM=screen-256color
+
+alias fradeo="cd ~/webdesign/fradeo_web/fradeo"
 
 alias meteo="curl -4 wttr.in/Bethune"
 
@@ -92,11 +105,11 @@ alias vssh="vagrant ssh"
 alias vh="vagrant halt"
 
 
-if [ -f ~/bin/tmuxinator.bash ]; then
-  source ~/bin/tmuxinator.bash
-fi
+alias tmux="TERM=xterm-256color tmux"
+alias t=./.tmux
+
 
 LUNCHY_DIR=$(dirname `gem which lunchy`)/../extras
 if [ -f $LUNCHY_DIR/lunchy-completion.bash ]; then
-  . $LUNCHY_DIR/lunchy-completion.bash
+. $LUNCHY_DIR/lunchy-completion.bash
 fi

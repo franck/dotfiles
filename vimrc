@@ -77,12 +77,14 @@ set title                         " Set the terminal's title
 " COLOR
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 :set t_Co=256 " 256 colors
-:set background=dark
+" :set background=dark
 :color grb256
 :let g:solarized_termcolors=256
-":colorscheme railscasts
-":colorscheme solarized
-:colorscheme gruvbox
+" :colorscheme railscasts
+:colorscheme solarized
+" :colorscheme gruvbox
+" :colorscheme monokai
+" :colorscheme smyck
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STATUS LINE
@@ -161,6 +163,7 @@ let keyboard = system('issw')
 
 source ~/.vim/bepo.vim
 source ~/.vim/test.vim
+
 
 " Custom surround mapping
 let g:surround_no_mappings=1

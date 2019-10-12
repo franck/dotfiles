@@ -95,6 +95,8 @@ noremap w<CR> :vsplit<CR>
 
 " Can't be bothered to understand ESC vs <c-c> in insert mode
 imap ttt <esc>
+imap '' <esc>
+
 
 noremap <leader>s :w<CR>
 noremap <leader>z :wq<CR>

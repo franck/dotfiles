@@ -89,6 +89,12 @@ Plugin 'honza/vim-snippets'
 " Plugin 'kchmck/vim-coffee-script'
 
 " Plugin 'sunaku/vim-ruby-minitest'
+Plugin 'thoughtbot/vim-rspec'
+
+" Run specs async
+" Plugin 'tpope/vim-dispatch'
+Plugin 'jgdavey/tslime.vim'
+Plugin 'szw/vim-maximizer'
 
 " :Ack pattern
 " Plugin 'mileszs/ack.vim'
@@ -117,4 +123,7 @@ filetype plugin indent on    " required
 " let g:ctrlp_map = '<c-p>'
 " let g:ctrlp_map = '<leader>h'
 "
+
+autocmd FileType ruby let b:dispatch = 'rspec %'
+
 

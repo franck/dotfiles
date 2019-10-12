@@ -31,11 +31,17 @@ nnoremap <leader>; :call OpenTestAlternate()<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RUNNING TESTS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>tt :call RunTestFile()<cr>
-map <leader>tT :call RunNearestTest()<cr>
-map <leader>ta :call RunAllTest()<cr>
-map <leader>tA :call RunAllTestWithStopWatch()<cr>
-map <leader>tf :call RunLastFailure()<cr>
+" map <leader>tt :call RunTestFile()<cr>
+" map <leader>tT :call RunNearestTest()<cr>
+" map <leader>ta :call RunAllTest()<cr>
+" map <leader>tA :call RunAllTestWithStopWatch()<cr>
+" map <leader>tf :call RunLastFailure()<cr>
+
+" vim-rspec mappings
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>T :call RunNearestSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+let g:rspec_command = ':w|call Send_to_Tmux("time spring rspec {spec}\n")'
 
 function! RunTestFile(...)
   if a:0
