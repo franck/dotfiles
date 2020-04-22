@@ -23,9 +23,9 @@ export VERSIONER_PYTHON_PREFER_32_BIT=yes
 # brew install openssl
 # brew link openssl
 # rvm install ruby-2.5.3 --with-openssl-dir=`brew --prefix openssl`
-export LDFLAGS="-L/usr/local/opt/openssl/lib"
-export CPPFLAGS="-I/usr/local/opt/openssl/include"
-export PKG_CONFIG_PATH="/usr/local/opt/openssl/lib/pkgconfig"
+export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
+export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
 #
 # ruby optim
 export RUBY_GC_HEAP_INIT_SLOTS=1000000
@@ -37,6 +37,7 @@ export RUBY_HEAP_FREE_MIN=500000
 export TERM=screen-256color
 
 alias fradeo="cd ~/webdesign/fradeo_web/fradeo"
+alias configurator="cd ~/webdesign/configurator_web/configurator"
 
 alias meteo="curl -4 wttr.in/Bethune"
 
@@ -108,6 +109,10 @@ alias vh="vagrant halt"
 alias tmux="TERM=xterm-256color tmux"
 alias t=./.tmux
 
+alias ls="exa"
+alias cat="bat"
+
+alias fix="git diff --name-only | uniq | xargs vi"
 
 LUNCHY_DIR=$(dirname `gem which lunchy`)/../extras
 if [ -f $LUNCHY_DIR/lunchy-completion.bash ]; then

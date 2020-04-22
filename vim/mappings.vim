@@ -24,11 +24,22 @@ nnoremap k gk
 cnoremap <C-a> <Home>
 
 " rocket launch
-nnoremap <leader>l :ls<cr>:b<space>
+" nnoremap <leader>l :ls<cr>:b<space>
+
+" rocket launch with fzf
+nnoremap <silent> <leader>l :Buffers<CR>
 
 " snipMate mappings
-imap <S-Tab> <Plug>snipMateNextOrTrigger
-smap <S-Tab> <Plug>snipMateNextOrTrigger
+" imap <S-Tab> <Plug>snipMateNextOrTrigger
+" smap <S-Tab> <Plug>snipMateNextOrTrigger
+" imap <tab> <Plug>snipMateNextOrTrigger
+" smap <tab> <Plug>snipMateNextOrTrigger
+
+" ultrasnips mappings
+" let g:UltiSnipsExpandTrigger="<S-Tab>"
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-v>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-l>"
 
 " reindent
 map <leader>i mzgg=G`z<CR>
@@ -58,6 +69,11 @@ nmap <leader>+ i<C-x>=
 nmap <leader>- i<C-x>-
 imap ,- <C-x>-
 imap ,+ <C-x>=
+
+" Fuzzy find
+nnoremap <silent> <leader>o :Files<CR>
+nnoremap <silent> <leader>O :Files!<CR>
+nnoremap <leader>f :Rg<Space>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RENAME CURRENT FILE
