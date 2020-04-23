@@ -161,7 +161,7 @@ source ~/.vim/mappings.vim
 
 let keyboard = system('issw')
 
-source ~/.vim/bepo.vim
+" source ~/.vim/bepo.vim
 source ~/.vim/test.vim
 
 

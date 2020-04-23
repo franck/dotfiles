@@ -5,7 +5,8 @@ if [[ -s "$HOME/.rvm/scripts/rvm" ]]  ; then source "$HOME/.rvm/scripts/rvm" ; f
 
 export PATH=$PATH:/usr/local/mysql/bin # Add MySQL to PATH
 export PATH=${PATH}:/usr/local/bin:/usr/games/bin:/usr/local/sbin
-export JAVA_HOME="$(/usr/libexec/java_home)"
+# export JAVA_HOME="$(/usr/libexec/java_home)"
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 export PHP_AUTOCONF="/usr/local/bin/autoconf"
 export NODE_PATH=$HOME/local/lib/node_modules
 export GOPATH=$HOME/go
