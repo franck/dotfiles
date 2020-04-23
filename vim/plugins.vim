@@ -31,6 +31,7 @@ Plugin 'tpope/vim-surround'
 " supercharge the '.' command to repeat a surround for instance
 " Plugin 'tpope/vim-repeat'
 
+
 " VIM RAILS
 " :A                  => open alternate file (spec for model, etc.)
 " :Emodel <tab>       => Tab complete to open model by name 
@@ -78,6 +79,9 @@ Plugin 'garbas/vim-snipmate'
 " optional
 Plugin 'honza/vim-snippets'
 
+" UltiSnips
+" Plugin 'SirVer/ultisnips'
+
 " add r and stands for 'ruby-block' so you could do :
 " dar     => delete around ruby-block
 " dir     => delete inside ruby-block
@@ -96,6 +100,10 @@ Plugin 'thoughtbot/vim-rspec'
 Plugin 'jgdavey/tslime.vim'
 Plugin 'szw/vim-maximizer'
 
+" Fzf : fuzzy search.
+Plugin 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
+Plugin 'junegunn/fzf.vim'
+
 " :Ack pattern
 " Plugin 'mileszs/ack.vim'
 
@@ -109,6 +117,10 @@ Plugin 'szw/vim-maximizer'
 
 " NerdTree
 " Plugin 'scrooloose/nerdtree'
+
+" supertab
+Plugin 'ervandew/supertab'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required:
