@@ -69,18 +69,22 @@ Plugin 'tpope/vim-endwise'
 " C-x -     => <% %>
 Plugin 'tpope/vim-ragtag'
 
+" UltiSnips
+Plugin 'SirVer/ultisnips'
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-l>"
+let g:UltiSnipsJumpBackwardTrigger="<c-d>"
+
 " SNIPMATE
-" S-tab to complete
-" INSERT MODE : letters<C-r>Tab to see what's available.
-" Ex: exp<C-r>Tab => exp, expb, experr
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
+" Plugin 'MarcWeber/vim-addon-mw-utils'
+" Plugin 'tomtom/tlib_vim'
+" Plugin 'garbas/vim-snipmate'
+" Snipmate
+" let g:snipMate.no_default_aliases = 1
+
 " optional
 Plugin 'honza/vim-snippets'
 
-" UltiSnips
-" Plugin 'SirVer/ultisnips'
 
 " add r and stands for 'ruby-block' so you could do :
 " dar     => delete around ruby-block

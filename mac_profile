@@ -110,7 +110,7 @@ alias tmux="TERM=xterm-256color tmux"
 alias t=./.tmux
 
 alias ls="exa"
-alias cat="bat"
+# alias cat="bat"
 
 alias fix="git diff --name-only | uniq | xargs vi"
 
