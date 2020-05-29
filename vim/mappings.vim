@@ -49,12 +49,6 @@ nmap <leader>vr :vsp $MYVIMRC<cr>
 " Compile vimrc file
 nmap <leader>so :source $MYVIMRC<cr>
 
-" Rails Vim shortcuts
-nmap <leader>m :Emodel<Space>
-nmap <leader>c :Econtroller<Space>
-nmap <leader>v :Eview<Space>
-nmap <leader>h :Ehelper<Space>
-
 " Dont mess the indentation with pasting
 function! PasteCode()
   set paste
