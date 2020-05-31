@@ -90,8 +90,8 @@ set title                         " Set the terminal's title
 :color grb256
 :let g:solarized_termcolors=256
 " :colorscheme railscasts
-:colorscheme solarized
-" :colorscheme gruvbox
+" :colorscheme solarized
+:colorscheme gruvbox
 " :colorscheme monokai
 " :colorscheme smyck
 

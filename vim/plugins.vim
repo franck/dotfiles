@@ -16,6 +16,8 @@ Plugin 'VundleVim/Vundle.vim'
 " :PluginInstall  => Install plugins
 " :PluginList     => List plugins
 
+Plugin 'morhetz/gruvbox'
+
 " Fugitive is a Git wrapper
 " Glog
 Plugin 'tpope/vim-fugitive'
@@ -124,6 +126,8 @@ Plugin 'junegunn/fzf.vim'
 
 " supertab
 Plugin 'ervandew/supertab'
+
+" gruvbox theme
 
 
 " All of your Plugins must be added before the following line
