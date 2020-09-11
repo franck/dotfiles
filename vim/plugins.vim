@@ -16,9 +16,11 @@ Plugin 'VundleVim/Vundle.vim'
 " :PluginInstall  => Install plugins
 " :PluginList     => List plugins
 
+
 " Fugitive is a Git wrapper
 " Glog
 Plugin 'tpope/vim-fugitive'
+Plugin 'vim-airline/vim-airline'
 
 " Fuzzy search 
 " need to install 'ag' utility for better perf, $brew install the_silver_searcher / apt-get install silversearcher-ag
@@ -69,18 +71,23 @@ Plugin 'tpope/vim-endwise'
 " C-x -     => <% %>
 Plugin 'tpope/vim-ragtag'
 
+" UltiSnips
+Plugin 'SirVer/ultisnips'
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-l>"
+let g:UltiSnipsJumpBackwardTrigger="<c-d>"
+   let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
+
 " SNIPMATE
-" S-tab to complete
-" INSERT MODE : letters<C-r>Tab to see what's available.
-" Ex: exp<C-r>Tab => exp, expb, experr
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
+" Plugin 'MarcWeber/vim-addon-mw-utils'
+" Plugin 'tomtom/tlib_vim'
+" Plugin 'garbas/vim-snipmate'
+" Snipmate
+" let g:snipMate.no_default_aliases = 1
+
 " optional
 Plugin 'honza/vim-snippets'
 
-" UltiSnips
-" Plugin 'SirVer/ultisnips'
 
 " add r and stands for 'ruby-block' so you could do :
 " dar     => delete around ruby-block
@@ -116,11 +123,22 @@ Plugin 'junegunn/fzf.vim'
 " Plugin 'rizzatti/dash.vim'
 
 " NerdTree
-" Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 
 " supertab
 Plugin 'ervandew/supertab'
 
+" gruvbox theme
+Plugin 'gruvbox-community/gruvbox'
+
+" Emmet : html easy
+Plugin 'mattn/emmet-vim'
+"
+" COC
+" Plugin 'neoclide/coc.nvim'
+
+" Make Quickfix editable for global replace
+Plugin 'stefandtw/quickfix-reflector.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required:
@@ -138,4 +156,6 @@ filetype plugin indent on    " required
 
 autocmd FileType ruby let b:dispatch = 'rspec %'
 
+" Expand Emmet html with ~,
+let g:user_emmet_leader_key='~'
 

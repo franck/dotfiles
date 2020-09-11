@@ -74,7 +74,8 @@
 [fetch]
   prune = true # compare local refs with the remote ref compare local refs with the remote refes 
 [core]
-  editor = vim
+  ; editor = /Applications/MacVim.app/Contents/MacOS/Vim
+  editor = /usr/local/bin/nvim
   excludefile = ~/.gitignore
 [status]
 	short = true

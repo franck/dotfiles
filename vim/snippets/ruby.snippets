@@ -12,6 +12,8 @@ snippet let
 	let(:${1:object}) { ${0} }
 snippet let!
 	let!(:${1:object}) { ${0} }
+snippet letc
+	let(:${1:object}) { create(${0}) }
 snippet feat
 	require "rails_helper"
 
@@ -23,4 +25,8 @@ snippet desc
 
 	describe "${1}" do
 	  ${2}
+	end
+snippet des
+	describe "${1:message}" do
+		${0}
 	end

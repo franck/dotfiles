@@ -31,8 +31,11 @@ CompilerSet errorformat^=
       \%\\&%\\x1b%\\S%\\+\ \ %#%m%\\>%\\x1b[0m\ \ %#%f,
       \%\\s\ %#%[cefi]%[rxod]%[eir]%[a-z]%#\ %\\+%\\S%\\+%$
       \%\\&%\\s\ %#%m%\\>\ \ %#%f,
-      \Overwrite%.%#%\\S%\\+\ \ %#%m%\\x1b[0m\ \ %#%f,
-      \%-GOverwrite%.%#\"h\"%.%#,
+      \\ %#Overwrite%.%#%\\S%\\+\ \ %#%m%\\x1b[0m\ \ %#%f,
+      \%-G\ %#Overwrite%.%#\"h\"%.%#,
+      \%+GStarted\ %\\u%\\u%.%#,
+      \%+GCompleted\ %\\d%\\d%\\d%.%#,
+      \%+G[ActiveJob]%.%#]\ Perform%.%#,
       \%.%#rails\ test\ %f:%l,
       \%+GCurrent\ version:%.%#,
       \%+G\ %#Status\ %#Migration\ ID%.%#,
@@ -47,6 +50,11 @@ CompilerSet errorformat^=
       \%+Eruby:%.%#(LoadError),
       \%+EUsage:%.%#,
       \%+ECould\ not\ find\ generator%.%#,
-      \%+EType\ 'rails'\ for\ help.
+      \%+EType\ 'rails'\ for\ help.,
+      \%\\&completion=rails#complete_rails,
+      \%\\&start=console,
+      \%\\&terminal=%\\C%\\%%(console%\\\|dbconsole%\\\|server%\\\|%[cs]%\\\|db%\\)%\\>:%\\@!%\\ze%.%#,
+      \%\\&force_start=%\\C%\\%%(console%\\\|dbconsole%\\\|server%\\\|%[cs]%\\\|db%\\)%\\>:%\\@!%\\ze%.%#,
+      \%\\&default=default
 
 " -complete=customlist,rails#complete_rails

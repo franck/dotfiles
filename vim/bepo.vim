@@ -59,14 +59,21 @@ noremap » >
 
 " Remaper la gestion des fenêtres
 " ———————————————————————————————
-noremap wt <C-w>j
+" move up
+noremap wt <C-w>j  
+" move down
 noremap ws <C-w>k
+" move lef
 noremap wc <C-w>h
+" move right
 noremap wr <C-w>l
+" close current window
 noremap wd <C-w>c
-noremap wo <C-w>s
-noremap wp <C-w>o
+" close all other windows
+noremap wo <C-w>o
+" split horizontaly
 noremap w<SPACE> :split<CR>
+" split verticaly
 noremap w<CR> :vsplit<CR>
 "Si vous souhaitez avoir les chiffres en accès direct en mode normal, remplacez la section « <> en direct » par les lignes suivantes :
 
@@ -93,10 +100,15 @@ noremap w<CR> :vsplit<CR>
 " noremap * 0
 " noremap 0 *
 
-" Can't be bothered to understand ESC vs <c-c> in insert mode
+" NERDtree
+let NERDTreeMapOpenInTab='\t'
+let NERDTreeMapOpenVSplit='\s'
+map <C-n> :NERDTreeToggle<CR>
+
+" Escape
 imap ttt <esc>
-imap '' <esc>
 
-
+" Save and escape
 noremap <leader>s :w<CR>
+inoremap <leader>s <esc>:w<CR>
 noremap <leader>z :wq<CR>

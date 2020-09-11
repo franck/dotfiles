@@ -43,39 +43,11 @@ alias configurator="cd ~/webdesign/configurator_web/configurator"
 
 alias meteo="curl -4 wttr.in/Bethune"
 
-alias sftpce="sftp -oPort=32100 deploy@46.105.99.154"
-alias sftpnewce="sftp -oPort=32100 deploy@46.105.105.40"
-alias sftpecj="sftp -oPort=32100 deploy@91.121.160.184"
-alias sftpej="sftp -oPort=32100 deploy@91.121.165.111"
-alias sftpcf="sftp deploy@connexion-francaise.com"
-alias sftpold="sftp -oPort=8888 franck@91.121.1.20"
-alias sftpmerry="sftp -oPort=32100 deploy@91.121.0.126"
-alias sftpit="sftp -oPort=32100 deploy@176.31.255.14"
-alias sftpes="sftpit"
-
-alias sshce="ssh deploy@46.105.99.154 -p 32100"
-alias sshnewce="ssh deploy@46.105.105.40 -p 32100"
-alias sshecj="ssh deploy@91.121.160.184 -p 32100"
-alias sshej="ssh deploy@91.121.165.111 -p 32100"
-alias sshnewej="ssh deploy@new.eurojob-consulting.com"
-alias sshold="ssh franck@91.121.1.20 -p 8888"
-alias sshfb="ssh -p 8888 eurojob-consulting.com -R :3001:127.0.0.1:3000 sleep 9999"
-alias sshmerry="ssh deploy@91.121.0.126 -p 32100"
-alias sshcairn="ssh cairnbri@cairnbridge.com"
-alias sshit="ssh -p 32100 deploy@176.31.255.14"
-alias sshes="sshit"
-alias sshgolf="ssh -p 32100 deploy@golfmail.fr"
-alias sshcf="ssh deploy@connexion-francaise.com"
-alias sshnewej="ssh deploy@new.eurojob-consulting.com"
-
 alias sshdgl='ssh -i ~/.ssh/awsfrancfortfranck.pem ec2-user@ec2-18-195-205-108.eu-central-1.compute.amazonaws.com'
 alias sftpdgl='sftp -i ~/.ssh/awsfrancfortfranck.pem ec2-user@ec2-18-195-205-108.eu-central-1.compute.amazonaws.com'
 
 alias redisstart='sudo launchctl start io.redis.redis-server'
 alias redisstop='sudo launchctl stop io.redis.redis-server'
-
-# alias tree="find . -print | sed -e 's;[^/]*/;|--;g;s;--|; |;g'"
-
 
 alias r="rails"
 alias h="heroku"
@@ -87,13 +59,11 @@ alias ack="/usr/local/Cellar/ack/2.14/bin/ack"
 alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 alias vi="vim"
 
-alias ett="mate app public config lib vendor/assets db lang test spec stories features Gemfile Guardfile .rvmrc &"
 alias nginx_start="sudo launchctl load -w /Library/LaunchDaemons/homebrew.mxcl.nginx.plist"
 alias nginx_stop="sudo launchctl load -w /Library/LaunchDaemons/homebrew.mxcl.nginx.plist"
 
 alias ctags="`brew --prefix`/bin/ctags"
 
-alias clean_budget_file="sed -e '1d' | sed -e '/Date/,$d' | sed -e 's/,/ /g' | sed -e 's/\"//g' | awk '{ print $1 \";\" $4 ';' $5}' | sed -e '/;;/d' | sed -e 's/\./,/g'"
 PHP_AUTOCONF="/usr/local/bin/autoconf"
 
 alias kibana="echo 'localhost:5601' && $HOME/webdesign/src/kibana/bin/kibana"
@@ -107,12 +77,11 @@ alias vu="vagrant up"
 alias vssh="vagrant ssh"
 alias vh="vagrant halt"
 
-
 alias tmux="TERM=xterm-256color tmux"
 alias t=./.tmux
 
 alias ls="exa"
-alias cat="bat"
+# alias cat="bat"
 
 alias fix="git diff --name-only | uniq | xargs vi"
 
