@@ -1,0 +1,51 @@
+# # RSPEC AND CAPYBARA
+# # expect(page).to
+snippet bb
+byebug
+endsnippet
+
+snippet exp
+expect({#}).to ${0}
+endsnippet
+
+snippet ept
+expect(page).to have_content ${0}
+endsnippet
+
+snippet sop
+save_and_open_page
+endsnippet
+
+snippet let
+let(:${1:object}) { ${0} }
+endsnippet
+
+snippet let!
+let!(:${1:object}) { ${0} }
+endsnippet
+
+snippet letc
+let(:${1:object}) { create(${0}) }
+endsnippet
+
+snippet feat
+require "rails_helper"
+
+feature "${1}" do
+  ${2}
+end
+endsnippet
+
+snippet desc
+require "rails_helper"
+
+describe "${1}" do
+  ${2}
+end
+endsnippet
+
+snippet des
+describe "${1:message}" do
+	${0}
+end
+endsnippet

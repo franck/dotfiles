@@ -45,7 +45,12 @@ nnoremap <silent> <leader>l :Buffers<CR>
 map <leader>i mzgg=G`z<CR>
 
 " Open vimrc in a new split window
-nmap <leader>vr :vsp $MYVIMRC<cr>
+if has('nvim')
+  nmap <leader>vr :vsp ~/.vimrc<cr>
+else
+  nmap <leader>vr :vsp $MYVIMRC<cr>
+end
+
 " Compile vimrc file
 nmap <leader>so :source $MYVIMRC<cr>
 
@@ -73,3 +78,18 @@ nnoremap <leader>f :Rg<Space>
 " RENAME CURRENT FILE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <leader>n :call RenameFile()<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" GIT
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <leader>gh :diffget //3<CR>
+nmap <leader>gu :diffget //2<CR>
+nmap <leader>gs :G<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" EMMET 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+

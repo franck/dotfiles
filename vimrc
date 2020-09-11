@@ -9,13 +9,13 @@ source ~/.vim/plugins.vim
 " """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible " allow unsaved background buffers and remember marks/undo for them
 syntax on " Enable highlighting for syntax
+set noerrorbells
 set hidden
 set encoding=utf-8
 set fileencoding=utf-8
 set termencoding=utf-8
 " remember more commands and search history
 set history=10000
-set expandtab
 
 " " do not scan all includes files for autocompletion
 setglobal complete-=i
@@ -23,6 +23,7 @@ setglobal complete-=i
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
+set expandtab
 set autoindent
 let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
@@ -35,9 +36,11 @@ set hlsearch
 set visualbell                    " No beeping.
 "some stuff to get the mouse going in term
 set mouse=a
-set ttymouse=xterm2
+" set ttymouse=xterm2
 " make searches case-sensitive only if they contain upper-case characters
-set ignorecase smartcase
+set smartcase
+
+set guicursor=
 
 " Highlight the line with a cursor
 set cursorline
@@ -63,9 +66,11 @@ set shell=bash
 " http://www.shallowsky.com/linux/noaltscreen.html
 set t_ti= t_te=
 " keep more context when scrolling off the end of a buffer
-set scrolloff=3
+set scrolloff=8
 " Store temporary files in a central spot
-set backup
+set noswapfile
+set nobackup
+set nowritebackup
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 " allow backspacing over everything in insert mode
@@ -82,16 +87,33 @@ set wildmenu                      " Enhanced command line completion.
 set wildmode=list:longest         " romplete files like a shell.
 set title                         " Set the terminal's title
 
+" COC suggestion
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+set updatetime=50
+
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 :set t_Co=256 " 256 colors
-" :set background=dark
-:color grb256
+" :color grb256
 :let g:solarized_termcolors=256
 " :colorscheme railscasts
 " :colorscheme solarized
+
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_invert_selection = '0'
+
 :colorscheme gruvbox
+:set background=dark
 " :colorscheme monokai
 " :colorscheme smyck
 
@@ -147,7 +169,6 @@ function! RenameFile()
 endfunction
 nnoremap <leader>n :call RenameFile()<cr>
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use Silver Bullet for Ack plugin if available
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -188,12 +209,12 @@ if !exists("g:surround_no_insert_mappings") || ! g:surround_no_insert_mappings
 endif
 
 
-" Python Setting {
-set pythondll=/usr/local/Frameworks/Python.framework/Versions/3.7/Python
-set pythonhome=/usr/local/Frameworks/Python.framework/Versions/3.7
-set pythonthreedll=/usr/local/Frameworks/Python.framework/Versions/3.7/Python
-set pythonthreehome=/usr/local/Frameworks/Python.framework/Versions/3.7
-if has('python3')
-  silent! python3 1
-endif
-" }
+" " Python Setting {
+" if has('python3')
+"   silent! python3 1
+"   set pythondll=/usr/local/Frameworks/Python.framework/Versions/3.7/Python
+"   set pythonhome=/usr/local/Frameworks/Python.framework/Versions/3.7
+"   set pythonthreedll=/usr/local/Frameworks/Python.framework/Versions/3.7/Python
+"   set pythonthreehome=/usr/local/Frameworks/Python.framework/Versions/3.7
+" endif
+" " }

@@ -16,11 +16,11 @@ Plugin 'VundleVim/Vundle.vim'
 " :PluginInstall  => Install plugins
 " :PluginList     => List plugins
 
-Plugin 'morhetz/gruvbox'
 
 " Fugitive is a Git wrapper
 " Glog
 Plugin 'tpope/vim-fugitive'
+Plugin 'vim-airline/vim-airline'
 
 " Fuzzy search 
 " need to install 'ag' utility for better perf, $brew install the_silver_searcher / apt-get install silversearcher-ag
@@ -76,6 +76,7 @@ Plugin 'SirVer/ultisnips'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-l>"
 let g:UltiSnipsJumpBackwardTrigger="<c-d>"
+   let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
 
 " SNIPMATE
 " Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -122,13 +123,22 @@ Plugin 'junegunn/fzf.vim'
 " Plugin 'rizzatti/dash.vim'
 
 " NerdTree
-" Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 
 " supertab
 Plugin 'ervandew/supertab'
 
 " gruvbox theme
+Plugin 'gruvbox-community/gruvbox'
 
+" Emmet : html easy
+Plugin 'mattn/emmet-vim'
+"
+" COC
+" Plugin 'neoclide/coc.nvim'
+
+" Make Quickfix editable for global replace
+Plugin 'stefandtw/quickfix-reflector.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required:
@@ -146,4 +156,6 @@ filetype plugin indent on    " required
 
 autocmd FileType ruby let b:dispatch = 'rspec %'
 
+" Expand Emmet html with ~,
+let g:user_emmet_leader_key='~'
 

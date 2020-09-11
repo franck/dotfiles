@@ -6,7 +6,9 @@ set -q XDG_DATA_HOME
 # Load Oh My Fish configuration.
 source $OMF_PATH/init.fish
 
-set EDITOR "vim"
+set EDITOR "/usr/local/bin/nvim"
+set GIT_EDITOR "/usr/local/bin/nvim"
+set VISUAL "/usr/local/bin/nvim"
 
 set fish_greeting ""
 
@@ -16,10 +18,15 @@ set PATH $PATH ./bin
 set PATH $PATH $HOME/bin 
 set PATH $PATH $HOME/.rvm/bin # Add RVM to PATH for scripting
 
+# ENV
+
+set JAVA_HOME (/usr/libexec/java_home)
+
 # ALIASES
  
 alias fradeo="cd ~/webdesign/fradeo_web/fradeo"
 alias configurator="cd ~/webdesign/configurator_web/configurator"
+alias sumpps="cd ~/webdesign/sumpps_web/sumpps"
 
 alias meteo="curl -H 'Accept-Language: fr' wttr.in"
 
@@ -29,7 +36,7 @@ alias h="heroku"
 alias ack="/usr/local/Cellar/ack/2.14/bin/ack"
 
 alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
-alias vi="vim"
+alias vi="nvim"
 
 alias kibana="echo 'localhost:5601' && $HOME/webdesign/src/kibana/bin/kibana"
 alias kb="$HOME/sandbox/src/kibana/bin/kibana"
@@ -45,3 +52,5 @@ alias t=./.tmux
 
 alias s="cd .."
 alias la="ls -a"
+
+alias rmi="rake db:migrate"
