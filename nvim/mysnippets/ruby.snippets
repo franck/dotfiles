@@ -5,7 +5,7 @@ byebug
 endsnippet
 
 snippet exp
-expect({#}).to ${0}
+expect(${1:object}).to ${0}
 endsnippet
 
 snippet ept
@@ -29,23 +29,35 @@ let(:${1:object}) { create(${0}) }
 endsnippet
 
 snippet feat
-require "rails_helper"
+require 'rails_helper'
 
-feature "${1}" do
+feature '${1}' do
   ${2}
 end
 endsnippet
 
 snippet desc
-require "rails_helper"
+require 'rails_helper'
 
-describe "${1}" do
+describe '${1}' do
   ${2}
 end
 endsnippet
 
 snippet des
-describe "${1:message}" do
-	${0}
+describe '${1:message}' do
+  ${0}
+end
+endsnippet
+
+snippet cont
+context '${1:message}' do
+  ${0}
+end
+endsnippet
+
+snippet it
+it '${1:message}' do
+  ${0}
 end
 endsnippet
