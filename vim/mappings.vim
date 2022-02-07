@@ -41,6 +41,9 @@ nnoremap <silent> <leader>l :Buffers<CR>
 " let g:UltiSnipsJumpForwardTrigger="<c-v>"
 " let g:UltiSnipsJumpBackwardTrigger="<c-l>"
 
+" rubocop
+nmap <leader>r :Tmux rubocop<CR>
+
 " reindent
 map <leader>i mzgg=G`z<CR>
 

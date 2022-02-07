@@ -184,7 +184,7 @@ source ~/.vim/mappings.vim
 
 let keyboard = system('issw')
 
-" source ~/.vim/bepo.vim
+source ~/.vim/bepo.vim
 source ~/.vim/test.vim
 
 
@@ -207,6 +207,21 @@ if !exists("g:surround_no_insert_mappings") || ! g:surround_no_insert_mappings
   imap      <C-G>s <Plug>Isurround
   imap      <C-G>S <Plug>ISurround
 endif
+
+
+" Create parents directories on save
+function s:MkNonExDir(file, buf)
+  if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+    let dir=fnamemodify(a:file, ':h')
+    if !isdirectory(dir)
+      call mkdir(dir, 'p')
+    endif
+  endif
+endfunction
+augroup BWCCreateDir
+  autocmd!
+  autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+augroup END
 
 
 " " Python Setting {

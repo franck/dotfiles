@@ -31,9 +31,9 @@ nnoremap <leader>; :call OpenTestAlternate()<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RUNNING TESTS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" map <leader>tt :call RunTestFile()<cr>
-" map <leader>tT :call RunNearestTest()<cr>
-" map <leader>ta :call RunAllTest()<cr>
+map <leader>tt :call RunTestFile()<cr>
+map <leader>tc :call RunNearestTest()<cr>
+map <leader>ta :call RunAllTest()<cr>
 " map <leader>tA :call RunAllTestWithStopWatch()<cr>
 " map <leader>tf :call RunLastFailure()<cr>
 
@@ -41,7 +41,13 @@ nnoremap <leader>; :call OpenTestAlternate()<cr>
 map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>T :call RunNearestSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
-let g:rspec_command = ':w|call Send_to_Tmux("time spring rspec {spec}\n")'
+if filereadable("bin/rspec")
+  let g:rspec_command = ':w|call Send_to_Tmux("\ntime spring rspec {spec}\n")'
+elseif filereadable("tmp/text.txt")
+  let g:rspec_command = ':w|call Send_to_Tmux("\ntime spring rails test {spec}\n")'
+else
+  let g:rspec_command = ':w|call Send_to_Tmux("\ntime rspec {spec}\n")'
+endif
 
 function! RunTestFile(...)
   if a:0
@@ -78,18 +84,8 @@ function! RunAllTest()
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  if filereadable("bin/test")
-    exec ":!bin/rake test"
-  elseif filereadable("bin/test5")
-    exec ":!rails test"
-  elseif filereadable("zeus.json")
-    exec ":!zeus rspec --color -I spec/spec_helper.rb spec/"
-  elseif filereadable("bin/rspec")
-    " exec ":!bin/rspec --color -I spec/rails_helper.rb spec/ --tag ~js"
-    exec ":!bin/rspec --color -I spec/rails_helper.rb spec/"
-  elseif filereadable("Gemfile")
-    " exec ":!rspec --color -I spec/rails_helper.rb spec/ --tag ~js"
-    exec ":!rspec --color -I spec/rails_helper.rb spec/"
+  if filereadable("tmp/test.txt")
+    exec ':w|call Send_to_Tmux("\ntime spring rails test\n")'
   else
     " exec ":!rspec --color -I spec/rails_helper.rb spec/ --tag ~js"
     exec ":!rspec --color -I spec/rails_helper.rb spec/"
@@ -116,12 +112,8 @@ function! RunTests(filename)
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  if filereadable("bin/test")
-    exec ":!m " . a:filename
-  elseif filereadable("bin/test5")
-    exec ":!rails test" . a:filename
-  elseif filereadable("zeus.json")
-    exec ":!zeus rspec " . a:filename
+  if filereadable("tmp/test.txt")
+    exec ':w|call Send_to_Tmux("\ntime spring rails test ' . a:filename . '\n")'
   elseif filereadable("bin/rspec")
     exec ":!bin/rspec " . a:filename
   elseif filereadable("Gemfile")

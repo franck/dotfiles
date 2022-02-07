@@ -45,19 +45,25 @@ end
 endsnippet
 
 snippet des
-describe '${1:message}' do
+describe '${1}' do
   ${0}
 end
 endsnippet
 
-snippet cont
-context '${1:message}' do
+snippet con
+context '${1}' do
   ${0}
 end
 endsnippet
 
 snippet it
-it '${1:message}' do
+it '${1}' do
+  ${0}
+end
+endsnippet
+
+snippet bef
+before do
   ${0}
 end
 endsnippet

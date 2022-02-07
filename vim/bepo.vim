@@ -112,3 +112,10 @@ imap ttt <esc>
 noremap <leader>s :w<CR>
 inoremap <leader>s <esc>:w<CR>
 noremap <leader>z :wq<CR>
+
+" Macro
+" qq to record a macro
+" @q to play it
+" @: repeat last ex command
+" @@ repeat last macro
+

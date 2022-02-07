@@ -29,6 +29,8 @@
   gn = goodness
   gnc = goodness --cached
 
+  lo = log --oneline -10 
+
   master = checkout master
 
   mup = !git checkout master && git pull && git checkout -
@@ -77,10 +79,9 @@
   ; editor = /Applications/MacVim.app/Contents/MacOS/Vim
   editor = /usr/local/bin/nvim
   excludefile = ~/.gitignore
+	excludesFile = ~/.gitignore
 [status]
 	short = true
-[credential]
-	helper = cache
 [rerere]
 	enabled = 1
 	autoupdate = true

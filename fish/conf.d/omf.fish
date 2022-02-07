@@ -10,23 +10,40 @@ set EDITOR "/usr/local/bin/nvim"
 set GIT_EDITOR "/usr/local/bin/nvim"
 set VISUAL "/usr/local/bin/nvim"
 
+
 set fish_greeting ""
 
 # PATH
 
-set PATH $PATH ./bin
-set PATH $PATH $HOME/bin 
+set PATH ./bin $PATH 
+set PATH $HOME/bin $PATH  
 set PATH $PATH $HOME/.rvm/bin # Add RVM to PATH for scripting
 
 # ENV
 
-set JAVA_HOME (/usr/libexec/java_home)
+set -x JAVA_HOME (/usr/libexec/java_home)
+set -x OBJC_DISABLE_INITIALIZE_FORK_SAFETY 'YES'
 
 # ALIASES
  
 alias fradeo="cd ~/webdesign/fradeo_web/fradeo"
+alias jobday="cd ~/webdesign/jobday"
+alias daphni="cd ~/webdesign/daphni/daphni"
+alias blog="cd ~/webdesign/blog/blog"
 alias configurator="cd ~/webdesign/configurator_web/configurator"
 alias sumpps="cd ~/webdesign/sumpps_web/sumpps"
+alias rpoc-bridge="cd ~/webdesign/egide/rpoc-bridge"
+alias rpoc-web="cd ~/webdesign/egide/rpoc-web"
+alias rweb="cd ~/webdesign/egide/rweb"
+alias evenapi="cd ~/webdesign/egide/evenapi"
+alias evendata="cd ~/webdesign/egide/evendata"
+alias evenapiclient="cd ~/webdesign/egide/even-api-client"
+alias kpdf="cd ~/webdesign/egide/k-pdf-web/k-pdf"
+alias kpdfapiclient="cd ~/webdesign/egide/k-pdf-api-client"
+alias kvisit="cd ~/webdesign/egide/kolimmo-visit"
+alias kweb="cd ~/webdesign/egide/kolimmo-web"
+alias aircall="cd ~/webdesign/aircall/web"
+alias holivia="cd ~/webdesign/holivia/holivia_web"
 
 alias meteo="curl -H 'Accept-Language: fr' wttr.in"
 
@@ -43,14 +60,21 @@ alias kb="$HOME/sandbox/src/kibana/bin/kibana"
 alias elasticsearch="$HOME/sandbox/src/elasticsearch/bin/elasticsearch"
 alias es="elasticsearch -d"
 alias es2="$HOME/sandbox/src/elasticsearch2/bin/elasticsearch -d"
+alias es5="$HOME/sandbox/src/es5/bin/elasticsearch -d"
 alias logstash="$HOME/sandbox/src/logstash/bin/logstash"
+alias filebeat="$HOME/sandbox/src/filebeat/filebeat"
 
 alias ls="exa -al --color=always --group-directories-first"
 
-alias tmux="TERM=xterm-256color tmux"
-alias t=./.tmux
+# alias tmux="TERM=xterm-256color tmux"
+# alias t="./.tmux"
+alias t="open /Applications/Be\ Focused\ Pro.app && ./.tmux"
 
 alias s="cd .."
 alias la="ls -a"
 
 alias rmi="rake db:migrate"
+
+alias gwip="gitupdate ."
+alias glo="git log --online -10"
+
