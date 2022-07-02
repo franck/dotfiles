@@ -10,7 +10,6 @@ set EDITOR "/usr/local/bin/nvim"
 set GIT_EDITOR "/usr/local/bin/nvim"
 set VISUAL "/usr/local/bin/nvim"
 
-
 set fish_greeting ""
 
 # PATH
@@ -18,6 +17,7 @@ set fish_greeting ""
 set PATH ./bin $PATH 
 set PATH $HOME/bin $PATH  
 set PATH $PATH $HOME/.rvm/bin # Add RVM to PATH for scripting
+set PATH $PATH $HOME/.ebcli-virtual-env/executables
 
 # ENV
 
@@ -77,4 +77,10 @@ alias rmi="rake db:migrate"
 
 alias gwip="gitupdate ."
 alias glo="git log --online -10"
+
+
+alias hstaging="ssh -i ~/.aws/holivia.pem ec2-user@15.188.142.111"
+alias hprod="ssh -i ~/.aws/holivia.pem ec2-user@13.37.15.127"
+alias hdemo="ssh -i ~/.aws/holivia.pem ec2-user@13.37.157.230"
+alias hfeat="ssh -i ~/.aws/holivia.pem ec2-user@52.47.204.254"
 

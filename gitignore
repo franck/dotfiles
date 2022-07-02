@@ -3,3 +3,8 @@
 *.swo
 .DS_Store
 .tmux
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
