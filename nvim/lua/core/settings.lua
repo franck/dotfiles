@@ -40,7 +40,6 @@ vim.opt.undofile = true
 vim.opt.termguicolors = true
 vim.opt.scrolloff = 8 -- how many lines above and below the cursor
 vim.opt.showmode = false
-vim.opt.completeopt = 'menuone'
 
 vim.opt.cursorline = true
 

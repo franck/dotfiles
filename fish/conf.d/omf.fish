@@ -84,3 +84,4 @@ alias hprod="ssh -i ~/.aws/holivia.pem ec2-user@13.37.15.127"
 alias hdemo="ssh -i ~/.aws/holivia.pem ec2-user@13.37.157.230"
 alias hfeat="ssh -i ~/.aws/holivia.pem ec2-user@52.47.204.254"
 
+alias love="/Applications/love.app/Contents/MacOS/love"

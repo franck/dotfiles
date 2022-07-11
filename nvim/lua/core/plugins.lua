@@ -25,6 +25,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-sleuth'
 
 
 -- Ruby
@@ -82,8 +83,16 @@ Plug 'junegunn/fzf.vim'
 -- Bufferline
 Plug('akinsho/bufferline.nvim', { tag = 'v2.*' })
 
+-- Motion
+Plug 'phaazon/hop.nvim'
+
 -- Formatting
 Plug('jose-elias-alvarez/null-ls.nvim')
+
+-- LSP
+Plug('neovim/nvim-lspconfig')
+Plug('williamboman/nvim-lsp-installer')
+Plug('ray-x/lsp_signature.nvim')
 
 vim.call('plug#end')
 
@@ -143,21 +152,3 @@ vim.cmd[[colorscheme nightfox]]
 require('lualine').setup()
 
 
--------------------------------------------------------------------------
--- Formatting
--------------------------------------------------------------------------
-require("null-ls").setup({
-  debug = true,
-  sources = {
-    require("null-ls").builtins.formatting.prettier,
-    require("null-ls").builtins.formatting.rubocop,
-  },
-})
-
-local group_js = vim.api.nvim_create_augroup("Javascript and Ruby Formatting", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePre",{ 
-  pattern = {"*.js", "*.ts", "*.jsx", "*.tsx", "*.rb" },
-  callback = function()
-    vim.lsp.buf.formatting()
-  end,
-  group = group_js, })

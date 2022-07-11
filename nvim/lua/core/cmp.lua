@@ -2,7 +2,7 @@
 -- Autocompletion
 -------------------------------------------------------------------------
 
-vim.opt.completeopt = { "menu", "menuone", "noselect" }
+vim.opt.completeopt = { "menu", "menuone", "noinsert" }
 
 -- Don't show the dumb matching stuff.
 vim.opt.shortmess:append "c"
@@ -62,48 +62,48 @@ cmp.setup {
     end,
   },
 
-  mapping = {
-    ["<C-t>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
-    ["<C-s>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
-    ["<C-l>"] = cmp.mapping.abort(),
-    ["<C-c>"] = cmp.mapping(
-    cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Insert,
-      select = true,
-    }, { "i", "c" }
-    ),
-  },
+  -- mapping = {
+  --   ["<C-t>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
+  --   ["<C-s>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
+  --   ["<C-l>"] = cmp.mapping.abort(),
+  --   ["<C-c>"] = cmp.mapping(
+  --   cmp.mapping.confirm {
+  --     behavior = cmp.ConfirmBehavior.Insert,
+  --     select = true,
+  --   }, { "i", "c" }
+  --   ),
+  -- },
 
 
   -- TAB MAPPING
-  -- mapping = {
-  --   ["<CR>"] = cmp.mapping.confirm { select = false },
-  --   ["<Tab>"] = cmp.mapping(function(fallback)
-  --     if cmp.visible() then
-  --       cmp.select_next_item()
-  --     elseif luasnip.expandable() then
-  --       luasnip.expand()
-  --     elseif luasnip.expand_or_jumpable() then
-  --       luasnip.expand_or_jump()
-  --     elseif has_words_before() then
-  --       cmp.complete()
-  --     elseif check_backspace() then
-  --       fallback()
-  --     else
-  --       fallback()
-  --     end
-  --   end, { "i", "s" }),
+  mapping = cmp.mapping.preset.insert({
+    ["<CR>"] = cmp.mapping.confirm { select = false },
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expandable() then
+        luasnip.expand()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      elseif has_words_before() then
+        cmp.complete()
+      elseif check_backspace() then
+        fallback()
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
 
-  --   ["<S-Tab>"] = cmp.mapping(function(fallback)
-  --     if cmp.visible() then
-  --       cmp.select_prev_item()
-  --     elseif luasnip.jumpable(-1) then
-  --       luasnip.jump(-1)
-  --     else
-  --       fallback()
-  --     end
-  --   end, { "i", "s", }),
-  -- },
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { "i", "s", }),
+  }),
 
   formatting = {
     format = function(entry, vim_item)

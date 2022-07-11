@@ -21,12 +21,16 @@ vim.keymap.set('o', 'iÉ', 'iW', { noremap = true })
 vim.keymap.set('n', 'l', 'c', { noremap = true })
 vim.keymap.set('n', 'L', 'C', { noremap = true })
 
+-- join
+vim.keymap.set('', 'T', 'J')
+vim.keymap.set('', 'S', 'K')
+
 -- until
-vim.keymap.set('o', 'j', 't', { noremap = true })
-vim.keymap.set('o', 'J', 'T', { noremap = true })
+vim.keymap.set('', 'j', 't', { noremap = true })
+vim.keymap.set('', 'J', 'T', { noremap = true })
 
 -- replace
-vim.keymap.set('n', 'h', 'r', { noremap = true })
+vim.keymap.set({ 'n', 'v' }, 'h', 'r', { noremap = true })
 
 -- substitute
 vim.keymap.set('n', 'k', 's', { noremap = true })

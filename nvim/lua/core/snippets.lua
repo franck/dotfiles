@@ -65,6 +65,16 @@ ls.add_snippets(nil, {
 -------------------------------------------------------------------------
 -- Ruby Snippet
 -------------------------------------------------------------------------
+ls.add_snippets('eruby', {
+  snip({
+    trig = "-",
+    namr = "<% %>"
+  }, fmt("<% {} %>", insert(0))),
+  snip({
+    trig = "=",
+    namr = "<%= %>"
+  }, fmt("<%= {} %>", insert(0))),
+})
 
 ls.add_snippets('ruby', {
 
@@ -83,7 +93,7 @@ ls.add_snippets('ruby', {
   }
   )),
 
-  -- New rails spec
+  -- New rails spec rspec
   snip({
     trig = "desc",
     namr = "New rails spec",
@@ -92,6 +102,24 @@ ls.add_snippets('ruby', {
   require 'rails_helper'
 
   describe {} do
+    {}
+  end
+  ]],
+  {
+    insert(1),
+    insert(0),
+  }
+  )),
+
+  -- New rails feature spec
+  snip({
+    trig = "feat",
+    namr = "New rails feature spec",
+    dscr = "New feature",
+  }, fmt([[
+  require 'rails_helper'
+
+  feature "{}" do
     {}
   end
   ]],
@@ -120,10 +148,26 @@ ls.add_snippets('ruby', {
   -- Context
   snip({
     trig = "con",
-    namr = "Context",
+    namr = "Context block",
     dscr = "Super simple context block",
   }, fmt([[
   context '{}' do
+    {}
+  end
+  ]],
+  {
+    insert(1),
+    insert(0),
+  }
+  )),
+
+  -- it
+  snip({
+    trig = "it",
+    namr = "It block",
+    dscr = "Super simple it block",
+  }, fmt([[
+  it '{}' do
     {}
   end
   ]],
@@ -161,7 +205,6 @@ ls.add_snippets('ruby', {
 -------------------------------------------------------------------------
 
 ls.add_snippets('javascript', {
-
   -- console.log
   snip({
     trig = "log",
@@ -174,4 +217,4 @@ ls.add_snippets('javascript', {
 -------------------------------------------------------------------------
 -- Friendly Snippet
 -------------------------------------------------------------------------
-require("luasnip/loaders/from_vscode").lazy_load()
+-- require("luasnip/loaders/from_vscode").lazy_load()
