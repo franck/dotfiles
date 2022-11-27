@@ -5,7 +5,7 @@ local Plug = vim.fn['plug#']
 vim.call('plug#begin', '~/.config/nvim/plugged')
 
 -- Theme
-Plug('catppuccin/nvim', { as = 'catppuccin'})
+Plug('catppuccin/nvim', { as = 'catppuccin' })
 Plug 'EdenEast/nightfox.nvim'
 Plug 'Avimitin/neovim-deus'
 Plug('folke/tokyonight.nvim', { branch = 'main' })
@@ -103,10 +103,10 @@ vim.call('plug#end')
 require('telescope').setup {
   extensions = {
     fzf = {
-      fuzzy = true,                    -- false will only do exact matching
-      override_generic_sorter = true,  -- override the generic sorter
-      override_file_sorter = true,     -- override the file sorter
-      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+      fuzzy = true, -- false will only do exact matching
+      override_generic_sorter = true, -- override the generic sorter
+      override_file_sorter = true, -- override the file sorter
+      case_mode = "smart_case", -- or "ignore_case" or "respect_case"
       -- the default case_mode is "smart_case"
     }
   }
@@ -136,19 +136,10 @@ vim.cmd('let g:ruby_indent_block_style = "do"')
 
 -- vim.cmd[[colorscheme tokyonight]]
 
-vim.cmd[[colorscheme nightfox]]
+vim.cmd [[colorscheme nightfox]]
 -- vim.cmd[[colorscheme terafox]]
 --
 -- vim.cmd[[colorscheme monokai]]
 --
 -- vim.cmd[[colorscheme deus]]
 -- vim.g.deus_background = "mid"
-
-
--------------------------------------------------------------------------
--- Status line 
--------------------------------------------------------------------------
--- require('feline').setup()
-require('lualine').setup()
-
-

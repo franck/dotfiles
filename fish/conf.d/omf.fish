@@ -3,6 +3,9 @@ set -q XDG_DATA_HOME
   and set -gx OMF_PATH "$XDG_DATA_HOME/omf"
   or set -gx OMF_PATH "$HOME/.local/share/omf"
 
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Load Oh My Fish configuration.
 source $OMF_PATH/init.fish
 
@@ -16,6 +19,7 @@ set fish_greeting ""
 
 set PATH ./bin $PATH 
 set PATH $HOME/bin $PATH  
+set PATH $PATH /opt/homebrew/bin
 set PATH $PATH $HOME/.rvm/bin # Add RVM to PATH for scripting
 set PATH $PATH $HOME/.ebcli-virtual-env/executables
 
@@ -75,6 +79,7 @@ alias la="ls -a"
 
 alias rmi="rake db:migrate"
 
+alias g="git"
 alias gwip="gitupdate ."
 alias glo="git log --online -10"
 

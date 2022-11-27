@@ -11,10 +11,11 @@
   b  = branch
   browse = !hub browse
   ca = commit --amend
-	car = commit --amend --no-edit
+  car = commit --amend --no-edit
   ci = commit
+  cm = commit -m
   co = checkout
-	ctags = !.git/hooks/ctags
+  ctags = !.git/hooks/ctags
   di = diff
   dc = diff --word-diff --cached --color-words
   df = diff --word-diff --color-words
@@ -32,6 +33,7 @@
   lo = log --oneline -10 
 
   master = checkout master
+  staging = checkout staging
 
   mup = !git checkout master && git pull && git checkout -
 

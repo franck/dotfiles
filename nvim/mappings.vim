@@ -22,8 +22,8 @@ map <leader>i mzgg=G`z<CR>
 " insert <%= %> and <% %> for ERB file
 nmap <leader>+ i<C-x>=
 nmap <leader>- i<C-x>-
-imap ,- <C-x>-
-imap ,+ <C-x>=
+imap ,- <C-X>-
+imap ,+ <C-X>=
 
 nmap Y yy
 

@@ -121,7 +121,7 @@ cmp.setup {
     { name = "nvim_lsp" },
     { name = "luasnip" },
     { name = "nvim_lua" },
-    { 
+    {
       name = "buffer",
       max_item_count = 10,
       keyword_length = 2,
@@ -144,7 +144,7 @@ cmp.setup {
   },
   experimental = {
     -- Display the completion while typing
-    ghost_text = true,
+    ghost_text = false,
 
     -- New menu style
     native_menu = false,

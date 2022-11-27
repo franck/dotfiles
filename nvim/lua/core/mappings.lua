@@ -13,10 +13,10 @@ vim.keymap.set('n', 'Y', 'yy')
 vim.keymap.set('', '<leader>i', 'mzgg=G`z<CR>')
 
 -- insert <%= %> and <% %> for ERB file
-vim.keymap.set('n', '<leader>+', 'i<C-x>=')
-vim.keymap.set('n', '<leader>-', 'i<C-x>-')
-vim.keymap.set('i', ',+', '<C-X>=')
-vim.keymap.set('i', ',-', '<C-X>-')
+vim.keymap.set('n', ',+', 'i<C-V><NL><Esc>I<%=<Space><Esc>A<Space>%><Esc>F<NL>s')
+vim.keymap.set('n', ',-', 'i<%<Space><Space>%><Esc>2hi')
+vim.keymap.set('i', ',+', '<C-V><NL><Esc>I<%=<Space><Esc>A<Space>%><Esc>F<NL>s')
+vim.keymap.set('i', ',-', '<%<Space><Space>%><Esc>2hi')
 
 -------------------------------------------------------------------------
 -- Folding
@@ -38,7 +38,7 @@ vim.keymap.set('n', 'ds', '<Plug>Dsurround')
 vim.keymap.set('n', 'ys', '<Plug>Ysurround')
 vim.keymap.set('n', 'ys', '<Plug>Ysurround')
 vim.keymap.set('n', 'yS', '<Plug>YSurround')
-vim.keymap.set('n', 'yss','<Plug>Yssurround')
+vim.keymap.set('n', 'yss', '<Plug>Yssurround')
 vim.keymap.set('n', 'ySs', '<Plug>YSsurround')
 vim.keymap.set('n', 'ySS', '<Plug>YSsurround')
 vim.keymap.set('v', 'S', '<Plug>VSurround', { noremap = true })

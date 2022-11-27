@@ -65,16 +65,6 @@ ls.add_snippets(nil, {
 -------------------------------------------------------------------------
 -- Ruby Snippet
 -------------------------------------------------------------------------
-ls.add_snippets('eruby', {
-  snip({
-    trig = "-",
-    namr = "<% %>"
-  }, fmt("<% {} %>", insert(0))),
-  snip({
-    trig = "=",
-    namr = "<%= %>"
-  }, fmt("<%= {} %>", insert(0))),
-})
 
 ls.add_snippets('ruby', {
 
@@ -88,9 +78,9 @@ ls.add_snippets('ruby', {
     {}
   end
   ]],
-  {
-    insert(0),
-  }
+    {
+      insert(0),
+    }
   )),
 
   -- New rails spec rspec
@@ -105,10 +95,10 @@ ls.add_snippets('ruby', {
     {}
   end
   ]],
-  {
-    insert(1),
-    insert(0),
-  }
+    {
+      insert(1),
+      insert(0),
+    }
   )),
 
   -- New rails feature spec
@@ -123,10 +113,10 @@ ls.add_snippets('ruby', {
     {}
   end
   ]],
-  {
-    insert(1),
-    insert(0),
-  }
+    {
+      insert(1),
+      insert(0),
+    }
   )),
 
   -- Describe
@@ -139,10 +129,10 @@ ls.add_snippets('ruby', {
     {}
   end
   ]],
-  {
-    insert(1),
-    insert(0),
-  }
+    {
+      insert(1),
+      insert(0),
+    }
   )),
 
   -- Context
@@ -155,10 +145,10 @@ ls.add_snippets('ruby', {
     {}
   end
   ]],
-  {
-    insert(1),
-    insert(0),
-  }
+    {
+      insert(1),
+      insert(0),
+    }
   )),
 
   -- it
@@ -171,10 +161,10 @@ ls.add_snippets('ruby', {
     {}
   end
   ]],
-  {
-    insert(1),
-    insert(0),
-  }
+    {
+      insert(1),
+      insert(0),
+    }
   )),
 
   -- Save and open page
@@ -190,7 +180,7 @@ ls.add_snippets('ruby', {
     namr = "Byebug",
   }, text('byebug')),
 
-  -- expect(page).to have_content 
+  -- expect(page).to have_content
   snip({
     trig = "ept",
     namr = "expect(page).to have_content",

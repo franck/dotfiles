@@ -15,6 +15,7 @@ for _, source in ipairs {
   "core.lsp",
   "core.test",
   "core.hop",
+  "core.lualine",
   -- "core.autocmds",
   "core.mappings",
   -- "core.ui",
@@ -24,4 +25,3 @@ for _, source in ipairs {
     vim.api.nvim_err_writeln("Failed to load " .. source .. "\n\n" .. fault)
   end
 end
-
