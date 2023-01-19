@@ -73,6 +73,7 @@
   modified = red
 [push]
 	default = upstream # push only the current local branch if upstream branch exist. if not do nothing.
+	autoSetupRemote = true
 [init]
 	templatedir = ~/.git_template
 [fetch]
