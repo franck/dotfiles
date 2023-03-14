@@ -28,6 +28,7 @@
         "/usr/local/Cellar/neovim/0.8.1/lib/nvim",
         "/Users/franck/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp/after",
         "/Users/franck/.local/share/nvim/site/pack/packer/start/cmp_luasnip/after",
-        "${3rd}/luassert/library"
+        "${3rd}/luassert/library",
+        "${3rd}/luv/library"
     ]
 }

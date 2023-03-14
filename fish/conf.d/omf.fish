@@ -48,6 +48,7 @@ alias kvisit="cd ~/webdesign/egide/kolimmo-visit"
 alias kweb="cd ~/webdesign/egide/kolimmo-web"
 alias aircall="cd ~/webdesign/aircall/web"
 alias holivia="cd ~/webdesign/holivia/holivia_web"
+alias ngrok-holivia="ngrok http --region=eu --subdomain=holivia 3000"
 
 alias meteo="curl -H 'Accept-Language: fr' wttr.in"
 

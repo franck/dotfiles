@@ -18,6 +18,8 @@ require('packer').startup(function(use)
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
     'williamboman/nvim-lsp-installer',
+    'lukas-reineke/lsp-format.nvim',
+    'jose-elias-alvarez/null-ls.nvim',
 
     -- Useful status updates for LSP
     'j-hui/fidget.nvim',
@@ -70,11 +72,11 @@ use 'tpope/vim-rails'
 use { "zbirenbaum/copilot.lua" }
 
 use {
- "zbirenbaum/copilot-cmp",
- after = { "copilot.lua" },
- config = function ()
-   require("copilot_cmp").setup()
- end
+  "zbirenbaum/copilot-cmp",
+  after = { "copilot.lua" },
+  config = function ()
+    require("copilot_cmp").setup()
+  end
 }
 
 -- Fuzzy Finder (files, lsp, etc)
@@ -117,6 +119,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 
 -- copilot
 require("copilot").setup({
+  cmd = "Copilot",
   suggestion = { enabled = false },
   panel = { enabled = false },
 })
@@ -240,6 +243,9 @@ require('telescope').setup {
         ['<C-d>'] = false,
       },
     },
+    file_ignore_patterns = {
+      "db/data"
+    },
   },
   extensions = {
     fzf = {
@@ -344,12 +350,7 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
-  -- NOTE: Remember that lua is a real programming language, and as such it is possible
-  -- to define small helper and utility functions so you don't have to repeat yourself
-  -- many times.
-  --
-  -- In this case, we create a function that lets us more easily define mappings specific
-  -- for LSP related items. It sets the mode, buffer and description for us each time.
+  require("lsp-format").on_attach(_)
   local nmap = function(keys, func, desc)
     if desc then
       desc = 'LSP: ' .. desc
@@ -359,15 +360,18 @@ local on_attach = function(_, bufnr)
   end
 
   nmap('<leader>rn', vim.lsp.buf.rename, 'Rename')
-  nmap('<leader>ca', vim.lsp.buf.code_action, 'Code Action')
+  nmap('<leader>a', vim.lsp.buf.code_action, 'Code Action')
 
   nmap('gd', vim.lsp.buf.definition, 'Goto Definition')
   nmap('gr', require('telescope.builtin').lsp_references, 'Goto References')
   nmap('gI', vim.lsp.buf.implementation, 'Goto Implementation')
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type Definition')
+  nmap('<leader>F', vim.lsp.buf.format, 'Format')
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, 'Document Symbols')
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Workspace Symbols')
   nmap('<leader>qf', require('telescope.builtin').quickfix, 'Workspace Symbols')
+  nmap('[d', vim.diagnostic.goto_prev, 'Previous diagnostic')
+  nmap(']d', vim.diagnostic.goto_next, 'Next diagnostic')
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
@@ -384,7 +388,12 @@ local on_attach = function(_, bufnr)
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     if vim.lsp.buf.format then
-      vim.lsp.buf.format()
+      vim.lsp.buf.format({
+        filter = function(client)
+          return client.name == 'null-ls'
+        end,
+        bufnr = bufnr,
+      })
     elseif vim.lsp.buf.formatting then
       vim.lsp.buf.formatting()
     end
@@ -396,14 +405,12 @@ require('mason').setup()
 
 -- Enable the following language servers
 -- Feel free to add/remove any LSPs that you want here. They will automatically be installed
-local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'sumneko_lua', 'gopls',  }
+local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'gopls' }
 
 -- Ensure the servers above are installed
 require('mason-lspconfig').setup {
   ensure_installed = servers,
 }
-
--- require'lspconfig'.rubocop.setup{}
 
 -- nvim-cmp supports additional completion capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -416,6 +423,8 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+require('null_ls')
+
 
 -- Turn on lsp status information
 require('fidget').setup()
@@ -427,26 +436,31 @@ local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
-require('lspconfig').sumneko_lua.setup {
+require('lspconfig').lua_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT)
-        version = 'LuaJIT',
-        -- Setup your lua path
-        path = runtime_path,
-      },
-      diagnostics = {
-        globals = { 'vim' },
-      },
-      workspace = { library = vim.api.nvim_get_runtime_file('', true) },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = { enable = false },
-    },
-  },
 }
+
+-- require('lspconfig').sumneko_lua.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+--   settings = {
+--     Lua = {
+--       runtime = {
+--         -- Tell the language server which version of Lua you're using (most likely LuaJIT)
+--         version = 'LuaJIT',
+--         -- Setup your lua path
+--         path = runtime_path,
+--       },
+--       diagnostics = {
+--         globals = { 'vim' },
+--       },
+--       workspace = { library = vim.api.nvim_get_runtime_file('', true) },
+--       -- Do not send telemetry data containing a randomized but unique identifier
+--       telemetry = { enable = false },
+--     },
+--   },
+-- }
 
 
 -- nvim-cmp setup
@@ -478,202 +492,202 @@ cmp.setup {
       end
     end, { 'i', 's' }),
     -- ['<S-Tab>'] = cmp.mapping(function(fallback)
-    --   if cmp.visible() then
-    --     cmp.select_prev_item()
-    --   elseif luasnip.jumpable(-1) then
-    --     luasnip.jump(-1)
-    --   else
-    --     fallback()
-    --   end
-    -- end, { 'i', 's' }),
-  },
-  sources = {
-    { name = "copilot" },
-    { name = 'luasnip' },
-    {
-      name = 'buffer',
-      option = {
-        get_bufnrs = function()
-          return vim.api.nvim_list_bufs()
-        end
-      }
+      --   if cmp.visible() then
+      --     cmp.select_prev_item()
+      --   elseif luasnip.jumpable(-1) then
+      --     luasnip.jump(-1)
+      --   else
+      --     fallback()
+      --   end
+      -- end, { 'i', 's' }),
     },
-    { name = 'nvim_lsp' },
-  },
-  sorting = {
-    comparators = {
-      function(...) return cmp_buffer:compare_locality(...) end,
+    sources = {
+      { name = "copilot" },
+      { name = 'luasnip' },
+      {
+        name = 'buffer',
+        option = {
+          get_bufnrs = function()
+            return vim.api.nvim_list_bufs()
+          end
+        }
+      },
+      { name = 'nvim_lsp' },
+    },
+    sorting = {
+      comparators = {
+        function(...) return cmp_buffer:compare_locality(...) end,
+      }
     }
   }
-}
 
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
+  -- The line beneath this is called `modeline`. See `:help modeline`
+  -- vim: ts=2 sts=2 sw=2 et
 
--- Bepo
--- Move
-vim.keymap.set('', 'c', 'h', { noremap = true })
-vim.keymap.set('', 'r', 'l', { noremap = true })
-vim.keymap.set('', 't', 'j', { noremap = true })
-vim.keymap.set('', 's', 'k', { noremap = true })
+  -- Bepo
+  -- Move
+  vim.keymap.set('', 'c', 'h', { noremap = true })
+  vim.keymap.set('', 'r', 'l', { noremap = true })
+  vim.keymap.set('', 't', 'j', { noremap = true })
+  vim.keymap.set('', 's', 'k', { noremap = true })
 
--- remap W with É
-vim.keymap.set('', 'é', 'w', { noremap = true })
-vim.keymap.set('', 'É', 'W', { noremap = true })
+  -- remap W with É
+  vim.keymap.set('', 'é', 'w', { noremap = true })
+  vim.keymap.set('', 'É', 'W', { noremap = true })
 
--- dié => diw : delete word under cursor
--- daé => daw : delete word under cursor and space until next word
-vim.keymap.set('o', 'aé', 'aw', { noremap = true })
-vim.keymap.set('o', 'aÉ', 'aW', { noremap = true })
-vim.keymap.set('o', 'ié', 'iw', { noremap = true })
-vim.keymap.set('o', 'iÉ', 'iW', { noremap = true })
--- change
-vim.keymap.set('', 'l', 'c', { noremap = true })
-vim.keymap.set('', 'L', 'C', { noremap = true })
+  -- dié => diw : delete word under cursor
+  -- daé => daw : delete word under cursor and space until next word
+  vim.keymap.set('o', 'aé', 'aw', { noremap = true })
+  vim.keymap.set('o', 'aÉ', 'aW', { noremap = true })
+  vim.keymap.set('o', 'ié', 'iw', { noremap = true })
+  vim.keymap.set('o', 'iÉ', 'iW', { noremap = true })
+  -- change
+  vim.keymap.set('', 'l', 'c', { noremap = true })
+  vim.keymap.set('', 'L', 'C', { noremap = true })
 
--- join
-vim.keymap.set('', 'T', 'J')
-vim.keymap.set('', 'S', 'K')
+  -- join
+  vim.keymap.set('', 'T', 'J')
+  vim.keymap.set('', 'S', 'K')
 
--- until
-vim.keymap.set('', 'j', 't', { noremap = true })
-vim.keymap.set('', 'J', 'T', { noremap = true })
+  -- until
+  vim.keymap.set('', 'j', 't', { noremap = true })
+  vim.keymap.set('', 'J', 'T', { noremap = true })
 
--- replace
-vim.keymap.set({ 'n', 'v' }, 'h', 'r', { noremap = true })
-
-
--- substitute
-vim.keymap.set('n', 'k', 's', { noremap = true })
-
--- Save
-vim.keymap.set('', '<leader>s', ':w<cr>', { noremap = true })
-vim.keymap.set('i', '<leader>s', '<esc>:w<cr>', { noremap = true })
-vim.keymap.set('', '<leader>z', ':wq<cr>', { noremap = true })
-
--- Y => yank whole line
-vim.keymap.set('n', 'Y', 'yy')
-
--- ease window manipulation
-vim.keymap.set('n', 'w', '<C-w>', { noremap = true })
-vim.keymap.set('n', 'W', '<C-w><C-w>', { noremap = true })
-vim.keymap.set('n', 'wt','<C-w>j', { noremap = true })
-vim.keymap.set('n', 'ws','<C-w>k', { noremap = true })
-vim.keymap.set('n', 'wc','<C-w>h', { noremap = true })
-vim.keymap.set('n', 'wr','<C-w>l', { noremap = true })
-vim.keymap.set('n', 'wd','<C-w>c', { noremap = true }) -- close current window
-vim.keymap.set('n', 'wo','<C-w>o', { noremap = true }) -- close all other windows
-vim.keymap.set('n', 'w<space>',':split<cr>', { noremap = true }) -- split horizontaly
-vim.keymap.set('n', 'w<cr>',':vsplit<cr>', { noremap = true }) -- split verticaly
-
--- reindent
-vim.keymap.set('n', '<leader>i', 'mzgg=G`z<CR>')
-vim.keymap.set('n', '<leader><space>', ':nohlsearch<CR>', { noremap = true }) -- disable search highlight
-vim.keymap.set('n', '<leader><leader>', '<c-^>', { noremap = true }) -- back to previous buffer
-
--- search current word without moving
-vim.keymap.set('n', '*', '*``', { noremap = true })
-vim.keymap.set('n', 'gd', '*``', { noremap = true })
-
--- Follow link in help
-vim.keymap.set('n', '<C-l>', '<C-]>')
-
--------------------------------------------------------------------------
--- Surround
--------------------------------------------------------------------------
-
-vim.g.surround_no_mappings = 1
-
-vim.keymap.set('n', 'yss', '<Plug>Yssurround')
-vim.keymap.set('n', 'ds', '<Plug>Dsurround')
-vim.keymap.set('n', 'ys', '<Plug>Ysurround')
-vim.keymap.set('n', 'ys', '<Plug>Ysurround')
-vim.keymap.set('n', 'yS', '<Plug>YSurround')
-vim.keymap.set('n', 'yss', '<Plug>Yssurround')
-vim.keymap.set('n', 'ySs', '<Plug>YSsurround')
-vim.keymap.set('n', 'ySS', '<Plug>YSsurround')
-vim.keymap.set('v', 'S', '<Plug>VSurround', { noremap = true })
-vim.keymap.set('v', 'S', '<Plug>VSurround')
-vim.keymap.set('x', 'gS', '<Plug>VgSurround')
-
--------------------------------------------------------------------------
--- Ruby indentation
--------------------------------------------------------------------------
-vim.cmd('let g:ruby_indent_access_modifier_style = "indent"')
-vim.cmd('let g:indent_guides_start_level = 2')
-vim.cmd('let g:indent_guides_guide_size = 1')
-vim.cmd('let g:ruby_indent_block_style = "do"')
+  -- replace
+  vim.keymap.set({ 'n', 'v' }, 'h', 'r', { noremap = true })
 
 
--------------------------------------------------------------------------
--- Snippets
--------------------------------------------------------------------------
-local luasnip_status_ok, ls = pcall(require, "luasnip")
-if not luasnip_status_ok then
-  return
-end
+  -- substitute
+  vim.keymap.set('n', 'k', 's', { noremap = true })
 
-local snip = ls.snippet
-local node = ls.snippet_node
-local text = ls.text_node
-local insert = ls.insert_node
-local func = ls.function_node
-local choice = ls.choice_node
-local dynamicn = ls.dynamic_node
+  -- Save
+  vim.keymap.set('', '<leader>s', ':w<cr>', { noremap = true })
+  vim.keymap.set('i', '<leader>s', '<esc>:w<cr>', { noremap = true })
+  vim.keymap.set('', '<leader>z', ':wq<cr>', { noremap = true })
 
-local fmt = require('luasnip.extras.fmt').fmt
+  -- Y => yank whole line
+  vim.keymap.set('n', 'Y', 'yy')
 
--------------------------------------------------------------------------
--- All Snippets
--------------------------------------------------------------------------
+  -- ease window manipulation
+  vim.keymap.set('n', 'w', '<C-w>', { noremap = true })
+  vim.keymap.set('n', 'W', '<C-w><C-w>', { noremap = true })
+  vim.keymap.set('n', 'wt','<C-w>j', { noremap = true })
+  vim.keymap.set('n', 'ws','<C-w>k', { noremap = true })
+  vim.keymap.set('n', 'wc','<C-w>h', { noremap = true })
+  vim.keymap.set('n', 'wr','<C-w>l', { noremap = true })
+  vim.keymap.set('n', 'wd','<C-w>c', { noremap = true }) -- close current window
+  vim.keymap.set('n', 'wo','<C-w>o', { noremap = true }) -- close all other windows
+  vim.keymap.set('n', 'w<space>',':split<cr>', { noremap = true }) -- split horizontaly
+  vim.keymap.set('n', 'w<cr>',':vsplit<cr>', { noremap = true }) -- split verticaly
 
-local date = function() return { os.date('%d-%m-%Y') } end
+  -- reindent
+  vim.keymap.set('n', '<leader>i', 'mzgg=G`z<CR>')
+  vim.keymap.set('n', '<leader><space>', ':nohlsearch<CR>', { noremap = true }) -- disable search highlight
+  vim.keymap.set('n', '<leader><leader>', '<c-^>', { noremap = true }) -- back to previous buffer
 
-ls.add_snippets(nil, {
-  all = {
+  -- search current word without moving
+  vim.keymap.set('n', '*', '*``', { noremap = true })
+  vim.keymap.set('n', 'gd', '*``', { noremap = true })
+
+  -- Follow link in help
+  vim.keymap.set('n', '<C-l>', '<C-]>')
+
+  -------------------------------------------------------------------------
+  -- Surround
+  -------------------------------------------------------------------------
+
+  vim.g.surround_no_mappings = 1
+
+  vim.keymap.set('n', 'yss', '<Plug>Yssurround')
+  vim.keymap.set('n', 'ds', '<Plug>Dsurround')
+  vim.keymap.set('n', 'ys', '<Plug>Ysurround')
+  vim.keymap.set('n', 'ys', '<Plug>Ysurround')
+  vim.keymap.set('n', 'yS', '<Plug>YSurround')
+  vim.keymap.set('n', 'yss', '<Plug>Yssurround')
+  vim.keymap.set('n', 'ySs', '<Plug>YSsurround')
+  vim.keymap.set('n', 'ySS', '<Plug>YSsurround')
+  vim.keymap.set('v', 'S', '<Plug>VSurround', { noremap = true })
+  vim.keymap.set('v', 'S', '<Plug>VSurround')
+  vim.keymap.set('x', 'gS', '<Plug>VgSurround')
+
+  -------------------------------------------------------------------------
+  -- Ruby indentation
+  -------------------------------------------------------------------------
+  vim.cmd('let g:ruby_indent_access_modifier_style = "indent"')
+  vim.cmd('let g:indent_guides_start_level = 2')
+  vim.cmd('let g:indent_guides_guide_size = 1')
+  vim.cmd('let g:ruby_indent_block_style = "do"')
+
+
+  -------------------------------------------------------------------------
+  -- Snippets
+  -------------------------------------------------------------------------
+  local luasnip_status_ok, ls = pcall(require, "luasnip")
+  if not luasnip_status_ok then
+    return
+  end
+
+  local snip = ls.snippet
+  local node = ls.snippet_node
+  local text = ls.text_node
+  local insert = ls.insert_node
+  local func = ls.function_node
+  local choice = ls.choice_node
+  local dynamicn = ls.dynamic_node
+
+  local fmt = require('luasnip.extras.fmt').fmt
+
+  -------------------------------------------------------------------------
+  -- All Snippets
+  -------------------------------------------------------------------------
+
+  local date = function() return { os.date('%d-%m-%Y') } end
+
+  ls.add_snippets(nil, {
+    all = {
+      snip({
+        trig = "date",
+        namr = "Date",
+        dscr = "Date in the form of DD-MM-YYYY",
+      }, {
+        func(date, {})
+      }),
+    },
+  })
+
+
+  -------------------------------------------------------------------------
+  -- Ruby Snippet
+  -------------------------------------------------------------------------
+  -- ls.add_snippets('eruby', { })
+
+  ls.add_snippets('ruby', {
+
+    -- Before
     snip({
-      trig = "date",
-      namr = "Date",
-      dscr = "Date in the form of DD-MM-YYYY",
-    }, {
-      func(date, {})
-    }),
-  },
-})
+      trig = "bef",
+      namr = "Before",
+      dscr = "Super simple before end block",
+    }, fmt([[
+    before do
+    {}
+  end
+  ]],
+  {
+    insert(0),
+  }
+  )),
 
-
--------------------------------------------------------------------------
--- Ruby Snippet
--------------------------------------------------------------------------
--- ls.add_snippets('eruby', { })
-
-ls.add_snippets('ruby', {
-
-  -- Before
+  -- New rails spec rspec
   snip({
-    trig = "bef",
-    namr = "Before",
-    dscr = "Super simple before end block",
+    trig = "desc",
+    namr = "New rails spec",
+    dscr = "New describe",
   }, fmt([[
-  before do
+  require 'rails_helper'
+
+  describe {} do
   {}
-end
-]],
-{
-  insert(0),
-}
-)),
-
--- New rails spec rspec
-snip({
-  trig = "desc",
-  namr = "New rails spec",
-  dscr = "New describe",
-}, fmt([[
-require 'rails_helper'
-
-describe {} do
-{}
 end
 ]],
 {
@@ -692,81 +706,81 @@ require 'rails_helper'
 
 feature "{}" do
 {}
-end
-]],
-{
-  insert(1),
-  insert(0),
-}
-)),
+        end
+        ]],
+        {
+          insert(1),
+          insert(0),
+        }
+        )),
 
--- Describe
-snip({
-  trig = "des",
-  namr = "Describe",
-  dscr = "Super simple describe block",
-}, fmt([[
-describe '{}' do
-{}
-end
-]],
-{
-  insert(1),
-  insert(0),
-}
-)),
+        -- Describe
+        snip({
+          trig = "des",
+          namr = "Describe",
+          dscr = "Super simple describe block",
+        }, fmt([[
+        describe '{}' do
+        {}
+      end
+      ]],
+      {
+        insert(1),
+        insert(0),
+      }
+      )),
 
--- Context
-snip({
-  trig = "con",
-  namr = "Context block",
-  dscr = "Super simple context block",
-}, fmt([[
-context '{}' do
-{}
-end
-]],
-{
-  insert(1),
-  insert(0),
-}
-)),
+      -- Context
+      snip({
+        trig = "con",
+        namr = "Context block",
+        dscr = "Super simple context block",
+      }, fmt([[
+      context '{}' do
+      {}
+    end
+    ]],
+    {
+      insert(1),
+      insert(0),
+    }
+    )),
 
--- it
-snip({
-  trig = "it",
-  namr = "It block",
-  dscr = "Super simple it block",
-}, fmt([[
-it '{}' do
-{}
-end
-]],
-{
-  insert(1),
-  insert(0),
-}
-)),
+    -- it
+    snip({
+      trig = "it",
+      namr = "It block",
+      dscr = "Super simple it block",
+    }, fmt([[
+    it '{}' do
+    {}
+  end
+  ]],
+  {
+    insert(1),
+    insert(0),
+  }
+  )),
 
--- Save and open page
-snip({
-  trig = "sop",
-  namr = "Save and open page",
-  dscr = "Lunchy gem helper",
-}, text('save_and_open_page')),
+  -- Save and open page
+  snip({
+    trig = "sop",
+    namr = "Save and open page",
+    dscr = "Lunchy gem helper",
+  }, text('save_and_open_page')),
 
--- Byebug
-snip({
-  trig = "bb",
-  namr = "Byebug",
-}, text('byebug')),
+  -- Byebug
+  snip({
+    trig = "bb",
+    namr = "Byebug",
+  }, text('byebug')),
 
--- expect(page).to have_content
-snip({
-  trig = "ept",
-  namr = "expect(page).to have_content",
-  dscr = "Capybara matcher",
-}, fmt("expect(page).to have_content {}", insert(0))),
+  -- expect(page).to have_content
+  snip({
+    trig = "ept",
+    namr = "expect(page).to have_content",
+    dscr = "Capybara matcher",
+  }, fmt("expect(page).to have_content {}", insert(0))),
 
 })
 
@@ -829,3 +843,7 @@ vim.keymap.set('n', '<leader>p', promoteToLet)
 -- Swift Lsp
 -------------------------------------------------------------------------
 require'lspconfig'.sourcekit.setup{}
+
+-- require'lspconfig'.ruby_ls.setup({
+-- 	cmd = { "bundle", "exec", "ruby-lsp" }
+-- })
