@@ -1,7 +1,6 @@
 -------------------------------------------------------------------------
--- Setup
+-- Snippets
 -------------------------------------------------------------------------
-
 local luasnip_status_ok, ls = pcall(require, "luasnip")
 if not luasnip_status_ok then
   return
@@ -16,32 +15,6 @@ local choice = ls.choice_node
 local dynamicn = ls.dynamic_node
 
 local fmt = require('luasnip.extras.fmt').fmt
-
--------------------------------------------------------------------------
--- Keymap
--------------------------------------------------------------------------
-
--- <c-l> is my expansion key
--- this will expand the current item or jump to the next item within the snippet.
-vim.keymap.set({ "i", "s" }, "<c-t>", function()
-  if ls.expand_or_jumpable() then
-    ls.expand_or_jump()
-  end
-end, { silent = true })
-
-vim.keymap.set({ "i", "s" }, "<c-s>", function()
-  if ls.jumpable(-1) then
-    ls.jump(-1)
-  end
-end, { silent = true })
-
-vim.keymap.set({ "i" }, "<c-l>", function()
-  if ls.choice_active() then
-    ls.change_choice(1)
-  end
-end, { silent = true })
-
-vim.keymap.set('n', '<leader>q', "<cmd>source ~/.config/nvim/lua/core/snippets.lua<cr>")
 
 -------------------------------------------------------------------------
 -- All Snippets
@@ -65,6 +38,7 @@ ls.add_snippets(nil, {
 -------------------------------------------------------------------------
 -- Ruby Snippet
 -------------------------------------------------------------------------
+-- ls.add_snippets('eruby', { })
 
 ls.add_snippets('ruby', {
 
@@ -74,7 +48,7 @@ ls.add_snippets('ruby', {
     namr = "Before",
     dscr = "Super simple before end block",
   }, fmt([[
-  before do
+    before do
     {}
   end
   ]],
@@ -92,9 +66,9 @@ ls.add_snippets('ruby', {
   require 'rails_helper'
 
   describe {} do
-    {}
-  end
-  ]],
+  {}
+end
+]],
     {
       insert(1),
       insert(0),
@@ -107,12 +81,12 @@ ls.add_snippets('ruby', {
     namr = "New rails feature spec",
     dscr = "New feature",
   }, fmt([[
-  require 'rails_helper'
+require 'rails_helper'
 
-  feature "{}" do
-    {}
-  end
-  ]],
+feature "{}" do
+{}
+        end
+        ]],
     {
       insert(1),
       insert(0),
@@ -125,10 +99,10 @@ ls.add_snippets('ruby', {
     namr = "Describe",
     dscr = "Super simple describe block",
   }, fmt([[
-  describe '{}' do
-    {}
-  end
-  ]],
+        describe '{}' do
+        {}
+      end
+      ]],
     {
       insert(1),
       insert(0),
@@ -141,10 +115,10 @@ ls.add_snippets('ruby', {
     namr = "Context block",
     dscr = "Super simple context block",
   }, fmt([[
-  context '{}' do
-    {}
-  end
-  ]],
+      context '{}' do
+      {}
+    end
+    ]],
     {
       insert(1),
       insert(0),
@@ -157,7 +131,7 @@ ls.add_snippets('ruby', {
     namr = "It block",
     dscr = "Super simple it block",
   }, fmt([[
-  it '{}' do
+    it '{}' do
     {}
   end
   ]],
@@ -201,10 +175,4 @@ ls.add_snippets('javascript', {
     namr = "console.log()",
     dscr = "Console Logger",
   }, fmt("console.log({})", insert(0))),
-
 })
-
--------------------------------------------------------------------------
--- Friendly Snippet
--------------------------------------------------------------------------
--- require("luasnip/loaders/from_vscode").lazy_load()

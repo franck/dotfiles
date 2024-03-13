@@ -2,7 +2,8 @@
 # VERSION: 3.0
 SETUVAR __fish_initialized:3400
 SETUVAR _fisher_daenney_2F_pyenv_files:/Users/franck/\x2econfig/fish/functions/pyenv\x2efish\x1e/Users/franck/\x2econfig/fish/conf\x2ed/pyenv\x2efish\x1e/Users/franck/\x2econfig/fish/completions/pyenv\x2efish
-SETUVAR _fisher_plugins:daenney/pyenv
+SETUVAR _fisher_jorgebucaran_2F_nvm_2E_fish_files:/Users/franck/\x2econfig/fish/functions/_nvm_index_update\x2efish\x1e/Users/franck/\x2econfig/fish/functions/_nvm_list\x2efish\x1e/Users/franck/\x2econfig/fish/functions/_nvm_version_activate\x2efish\x1e/Users/franck/\x2econfig/fish/functions/_nvm_version_deactivate\x2efish\x1e/Users/franck/\x2econfig/fish/functions/nvm\x2efish\x1e/Users/franck/\x2econfig/fish/conf\x2ed/nvm\x2efish\x1e/Users/franck/\x2econfig/fish/completions/nvm\x2efish
+SETUVAR _fisher_plugins:daenney/pyenv\x1ejorgebucaran/nvm\x2efish
 SETUVAR fish_color_autosuggestion:555\x1ebrblack
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:005fd7

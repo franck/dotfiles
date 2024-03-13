@@ -61,6 +61,7 @@ null_ls.setup({
   -- end,
 })
 
+-- Autocorrect
 local group_js = vim.api.nvim_create_augroup("Javascript and Ruby Formatting", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = { "*.js", "*.ts", "*.jsx", "*.tsx", "*.rb", "*.scss", "*.css", "*.lua" },

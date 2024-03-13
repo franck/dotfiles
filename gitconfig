@@ -3,6 +3,7 @@
 	email = franck.dagostini@gmail.com
 
 [diff]
+  algorithm = histogram
 [color]
   ui = auto
 [alias]
@@ -59,6 +60,7 @@
 [merge]
 	tool = vimdiff
   ff = only # fast forward only. Never create a commit only for merging. Force to Rebase first.
+  conflictstyle = zdiff3
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

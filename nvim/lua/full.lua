@@ -1,6 +1,8 @@
 -- Install packer
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
+
 local is_bootstrap = false
+
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   is_bootstrap = true
   vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
@@ -22,8 +24,7 @@ require('packer').startup(function(use)
       'jose-elias-alvarez/null-ls.nvim',
 
       -- Useful status updates for LSP
-      'j-hui/fidget.nvim',
-    },
+      { 'j-hui/fidget.nvim', tag = 'legacy' }, },
   }
 
   use 'hrsh7th/cmp-buffer'
@@ -33,8 +34,7 @@ require('packer').startup(function(use)
   -- Autocompletion
   use {
     'hrsh7th/nvim-cmp',
-    requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip', 'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path' },
+    requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path' },
   }
 
   -- Highlight, edit, and navigate code
@@ -56,10 +56,10 @@ require('packer').startup(function(use)
   use 'tpope/vim-rhubarb'
   use 'lewis6991/gitsigns.nvim'
 
-  use 'navarasu/onedark.nvim'               -- Theme inspired by Atom
-  use 'nvim-lualine/lualine.nvim'           -- Fancier statusline
+  use 'navarasu/onedark.nvim' -- Theme inspired by Atom
+  use 'nvim-lualine/lualine.nvim' -- Fancier statusline
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
-  use 'numToStr/Comment.nvim'               -- "gc" to comment visual regions/lines
+  use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
   use 'tpope/vim-endwise'
   use 'tpope/vim-surround'
   -- use 'jiangmiao/auto-pairs'
@@ -85,6 +85,13 @@ require('packer').startup(function(use)
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
+
+  -- Chat GPT
+  use({
+    "Bryley/neoai.nvim",
+    requires = { "MunifTanjim/nui.nvim" },
+  })
+
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
@@ -124,62 +131,6 @@ require("copilot").setup({
   suggestion = { enabled = false },
   panel = { enabled = false },
 })
-
--- [[ Setting options ]]
--- See `:help vim.o`
-
--- Set highlight on search
-vim.o.hlsearch = true
-vim.o.inccommand = true
-
--- Make line numbers default
-vim.wo.number = true
-
--- Enable mouse mode
-vim.o.mouse = 'a'
-
--- Enable break indent
-vim.o.breakindent = true
-
--- Save undo history
-vim.o.undofile = true
-
--- Case insensitive searching UNLESS /C or capital in search
-vim.o.ignorecase = true
-vim.o.smartcase = true
-
--- Decrease update time
-vim.o.updatetime = 250
-vim.wo.signcolumn = 'yes'
-
--- Set colorscheme
-vim.o.termguicolors = true
-vim.cmd [[colorscheme onedark]]
-
--- Indentation
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.expandtab = true -- expand tab to spaces
-vim.opt.smartindent = true
-
--- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
-
--- [[ Basic Keymaps ]]
--- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-vim.g.mapleader = ','
-vim.g.maplocalleader = ','
-
--- Keymaps for better default experience
--- See `:help vim.keymap.set()`
-vim.keymap.set({ 'n', 'v' }, '<space>', '<Nop>', { silent = true })
-
--- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -------------------------------------------------------------------------
 -- Folding
@@ -250,10 +201,10 @@ require('telescope').setup {
   },
   extensions = {
     fzf = {
-      fuzzy = true,                   -- false will only do exact matching
+      fuzzy = true, -- false will only do exact matching
       override_generic_sorter = true, -- override the generic sorter
-      override_file_sorter = true,    -- override the file sorter
-      case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+      override_file_sorter = true, -- override the file sorter
+      case_mode = "smart_case", -- or "ignore_case" or "respect_case"
       -- the default case_mode is "smart_case"
     }
   },
@@ -476,7 +427,7 @@ cmp.setup {
     end,
   },
   mapping = cmp.mapping.preset.insert {
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-d>'] = cmp.mapping.scroll_docs( -4),
     ['<C-F>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<CR>'] = cmp.mapping.confirm {
@@ -576,15 +527,15 @@ vim.keymap.set('n', 'wt', '<C-w>j', { noremap = true })
 vim.keymap.set('n', 'ws', '<C-w>k', { noremap = true })
 vim.keymap.set('n', 'wc', '<C-w>h', { noremap = true })
 vim.keymap.set('n', 'wr', '<C-w>l', { noremap = true })
-vim.keymap.set('n', 'wd', '<C-w>c', { noremap = true })           -- close current window
-vim.keymap.set('n', 'wo', '<C-w>o', { noremap = true })           -- close all other windows
+vim.keymap.set('n', 'wd', '<C-w>c', { noremap = true }) -- close current window
+vim.keymap.set('n', 'wo', '<C-w>o', { noremap = true }) -- close all other windows
 vim.keymap.set('n', 'w<space>', ':split<cr>', { noremap = true }) -- split horizontaly
-vim.keymap.set('n', 'w<cr>', ':vsplit<cr>', { noremap = true })   -- split verticaly
+vim.keymap.set('n', 'w<cr>', ':vsplit<cr>', { noremap = true }) -- split verticaly
 
 -- reindent
 vim.keymap.set('n', '<leader>i', 'mzgg=G`z<CR>')
 vim.keymap.set('n', '<leader><space>', ':nohlsearch<CR>', { noremap = true }) -- disable search highlight
-vim.keymap.set('n', '<leader><leader>', '<c-^>', { noremap = true })          -- back to previous buffer
+vim.keymap.set('n', '<leader><leader>', '<c-^>', { noremap = true }) -- back to previous buffer
 
 -- search current word without moving
 vim.keymap.set('n', '*', '*``', { noremap = true })
@@ -670,10 +621,10 @@ ls.add_snippets('ruby', {
     namr = "Before",
     dscr = "Super simple before end block",
   }, fmt([[
-    before do
-    {}
-  end
-  ]],
+  before do
+  {}
+end
+]],
     {
       insert(0),
     }
@@ -685,10 +636,10 @@ ls.add_snippets('ruby', {
     namr = "New rails spec",
     dscr = "New describe",
   }, fmt([[
-  require 'rails_helper'
+require 'rails_helper'
 
-  describe {} do
-  {}
+describe {} do
+{}
 end
 ]],
     {
@@ -800,6 +751,7 @@ ls.add_snippets('javascript', {
 })
 
 
+
 -------------------------------------------------------------------------
 -- Ragtag
 -------------------------------------------------------------------------
@@ -849,3 +801,152 @@ require 'lspconfig'.sourcekit.setup {}
 -- require'lspconfig'.ruby_ls.setup({
 -- 	cmd = { "bundle", "exec", "ruby-lsp" }
 -- })
+
+--
+
+
+require("neoai").setup {
+  ui = {
+    output_popup_text = "NeoAI",
+    input_popup_text = "Prompt",
+    width = 40, -- As percentage eg. 30%
+    output_popup_height = 80, -- As percentage eg. 80%
+    submit = "<Enter>", -- Key binding to submit the prompt
+  },
+  models = {
+    {
+      name = "openai",
+      model = "gpt-3.5-turbo",
+      params = nil,
+    },
+  },
+  register_output = {
+    ["g"] = function(output)
+      return output
+    end,
+    ["c"] = require("neoai.utils").extract_code_snippets,
+  },
+  inject = {
+    cutoff_width = 75,
+  },
+  prompts = {
+    context_prompt = function(context)
+      return "Hey, I'd like to provide some context for future "
+          .. "messages. Here is the code/text that I want to refer "
+          .. "to in our upcoming conversations:\n\n"
+          .. context
+    end,
+  },
+  mappings = {
+    ["select_up"] = "<C-s>",
+    ["select_down"] = "<C-t>",
+  },
+  open_api_key_env = "OPENAI_API_KEY",
+  shortcuts = {
+    {
+      name = "textify",
+      key = "<leader>o",
+      desc = "fix text with AI",
+      use_context = true,
+      prompt = [[
+    Please rewrite the text to make it more readable, clear,
+    concise, and fix any grammatical, punctuation, or spelling
+    errors
+    ]],
+      modes = { "v" },
+      strip_function = nil,
+    },
+    {
+      name = "gitcommit",
+      key = "<leader>ag",
+      desc = "generate git commit message",
+      use_context = false,
+      prompt = function()
+        return [[
+      Using the following git diff generate a consise and
+      clear git commit message, with a short title summary
+      that is 75 characters or less:
+      ]] .. vim.fn.system("git diff --cached")
+      end,
+      modes = { "n" },
+      strip_function = nil,
+    },
+  },
+}
+
+function _G.switch_file_extension()
+  local bufname = vim.fn.expand('%:t') -- get the name of the current buffer
+  local new_bufname
+
+  -- Check if current file extension is .rb or .html.erb and switch accordingly
+  if string.match(bufname, ".rb$") then
+    new_bufname = string.gsub(bufname, ".rb$", ".html.erb")
+  elseif string.match(bufname, ".html.erb$") then
+    new_bufname = string.gsub(bufname, ".html.erb$", ".rb")
+  end
+
+  -- Ensure new_bufname exists after the operation
+  if new_bufname then
+    local new_bufpath = vim.fn.expand('%:p:h') .. '/' .. new_bufname -- construct the full path
+    vim.cmd('edit ' .. new_bufpath) -- open the new buffer
+  else
+    print("Cannot switch file extension for the current file.")
+  end
+end
+
+vim.api.nvim_set_keymap('n', '<leader>h', ':lua switch_file_extension()<CR>', { noremap = true, silent = true })
+  },
+  open_api_key_env = "OPENAI_API_KEY",
+  shortcuts = {
+    {
+      name = "textify",
+      key = "<leader>o",
+      desc = "fix text with AI",
+      use_context = true,
+      prompt = [[
+    Please rewrite the text to make it more readable, clear,
+    concise, and fix any grammatical, punctuation, or spelling
+    errors
+    ]],
+      modes = { "v" },
+      strip_function = nil,
+    },
+    {
+      name = "gitcommit",
+      key = "<leader>ag",
+      desc = "generate git commit message",
+      use_context = false,
+      prompt = function()
+        return [[
+      Using the following git diff generate a consise and
+      clear git commit message, with a short title summary
+      that is 75 characters or less:
+      ]] .. vim.fn.system("git diff --cached")
+      end,
+      modes = { "n" },
+      strip_function = nil,
+    },
+  },
+}
+
+function _G.switch_file_extension()
+  local bufname = vim.fn.expand('%:t') -- get the name of the current buffer
+  local new_bufname
+
+  -- Check if current file extension is .rb or .html.erb and switch accordingly
+  if string.match(bufname, ".rb$") then
+    new_bufname = string.gsub(bufname, ".rb$", ".html.erb")
+  elseif string.match(bufname, ".html.erb$") then
+    new_bufname = string.gsub(bufname, ".html.erb$", ".rb")
+  end
+
+  -- Ensure new_bufname exists after the operation
+  if new_bufname then
+    local new_bufpath = vim.fn.expand('%:p:h') .. '/' .. new_bufname -- construct the full path
+    vim.cmd('edit ' .. new_bufpath) -- open the new buffer
+  else
+    print("Cannot switch file extension for the current file.")
+  end
+end
+
+vim.api.nvim_set_keymap('n', '<leader>h', ':lua switch_file_extension()<CR>', { noremap = true, silent = true })
