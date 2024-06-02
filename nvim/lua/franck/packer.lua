@@ -13,6 +13,9 @@ return require('packer').startup(function(use)
     requires = { { 'nvim-lua/plenary.nvim' } }
   }
 
+  use { 'nvim-telescope/telescope-fzf-native.nvim', run =
+  'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+
   use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
 
   use('mbbill/undotree')
@@ -66,4 +69,6 @@ return require('packer').startup(function(use)
   use 'tpope/vim-surround'
   use 'vim-ruby/vim-ruby'
   use 'tpope/vim-rails'
+
+  use 'https://codeberg.org/esensar/nvim-dev-container'
 end)

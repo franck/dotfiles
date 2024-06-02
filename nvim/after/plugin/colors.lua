@@ -10,3 +10,4 @@ end
 
 -- ColorMyPencils("catppuccin-frappe")
 ColorMyPencils("tokyonight-night")
+-- ColorMyPencils("tokyonight-storm")

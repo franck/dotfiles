@@ -30,6 +30,17 @@ local on_attach = function(_, bufnr)
   nmap('[d', vim.diagnostic.goto_prev, 'Previous diagnostic')
   nmap(']d', vim.diagnostic.goto_next, 'Next diagnostic')
 
+  local open_float_opts = {
+    focusable = false,
+    close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+    border = 'rounded',
+    source = 'always',
+    prefix = ' ',
+    scope = 'cursor'
+  }
+
+  -- vim.keymap.set('<leader>qf', ']t', vim.diagnostic.open_float(nil, open_float_opts), { noremap = true, silent = true })
+
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
@@ -80,7 +91,6 @@ for _, lsp in ipairs(servers) do
   }
 end
 
-require('null_ls')
 
 -- Turn on lsp status information
 require('fidget').setup()
@@ -110,7 +120,7 @@ cmp.setup {
     end,
   },
   mapping = cmp.mapping.preset.insert {
-    ['<C-d>'] = cmp.mapping.scroll_docs( -4),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-F>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<CR>'] = cmp.mapping.confirm {
@@ -127,31 +137,31 @@ cmp.setup {
       end
     end, { 'i', 's' }),
     -- ['<S-Tab>'] = cmp.mapping(function(fallback)
-      --   if cmp.visible() then
-      --     cmp.select_prev_item()
-      --   elseif luasnip.jumpable(-1) then
-      --     luasnip.jump(-1)
-      --   else
-      --     fallback()
-      --   end
-      -- end, { 'i', 's' }),
-    },
-    sources = {
-      { name = "copilot" },
-      { name = 'luasnip' },
-      {
-        name = 'buffer',
-        option = {
-          get_bufnrs = function()
-            return vim.api.nvim_list_bufs()
-          end
-        }
-      },
-      { name = 'nvim_lsp' },
-    },
-    sorting = {
-      comparators = {
-        function(...) return cmp_buffer:compare_locality(...) end,
+    --   if cmp.visible() then
+    --     cmp.select_prev_item()
+    --   elseif luasnip.jumpable(-1) then
+    --     luasnip.jump(-1)
+    --   else
+    --     fallback()
+    --   end
+    -- end, { 'i', 's' }),
+  },
+  sources = {
+    { name = "copilot" },
+    { name = 'luasnip' },
+    {
+      name = 'buffer',
+      option = {
+        get_bufnrs = function()
+          return vim.api.nvim_list_bufs()
+        end
       }
+    },
+    { name = 'nvim_lsp' },
+  },
+  sorting = {
+    comparators = {
+      function(...) return cmp_buffer:compare_locality(...) end,
     }
   }
+}

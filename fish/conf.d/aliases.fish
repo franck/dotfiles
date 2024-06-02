@@ -7,6 +7,11 @@ alias docked='docker run --rm -it -v $PWD:/rails -v ruby-bundle-cache:/bundle gh
 alias dock='docker run --rm -it -v $PWD:/rails -v ruby-bundle-cache:/bundle'
 alias docker_exec_web='docker compose -f docker-compose.dev.yml exec web'
 alias d='docker_exec_web'
+alias holivia_debug='docker attach web'
+alias hop='op run --env-file="./.env.1password" --'
+alias hprod='hecs console -c prod -s worker'
+alias hstaging='hecs console -c staging -s worker'
+alias hfranck='hecs console -c franck -s worker'
 
 alias rails-server='docker run --rm -it -v $PWD:/rails -v ruby-bundle-cache:/bundle -p 3000:3000 ghcr.io/rails/cli rails server'
 alias rails-console='docker run --rm -it -v $PWD:/rails -v ruby-bundle-cache:/bundle ghcr.io/rails/cli rails console'
@@ -32,6 +37,7 @@ alias kweb="cd ~/webdesign/egide/kolimmo-web"
 alias aircall="cd ~/webdesign/aircall/web"
 alias holivia="cd ~/webdesign/holivia/holivia_web"
 alias hinfra="cd ~/webdesign/holivia/holivia_infra"
+alias hdbt="cd ~/webdesign/holivia/dbt_holivia"
 alias hchat="cd ~/webdesign/holivia/holivia_chat"
 alias oneone="cd ~/webdesign/oneone"
 alias hooked="cd ~/webdesign/hooked/hooked"
@@ -76,16 +82,6 @@ alias g="git"
 alias gwip="gitupdate ."
 alias glo="git log --online -10"
 
-
-alias hstaging="ssh -i ~/.aws/holivia.pem ec2-user@35.180.3.220"
-alias hprod="ssh -i ~/.aws/holivia.pem ec2-user@15.237.98.169"
-alias hprodrds="ssh -i ~/.aws/holivia.pem ec2-user@13.38.44.42"
-alias hdemo="ssh -i ~/.aws/holivia.pem ec2-user@13.37.157.230"
-alias hfeat="ssh -i ~/.aws/holivia.pem ec2-user@52.47.204.254"
-alias hfeatone="ssh -i ~/.aws/holivia.pem ec2-user@13.38.224.253"
-alias hfeattwo="ssh -i ~/.aws/holivia.pem ec2-user@13.38.150.195"
-alias hfeatthree="ssh -i ~/.aws/holivia.pem ec2-user@13.37.97.113"
-alias hrdsprod="ssh -i ~/.aws/holivia.pem ec2-user@13.38.44.42"
 
 alias love="/Applications/love.app/Contents/MacOS/love"
 alias pwg="pwgen -Bsncs 32 1 -r '\"\'\`' | head -c32;echo"
