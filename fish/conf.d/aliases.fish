@@ -36,6 +36,8 @@ alias kvisit="cd ~/webdesign/egide/kolimmo-visit"
 alias kweb="cd ~/webdesign/egide/kolimmo-web"
 alias aircall="cd ~/webdesign/aircall/web"
 alias holivia="cd ~/webdesign/holivia/holivia_web"
+alias hstats="cd ~/webdesign/holivia/holivia_stats"
+alias mgme="cd ~/webdesign/mgme/mgme"
 alias hinfra="cd ~/webdesign/holivia/holivia_infra"
 alias hdbt="cd ~/webdesign/holivia/dbt_holivia"
 alias hchat="cd ~/webdesign/holivia/holivia_chat"
@@ -53,6 +55,7 @@ alias ack="/usr/local/Cellar/ack/2.14/bin/ack"
 
 alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 alias vi="nvim"
+alias nv="NVIM_APPNAME=editorconfig nvim"
 
 alias kibana="echo 'localhost:5601' && $HOME/webdesign/src/kibana/bin/kibana"
 alias kb="$HOME/sandbox/src/kibana/bin/kibana"
@@ -82,6 +85,6 @@ alias g="git"
 alias gwip="gitupdate ."
 alias glo="git log --online -10"
 
-
+alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
 alias love="/Applications/love.app/Contents/MacOS/love"
 alias pwg="pwgen -Bsncs 32 1 -r '\"\'\`' | head -c32;echo"
