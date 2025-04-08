@@ -17,7 +17,7 @@ alias rails-server='docker run --rm -it -v $PWD:/rails -v ruby-bundle-cache:/bun
 alias rails-console='docker run --rm -it -v $PWD:/rails -v ruby-bundle-cache:/bundle ghcr.io/rails/cli rails console'
 alias dhc='docker run --rm -it -v .:/rails -v ruby-bundle-cache:/bundle holivia-chat'
 alias dhc-server='docker run --rm -it -v .:/rails -v ruby-bundle-cache:/bundle -p 3000:3000 holivia-chat rails server'
- 
+
 alias fradeo="cd ~/webdesign/fradeo_web/fradeo"
 alias jobday="cd ~/webdesign/jobday"
 alias daphni="cd ~/webdesign/daphni/daphni"

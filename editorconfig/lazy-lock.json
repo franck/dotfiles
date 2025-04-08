@@ -2,6 +2,7 @@
   "LuaSnip": { "branch": "master", "commit": "03c8e67eb7293c404845b3982db895d59c0d1538" },
   "blink-cmp-copilot": { "branch": "main", "commit": "c5c5cbce5748d21073f1d5348a92ebe6ce63f387" },
   "blink.cmp": { "branch": "main", "commit": "1cc3b1a908fbcfd15451c4772759549724f38524" },
+  "codecompanion.nvim": { "branch": "main", "commit": "abc0e1c8edd5a78814830e730eef67b7b5278bdd" },
   "copilot.lua": { "branch": "master", "commit": "886ee73b6d464b2b3e3e6a7ff55ce87feac423a9" },
   "lazy.nvim": { "branch": "main", "commit": "d8f26efd456190241afd1b0f5235fe6fdba13d4a" },
   "lazydev.nvim": { "branch": "main", "commit": "8620f82ee3f59ff2187647167b6b47387a13a018" },

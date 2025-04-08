@@ -3,7 +3,7 @@ vim.o.hlsearch = true
 vim.o.inccommand = 'nosplit'
 
 -- paste what is in the clipboard buffer with "p"
--- vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard = "unnamedplus"
 
 -- Yank to clipboard
 vim.keymap.set('n', "<leader>y", ":w !pbcopy<CR>")
