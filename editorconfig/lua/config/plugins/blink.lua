@@ -80,11 +80,14 @@ return {
         },
       },
 
+      -- do not use autocompletion in cmdline, specially for path completion as blink
+      -- does not work properly for that purpose
+      cmdline = { enabled = false },
+
       -- Default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
-        default = { 'codecompanion', 'copilot', 'lsp', 'path', 'snippets', 'buffer' },
-        cmdline = {},
+        default = { 'copilot', 'lsp', 'snippets', 'buffer' },
         providers = {
           copilot = {
             name = 'copilot',
